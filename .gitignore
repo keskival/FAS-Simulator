@@ -2,4 +2,5 @@ documentation/*.aux
 documentation/*.bbl
 documentation/*.blg
 documentation/*.log
+documentation/*.backup
 *.pyc
