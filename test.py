@@ -5,11 +5,9 @@ from scheduler import Scheduler
 
 # Testing
 scheduler = Scheduler()
-crane1 = Crane(30000, scheduler)
+crane1 = Crane(30000, scheduler, lambda: scheduler.add(crane1.item_taken, 0))
 crane1.add_queue()
 crane1.add_queue()
-scheduler.add(lambda: crane1.item_taken(), 100000)
-print "Scheduling next event."
 while scheduler.next():
-    print "Scheduling next event."
+    pass
 print "Done."

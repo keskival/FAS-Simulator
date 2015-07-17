@@ -9,6 +9,7 @@ class Scheduler:
         self.time = 0
         self.events = []
     def next(self):
+        print "Scheduling at time: " + str(self.time)
         if (len(self.events) == 0):
             return False
         else:
