@@ -5,7 +5,7 @@ class Event:
     def __init__(self, timestamp, callback):
         self.timestamp = timestamp
         self.callback = callback
-    def cmp(self, other):
+    def __cmp__(self, other):
         return cmp(self.timestamp, other.timestamp)
-    def execute(self, scheduler):
-        self.callback(scheduler)
+    def execute(self):
+        self.callback()
