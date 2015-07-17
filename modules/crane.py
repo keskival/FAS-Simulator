@@ -2,34 +2,40 @@
 from random_delay import delay
 
 class Crane:
-    """ This class is a base class for all the cranes. """
-    def __init__(self, duration, scheduler, next_step):
+    """ This class represents the cranes. """
+    def __init__(self, name, duration, scheduler, logger, next_step):
         self.duration = duration
         self.queue = 0
         self.scheduler = scheduler
+        self.logger = logger
+        self.name = name
         self.state = "waiting"
         self.next_step = next_step
     def add_queue(self):
-        print "add_queue"
+        print self.name + ": add_queue"
         self.queue = self.queue + 1
         if (self.state == "waiting"):
             self.go_forward()
     def go_forward(self):
-        print "go_forward"
+        print self.name + ": go_forward"
+        self.logger.addMessage(self.name + " FORWARD");
         self.queue = self.queue - 1
         self.state = "running"
         self.scheduler.add(self.stop, delay(self.duration, 5))
     def stop(self):
-        print "stop"
+        print self.name + ": stop"
+        self.logger.addMessage(self.name + " STOP");
         self.next_step()
     def item_taken(self):
-        print "item_taken"
+        print self.name + ": item_taken"
         self.go_back()
     def go_back(self):
-        print "go_back"
+        print self.name + ": go_back"
+        self.logger.addMessage(self.name + " BACKWARD");
         self.scheduler.add(self.wait, delay(self.duration, 5))
     def wait(self):
-        print "wait"
+        print self.name + ": wait"
+        self.logger.addMessage(self.name + " STOP");
         self.state = "waiting"
         if (self.queue > 0):
             self.go_forward()
