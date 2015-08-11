@@ -10,5 +10,10 @@ class Logger:
     def addMessage(self, type, metadata = ""):
         logline = LogLine(self.scheduler.time, type, metadata)
         self.loglines.append(logline)
+    def indentLine(self, lineStr):
+        return "  " + lineStr
+    def indent(self, linesStr):
+        lines = linesStr.split("\n")
+        return "\n".join(map(self.indentLine, lines))
     def getLoglines(self):
-        return ",\n".join(map(str, self.loglines))
+        return "[\n" + (",\n".join(map(self.indent, map(str, self.loglines))) + "\n]\n")

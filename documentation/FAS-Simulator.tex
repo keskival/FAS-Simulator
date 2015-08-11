@@ -73,7 +73,8 @@ require public datasets to execute these methods against.
 Currently there are no standard benchmarks to test
 different anomaly detection methods and compare their performance against each other. Such standard benchmarks exist in other fields of machine learning,
 such as the MNIST handwritten digits benchmark\cite{lecun-mnisthandwrittendigit-2010}. Realistic simulations are often used\cite{jager2014assessing} for domains where
-real data is hard to collect or where real data would be subject to business confidentiality.
+real data is hard to collect or where real data would be subject to business confidentiality. Training neural network and other learning systems often utilizes realistic
+simulations instead of real data. Real measured data is often limited in both state space and in volume, where simulations give better results \cite{duch2005artificial}.
 
 Fault-free simulations of flexible assembly systems are generally available\cite{giulio} and have been studied for visualization and optimization purposes.
 These are not directly suitable for benchmarking fault detection methods.
@@ -236,11 +237,11 @@ Step & Description & Duration & Log messages & Potential failures \\
 \hline
 17 & Conveyor with cover & 10 s & To cell, stop & Wear \& tear \\
 \hline
-18 & Add cover and screws & 76 s & OK pressed & Failed manual step \\
+18 & Add cover and bolts & 76 s & OK pressed & Failed manual step \\
 \hline
 19 & Conveyor & 30 s & To cell, stop, to next cell & Wear \& tear \\
 \hline
-20 & Tighten the screws & 28 s & OK pressed & Failed manual step \\
+20 & Tighten the bolts & 28 s & OK pressed & Failed manual step \\
 \hline
 21 & Conveyor & 30 s & To cell, stop, to next cell & Wear \& tear \\
 \hline
@@ -250,7 +251,7 @@ Step & Description & Duration & Log messages & Potential failures \\
 \hline
 24 & Conveyor & 21 s & To cell, stop, to next cell & Wear \& tear \\
 \hline
-25 & Tighten the screws & 16 s & OK pressed & Failed manual step \\
+25 & Tighten the bolts & 16 s & OK pressed & Failed manual step \\
 \hline
 26 & Conveyor & 21 s & To cell, stop, to next cell & Wear \& tear \\
 \hline
@@ -260,7 +261,7 @@ Step & Description & Duration & Log messages & Potential failures \\
 \hline
 29 & Conveyor & 21 s & To cell, stop, to next cell & Wear \& tear \\
 \hline
-30 & Tighten the screws & 32 s & OK pressed & Failed manual step \\
+30 & Tighten the bolts & 32 s & OK pressed & Failed manual step \\
 \hline
 31 & Conveyor & 21 s & To output gate & Wear \& tear \\
 \hline
@@ -289,7 +290,7 @@ linear effect on machine performance measured in delays and success rates in app
 
 Simulated wear and tear causes two types of delay profiles. First,
 a continuous wear and tear typically causes no measurable delays at first, but when the degradation accumulates the delay increases following
-a roughly exponential curve \ref{continuouswearandtear}. Second, for certain steps, such as taking screws from the bowl feeder a human operator
+a roughly exponential curve \ref{continuouswearandtear}. Second, for certain steps, such as taking bolts from the bowl feeder a human operator
 might fail to get a screw from time to time. Typically human operator tries again and succeeds. The frequency of the failure increases
 slowly and roughly following an exponential curve until the failure rate becomes apparent and causes the operator to take corrective action,
 typically causing downtime. These failures cause a random delay if they happen. This characteristic delay profile is depicted in \ref{retrydelays}.

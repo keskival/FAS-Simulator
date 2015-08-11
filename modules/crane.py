@@ -3,16 +3,18 @@ from random_delay import delay
 
 class Crane:
     """ This class represents the cranes. """
-    def __init__(self, name, duration, scheduler, logger, next_step):
+    def __init__(self, name, duration, scheduler, logger):
         self.duration = duration
         self.queue = 0
         self.scheduler = scheduler
         self.logger = logger
         self.name = name
         self.state = "waiting"
+        self.next_step = lambda: None
+    def set_next(self, next_step):
         self.next_step = next_step
-    def add_queue(self):
-        print self.name + ": add_queue"
+    def input(self):
+        print self.name + ": input"
         self.queue = self.queue + 1
         if (self.state == "waiting"):
             self.go_forward()
