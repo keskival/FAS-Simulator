@@ -41,6 +41,7 @@
 \begin{document}
 
 \maketitle
+Version: \today
 
 \begin{abstract}
 
@@ -112,6 +113,11 @@ errors, human operators might fail in manual assembly steps for example by press
 as completed too quickly.
 The flexible assembly system might also get in incompatible materials, parts or replacement tools and fail when trying to use them.
 
+There has lately been an increase of computer crime against industrial networks as the devices and systems become more connected.
+Nation states execute industrial espionage and even sabotage against each other\cite{stuxnet}. An electronic sabotage attack might present itself
+much like a human misconfiguration error, and would be potentially detected in a similar fashion even if the attack itself would not be
+directly visible in the logs as anomalous activity.
+
 For useful anomaly detection systems we need to concentrate on faults that are unexpected, and that potentially have early indications.
 The table \ref{faults} summarizes the classes of faults.
 
@@ -127,7 +133,7 @@ Fault type & Unexpected faults & Potentially has an early indication & Useful ta
 \hline
 Auxilliary component wear and tear & X & X & X \\
 \hline
-Human error, misconfiguration & X & X & X \\
+Human error, misconfiguration / Cyberattack & X & X & X \\
 \hline
 Human error, failed manual step & X & X & X \\
 \hline
@@ -294,11 +300,6 @@ An example of such a signal could be for example a health warning of a device th
 but increases in frequency when the device actually starts to fail. There can also be log messages for example for electrical switches turning
 on and off when the working step is active, but never while the step is not active. Anomalies in such messages are an indicator of potential
 future fault.
-
-There has lately been an increase of computer crime against industrial networks as the devices and systems become more connected.
-Nation states execute industrial espionage and even sabotage against each other\cite{stuxnet}. An electronic sabotage attack might present itself
-much like a human misconfiguration error, and would be potentially detected in a similar fashion even if the attack itself would not be
-directly visible in the logs as anomalous activity.
 
 \section{Evaluation}
 
