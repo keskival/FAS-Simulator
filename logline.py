@@ -7,4 +7,4 @@ class LogLine:
         self.msgtype = msgtype
         self.metadata = metadata
     def __str__(self):
-        return "{\n  timestamp: " + str(self.timestamp) + ",\n  type: \"" + self.msgtype + "\"\n}"
+        return "{\n  \"timestamp\": " + str(self.timestamp) + ",\n  \"type\": \"" + self.msgtype + "\"\n}"
