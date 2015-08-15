@@ -35,7 +35,7 @@
 \fi
 
 %opening
-\title{A Benchmark Simulator for Log-structured Data In Fault Prediction and Anomaly Detection in Flexible Assembly Systems - DRAFT}
+\title{A Simulator for Log-structured Data in Flexible Assembly System Fault Prediction - DRAFT}
 \author{Tero Keski-Valkama}
 
 \begin{document}
@@ -51,15 +51,24 @@ Version: \today
 \end{IEEEkeywords}
 
 \section{Introduction}
+This paper describes a method for simulating flexible assembly system log-structured data sources including faults. Such simulator is required for creating representative corpuses
+of data for teaching automated learning algorithms for predictive maintenance.
+
 Flexible assembly system was described by Donath and Graves \cite{donath1988flexible} as a system consisting of a set of products each with a specified volume
 assembled on a workshop consisting of a fixed number of cells. In practise, a flexible assembly system contains parts and materials stored in an intermediate storage,
 a conveyor or crane system to move the parts, materials, intermediate assemblies and finished products between the cells, and the cells with work machines and necessary tooling
-to assemble and process intermediate assemblies and products.
+to assemble and process intermediate assemblies and products. The cells might consist of for example manual assembly steps, robotic assembly cells, CNC lathes, or 3D printing.
+
+As opposed to more specialized industrial production systems, flexible assembly systems are designed for smaller batches and greater flexibility so that the set of end products can vary more widely.
+For example, flexible assembly systems can be reconfigured more conveniently following the evolution of new versions of the end products. Flexibly assembly systems also allow for a wider range
+of customization between the different end product instances of the same product. The nature of fast evolution of configurations and workflows, and heterogeneous operating conditions make
+planning maintenance more challenging.
 
 System downtime is a significant cost for flexible assembly systems. System downtime is reduced by preventive maintenance typically scheduled periodically.
-Recently Internet of Things and opening of the industrial system APIs have created new possibilities for predictive maintenance. Different sites with similar
-flexible automation systems have widely different environmental and workload conditions which has an impact on the wear and tear of the flexible automation system.
-Taking different site environments and workloads into account when planning preventive maintenance cycles is non-trivial.
+Recently Internet of Things and opening of the networked industrial system APIs have created new possibilities for predictive maintenance. Different sites with similar
+flexible automation systems have widely different environmental and workload conditions which has an impact on the wear and tear of the flexible automation system components.
+Taking different site environments and workloads into account when planning preventive maintenance cycles is non-trivial. There is a clear need to adapt maintenance based on actual
+conditions in the operation rather than by simply scheduling maintenance periodically.
 
 Going from preventive maintenance towards predictive maintenance optimizes and targets the maintenance related costs towards the activities that have best impact
 on improving the availability and operation of deployed flexible manufacturing systems.
@@ -67,14 +76,11 @@ Predictive maintenance in flexible assembly systems benefits from automatic indi
 Current predictive maintenance systems concentrate on measuring device health by means of measuring temperature and vibration
 \cite{contreras2002integrating}.
 
-My own future research includes plans to implement novel anomaly detection methods for flexible manufacturing systems. Validating and quantifying these methods
-require public datasets to execute these methods against.
-
-Currently there are no standard benchmarks to test
+Creating novel automatic methods for fault prediction requires standard benchmarks to compare these methods against. Currently there are no standard benchmarks to test
 different anomaly detection methods and compare their performance against each other. Such standard benchmarks exist in other fields of machine learning,
 such as the MNIST handwritten digits benchmark\cite{lecun-mnisthandwrittendigit-2010}. Realistic simulations are often used\cite{jager2014assessing} for domains where
 real data is hard to collect or where real data would be subject to business confidentiality. Training neural network and other learning systems often utilizes realistic
-simulations instead of real data. Real measured data is often limited in both state space and in volume, where simulations give better results \cite{duch2005artificial}.
+simulations instead of real data. Real measured data is often limited in both state space and in volume, and often simulations give better results \cite{duch2005artificial}.
 
 Fault-free simulations of flexible assembly systems are generally available\cite{giulio} and have been studied for visualization and optimization purposes.
 These are not directly suitable for benchmarking fault detection methods.
