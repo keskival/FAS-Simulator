@@ -35,7 +35,7 @@
 \fi
 
 %opening
-\title{A Simulator for Log-structured Data in Flexible Assembly System Fault Prediction - DRAFT}
+\title{A Simulator for Event-oriented Data in Flexible Assembly System Fault Prediction - DRAFT}
 \author{Tero Keski-Valkama}
 
 \begin{document}
@@ -51,8 +51,8 @@ Version: \today
 \end{IEEEkeywords}
 
 \section{Introduction}
-This paper describes a method for simulating flexible assembly system log-structured data sources including faults. Such simulator is required for creating representative corpuses
-of data for teaching automated learning algorithms for predictive maintenance.
+This paper describes a method for simulating event-oriented data sources of a flexible assembly system including faults. Such simulator is required for creating representative corpuses
+of data for teaching automated learning algorithms for predictive maintenance and systemic fault detection.
 
 Flexible assembly system was described by Donath and Graves \cite{donath1988flexible} as a system consisting of a set of products each with a specified volume
 assembled on a workshop consisting of a fixed number of cells. In practise, a flexible assembly system contains parts and materials stored in an intermediate storage,
@@ -65,18 +65,18 @@ of customization between the different end product instances of the same product
 planning maintenance more challenging.
 
 System downtime is a significant cost for flexible assembly systems. System downtime is reduced by preventive maintenance typically scheduled periodically.
-Recently Internet of Things and opening of the networked industrial system APIs have created new possibilities for predictive maintenance. Different sites with similar
+Recently Internet of Things and opening of the networked industrial system APIs have created new possibilities for predictive maintenance and systemic fault detection. Different sites with similar
 flexible automation systems have widely different environmental and workload conditions which has an impact on the wear and tear of the flexible automation system components.
 Taking different site environments and workloads into account when planning preventive maintenance cycles is non-trivial. There is a clear need to adapt maintenance based on actual
-conditions in the operation rather than by simply scheduling maintenance periodically.
+conditions in the operation rather than by simply scheduling maintenance periodically. It is also important to indicate potential faults early to improve the response time of corrective action.
 
 Going from preventive maintenance towards predictive maintenance optimizes and targets the maintenance related costs towards the activities that have best impact
 on improving the availability and operation of deployed flexible manufacturing systems.
 Predictive maintenance in flexible assembly systems benefits from automatic indicators for potential future faults.
-Current predictive maintenance systems concentrate on measuring device health by means of measuring temperature and vibration
-\cite{contreras2002integrating}.
+Current predictive maintenance systems concentrate on measuring device health for example by means of measuring temperature and vibration
+\cite{contreras2002integrating}. Less research effort is done in the context of event-oriented data sources (logs), and about systemic failures.
 
-Creating novel automatic methods for fault prediction requires standard benchmarks to compare these methods against. Currently there are no standard benchmarks to test
+Evaluating novel automatic methods for fault prediction requires standard benchmarks to compare these methods against. Currently there are no standard benchmarks to test
 different anomaly detection methods and compare their performance against each other. Such standard benchmarks exist in other fields of machine learning,
 such as the MNIST handwritten digits benchmark\cite{lecun-mnisthandwrittendigit-2010}. Realistic simulations are often used\cite{jager2014assessing} for domains where
 real data is hard to collect or where real data would be subject to business confidentiality. Training neural network and other learning systems often utilizes realistic
@@ -94,26 +94,31 @@ not generally available, because fault data is generally subject to business con
 The generally available simulation models do not typically contain failure modes and are not typically designed to emit
 log structured events in a realistic fashion, but they can be used as a starting point in creating a flexible assembly system model.
 
-To enable relevant research into anomaly detection in flexible assembly systems a realistic simulator for log structured events is needed.
+To enable relevant research into anomaly detection in flexible assembly systems a realistic simulator for logged events is needed.
 All references to simulated faults and failure modes in the research described in this article are hypothetical and should not be considered to
 reflect actual characteristics of any specific existing systems. An effort is made to make the simulations contain the necessary features of
 generic and realistic failure modes to make the models useful for research, but for example the simulated fault frequencies and the configuration
 of the flexible assembly system along with workflows and end products are arbitrary and hypothetical.
 
 A simulation for benchmarking anomaly and fault detection methods should not be fully deterministic to reflect the real world dynamics. The simulation should also
-include realistic faults with possible early indicators such as variations in delays in the steps of the process.
+include realistic faults with possible early indicators such as variations in delays in the steps of the process. The focus of the simulator is on faults without pre-existing
+diagnostic fault codes, such as unexpected faults and degradation of the assembly modules and conveyors, and on systemic faults. Systemic faults in this paper
+mean faults and degradation of output where each of the component modules of the Flexible Assembly System are seemingly operating without faults.
 
 \section{Modes of Failures in Flexible Assembly Systems}
 
 Flexible assembly system failures are typically component failures where a failure of a single module or a component will lead to the system becoming inoperational.
 Since the flexible assembly systems are dynamic systems with numerous moving parts, the wear and tear of the components and tools are a significant source of downtime.
 In addition to the component failures, certain systemic failures can cause downtime, such as power loss and network communication failures.
+The critical systemic failures mentioned don't typically show any indication before they happen so predictive maintenance has little potential to be applied there.
+In addition to these critical system failures,
+the whole system can exhibit modes of failure and degradation which are not directly attributable to single component degradation or failure. Some of these might be caused by
+external factors, such as accidents and human errors, but also for example by timing issues in the whole process causing unexpected queues or traffic jams.
 
-The systemic failures mentioned don't typically show any indication before they happen so predictive maintenance has little potential to be applied there. Tool wear and tear
-depends on the workload. Typically tools that wear out fast, for example multiple times for one unit of work in a cell, receive much attention and such tools are generally
+Tool wear and tear depends on the workload. Typically tools that wear out fast, for example multiple times for one unit of work in a cell, receive much attention and such tools are generally
 well maintained. Tools that have wear and tear but have longer life spans are more susceptible to being overlooked by operators and might have some indicators of degrading
 before a failure. Cranes, hatches and conveyors have relatively long life spans and are primarily maintained in periodic preventive maintenance. If we could get indicators
-for impeding failure for these components, the periodical maintenance could be scheduled earlier to prevent downtime. In addition to these physical faults the flexible
+for impending failure for these components, the periodical maintenance could be scheduled earlier to prevent downtime. In addition to these physical faults the flexible
 assembly system can suffer from human errors. Human operator can inadvertently misconfigure the flexible assembly system so that its operating mode changes unexpectedly,
 for example by disabling a cell which can lead to the system stopping without a proper failure. In addition to configuration
 errors, human operators might fail in manual assembly steps for example by pressing the button to mark the step
@@ -125,7 +130,8 @@ Nation states execute industrial espionage and even sabotage against each other\
 much like a human misconfiguration error, and would be potentially detected in a similar fashion even if the attack itself would not be
 directly visible in the logs as anomalous activity.
 
-For useful anomaly detection systems we need to concentrate on faults that are unexpected, and that potentially have early indications.
+For useful anomaly detection systems we need to concentrate on faults that are unexpected without pre-existing diagnostic error codes, and that potentially have early indications
+in collected event-based logs. Early indication in this context means that the error can be detected in the system logs before the failure becomes otherwise evident.
 The table \ref{faults} summarizes the classes of faults.
 
 \begin{table}[!t]
@@ -140,13 +146,13 @@ Fault type & Unexpected faults & Potentially has an early indication & Useful ta
 \hline
 Auxilliary component wear and tear & X & X & X \\
 \hline
-Human error, misconfiguration / Cyberattack & X & X & X \\
+Critical systemic failures (power, network) & X & & \\
 \hline
 Human error, failed manual step & X & X & X \\
 \hline
 Incompatible parts, materials or replacement tools & X & & \\
 \hline
-Systemic failures (power, network) & X & & \\
+Systemic failures (jams, accidents, misconfigurations, cyberattacks) & X & X & X \\
 \hline
 Tool wear and tear for quickly degrading tools & & X & \\
 \hline
@@ -307,6 +313,30 @@ An example of such a signal could be for example a health warning of a device th
 but increases in frequency when the device actually starts to fail. There can also be log messages for example for electrical switches turning
 on and off when the working step is active, but never while the step is not active. Anomalies in such messages are an indicator of potential
 future fault.
+
+In addition to unexpected component failures, we have to simulate systemic failures. The simulated systemic failures and their effects are listed in the table \ref{systemicfailures}.
+Jams in the real Flexible Assembly System can happen in various ways.
+
+\begin{table}[!t]
+\renewcommand{\arraystretch}{1.3}
+\caption{Table of the steps 1-16 in the main assembly process}
+\label{systemicfailures}
+\centering
+\begin{tabular}{|p{5mm}|p{20mm}|p{10mm}|p{15mm}|p{15mm}|}
+\hline
+Failure & Description & Effect \\
+\hline
+\hline
+Accident & TODO  & TODO \\
+\hline
+Cyberattack & TODO  & TODO \\
+\hline
+Jam & TODO  & TODO \\
+\hline
+Misconfiguration & TODO  & TODO \\
+\hline
+\end{tabular}
+\end{table}
 
 \section{Evaluation}
 
