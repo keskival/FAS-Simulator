@@ -4,6 +4,7 @@
 import json
 import sys, os
 sys.path.append("./lib/netzob/src/")
+from netzob.Common.Vocabulary import Vocabulary
 from netzob.Inference.Grammar.Angluin import Angluin
 
 outputJsonFile = open('output.json', 'r')
@@ -35,4 +36,10 @@ for item in outputJson:
     sequence = sequence + id_to_char(id)
 
 print sequence
+print len(sequence)
+print len(types)
 
+vocabulary = Vocabulary()
+
+# __init__(self, dictionary, inputDictionary, communicationChannel, resetScript, cb_query, cb_hypotheticalAutomaton, cache)
+angluinLearner = Angluin()
