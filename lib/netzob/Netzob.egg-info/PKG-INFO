@@ -1,0 +1,364 @@
+Metadata-Version: 1.1
+Name: Netzob
+Version: 0.4.1
+Summary: Inferring communication protocols
+Home-page: http://www.netzob.org
+Author: Georges Bossert, Frédéric Guihéry
+Author-email: contact@netzob.org
+License: GPLv3
+Download-URL: http://www.netzob.org/download
+Description: ==========================================
+        Netzob : Inferring Communication Protocols
+        ==========================================
+        
+        About Netzob
+        ============
+        
+        Functional Description
+        -----------------------
+        
+        Netzob is an opensource tool for reverse engineering, traffic generation
+        and fuzzing of communication protocols. This tool allows to infer the message format (vocabulary)
+        and the state machine (grammar) of a protocol through passive and active processes.
+        Its objective is to bring state of art academic researches to the operational field,
+        by leveraging bio-informatic and grammatical inferring algorithms in a semi-automatic manner.
+        
+        Netzob is suitable for reversing network protocols, structured files and system and
+        process flows (IPC and communication with drivers and devices).
+        Dedicated modules are provided to capture and import data in multiple contexts (network, file and process data acquisition).
+        Once inferred, a protocol model can afterward be exported to third party tools (Peach, Scapy, Wireshark, etc.)
+        or used in the traffic generation engine, to allow simulation of realistic and controllable communication endpoints and flows.
+        
+        Netzob handles different types of protocols: text protocols (like HTTP and IRC), delimiter-based protocols,
+        fixed fields protocols (like IP and TCP) and variable-length fields protocols (like TLV-based protocols).
+        
+        Technical Description
+        ---------------------
+        
+        Netzob's source code is mostly made of Python (90%) with some specific
+        extensions in C (6%). It includes a graphical interface based on GTK3.
+        
+        The tool is made of a core (officially maintained) and of bunch of
+        plugins (exporters, importers, ...). Some plugins are provided by the team while others are
+        created and managed directly by users.
+        
+        More Information
+        ----------------
+        
+        :Website: `http://www.netzob.org <http://www.netzob.org>`_
+        :Email: `contact@netzob.org <contact@netzob.org>`_
+        :Mailing list: Two lists are available, use the `SYMPA web interface <https://lists.netzob.org/wws>`_ to register.
+        :IRC: You can hang-out with us on Freenode's IRC channel #netzob @ freenode.org.
+        :Wiki: Discuss strategy on `Netzob's wiki <https://dev.netzob.org/projects/netzob/wiki>`_
+        :Twitter: Follow Netzob's official accounts (@Netzob)
+        
+        Get Started with Netzob
+        =======================
+        
+        Install it
+        ----------
+        
+        There are two main ways of installing Netzob. The first one is based on
+        per-OS installers while the other one is more 'pythonic'.
+        
+        We recommend the per-OS installers for 'normal' users while
+        testers, developers and python experts might prefer the 'pythonic' way.
+        
+        Per-OS Installers:
+        ^^^^^^^^^^^^^^^^^^
+        
+        Please follow the specification documentations for each supported platform:
+        
+        :Debian/Ubuntu: `Installation documentation on Debian (wiki) <https://dev.netzob.org/projects/netzob/wiki/Installation_documentation_on_Debian>`_
+        :Gentoo: `Installation documentation on Gentoo (wiki) <https://dev.netzob.org/projects/netzob/wiki/Installation_documentation_on_Gentoo>`_
+        
+        Pythonic Installer:
+        ^^^^^^^^^^^^^^^^^^^
+        
+        As a 'classic' python project, Netzob is provided with its
+        ``setup.py``. This file defines what and how to install the project on a
+        python hosting OS.
+        
+        This file depends on ``setuptools`` which like few other modules cannot be
+        automatically installed. The reason why, you have to manually install the
+        following bunch of prerequisites before initiating Netzob's install process.
+        
+        * python
+        * python-dev
+        * python-impacket
+        * libxml2-dev
+        * libxslt-dev
+        * python-setuptools
+        * python-gi
+        * gir1.2-gtk-3.0, gir1.2-glib-2.0, gir1.2-gdkpixbuf-2.0, gir1.2-pango-1.0
+        * libgtk-3-0
+        * graphviz
+        
+        We also highly recommend to install the following additional dependencies:
+        
+        * python-babel (for the translations)
+        * python-sphinx (for the documentation)
+        
+        Once the required dependencies are installed, you can test Netzob in
+        developer mode::
+        
+          python setup.py build
+          python setup.py develop --user
+        
+        Otherwise, if you want to install Netzob on the system::
+        
+          python setup.py build
+          python setup.py develop
+          python setup.py install
+        
+        Start it
+        --------
+        
+        Once installed, running Netzob is as simple as executing the provided script::
+        
+          $ ./netzob
+        
+        This script is in Python's path if you've installed Netzob, otherwise
+        (in developer mode), it's located in the top distribution directory.
+        
+        
+        Miscellaneous
+        -------------
+        
+        Configuration requirements for Network and PCAP input::
+        
+        *Note: Capturing data from network interfaces often requires admin privileges. Before we provide a cleaner and secure way (see issue 425 on the bugtracker for updated information - https://dev.netzob.org/issues/425), a possible HACK is to provide additionnal capabilities to the python binary.* ::
+        
+          $ sudo setcap cap_net_raw=ep /usr/bin/python2.XX
+        
+        Configuration requirements for IPC input on Ubuntu::
+        
+          $ sudo bash -c "echo 0 > /proc/sys/kernel/yama/ptrace_scope"
+        
+        Documentation
+        =============
+        
+        The folder ``doc/documentation`` contains all the documentation of Netzob.
+        
+        The user manual can be generated based on RST sources located in folder
+        ``doc/documentation/source`` with the following command::
+        
+          $ sphinx-build -b html doc/documentation/source/ doc/documentation/build/
+        
+        Contributing
+        ============
+        
+        There are multiple ways to help-us.
+        
+        Defects and Features  Requests
+        ------------------------------
+        
+        Help-us by reporting bugs and requesting features using the `Bug Tracker <https://dev.netzob.org/projects/netzob/issues>`_.
+        
+        Translation
+        -----------
+        
+        Netzob has `support <https://dev.netzob.org/projects/netzob/wiki/Translation_support>`_ for translation.
+        Currently English and French languages are supported. New languages are welcome.
+        
+        Join the Development Team
+        -------------------------
+        
+        To participate in the development, you need to get the latest version,
+        modify it and submit your changes.
+        
+        These operations are detailed on Netzob's wiki through the following
+        pages:
+        
+        * `Accessing and using Git Repositories for Netzob development <https://dev.netzob.org/projects/netzob/wiki/Accessing_and_using_Git_Repositories_for_Netzob_development>`_
+        * `First steps for a new developer <https://dev.netzob.org/projects/netzob/wiki/First_steps_for_a_new_developer>`_
+        
+        You're interested in joining, please contact-us !
+        
+        Authors, Contributors and Sponsors
+        ==================================
+        
+        See the top distribution file ``AUTHORS.txt`` for the detailed and updated list
+        of authors, contributors and sponsors.
+        
+        License
+        =======
+        
+        This software is licensed under the GPLv3 License. See the ``COPYING.txt`` file
+        in the top distribution directory for the full license text.
+        
+        
+        Extra
+        =====
+        
+        .. figure:: http://www.netzob.org/img/logo.png
+           :width: 200 px
+           :alt: Zoby, the official mascot of Netzob
+           :align: center
+        
+           Zoby, the official mascot of Netzob.
+        
+        NEWS
+        ====
+        
+        v0.4.1 -- 2013-02-02
+        --------------------
+        
+        :Version name: WaddlingPeccary
+        
+        * Export plugins
+            * Automatic generation of Wireshark dissectors
+            * Automatic generation of Peach fuzzers
+        * Workspaces and projects
+            * Workspace manager
+            * Project manager
+            * Trace manager
+        * Pretty print of XML files
+        * Simplify the default Variable
+        * Provide extra compile arguments to the build process
+        
+        v0.4 -- 2012-11-15
+        ------------------
+        
+        :Version name: JumpingRhino
+        
+        * User interface
+            * New user-friendly graphical interface
+            * Port Netzob to GTK+3
+            * Allow specification of logging level in the UI
+        * New plugin architecture
+        * Internationalization of Netzob
+        * Vocabulary inference
+            * Support of layers
+            * Support customized transformation functions
+            * Provide the edition of a variable
+            * Support IPv4, MAC and random binary variables
+            * Support filters for displayed messages
+            * Allow export of a selection of fields as a new symbol
+        * Import
+            * Importer for OSpy projects
+            * Allow user to specify the import layer (2,3 or 4) while importing network messages
+            * Allow to keep delimiter while file importing. Indicate the position of the delimiter
+        * Automatic Bug Reporter
+        
+        
+        v0.3.3 -- 2012-06-06
+        --------------------
+        
+        :Version name: FlyingRazorback
+        
+        * Graphical interface
+            * Visualization and encoding filters
+            * Mathematical filters (Base64, GZIP, BZ2)
+            * Dedicated Search View
+            * Preview of data rendering in contextual menu
+            * Support format visualization at the symbol level
+        * Partitioning
+            * Alignment and sequencing by field
+            * Execute alignment on specified symbols
+            * Split field by the right
+            * Allow the partitioning of messages with specified boundaries
+            * Allow partitioning at the project and symbol level
+            * Similarity score based on number of common dynamic elements
+            * Optimization of Needleman : don't repeat the same computation twice
+            * Implement native UPGMA algorithm
+        * Grammar inference
+            * Infer the grammar of a network client
+        * Project/trace management
+            * Export / Import projects
+            * Importer for XML formated traces
+        
+        v0.3.2 -- 2012-02-23
+        --------------------
+        
+        * Upgrade Vocabulary Inference
+            * Add Octal visualization
+                * Feature #57: Resize columns
+                * Feature #59: Allows to copy message/field to clipboard
+                * Feature #60: Support simple alignment
+                * Feature #62: Allow the deletion of multiple messages at a time
+                * Feature #20: Show the current status of an alignment
+                * Manual modification of the Regex of a field		
+            * Upgrade Grammar Inference
+                * Feature #55: Dedicated GUI for the automatic inferring process
+            * Upgrade Simulator
+                * Feature #87: Specify source port for network simulator
+        * Upgrade Import/Export and Traces Management
+            * Feature #22: Activate the management of traces
+            * Feature #61: Traces must be compressed when stored in the trace manager
+            * Feature #92: Handle cooked socket (SLL) packet format
+            * Feature #83: Support of human readable format export
+            * Support Unicode for filenames
+        * Extra
+            * Workspace can be specified through a command line argument
+            * Feature #73: Add manpage for Netzob
+            * Feature #74: Add ".desktop" file in the official version
+            * Apply pep8 quality repository on source code
+            	
+        v0.3.1 -- 2012-01-12
+        --------------------
+        
+        * Small fixes
+        
+        v0.3 -- 2012-01-12
+        ------------------
+        
+        * Upgraded GUI and user experience
+            * Add a menu
+            * Simplify the Vocabulary inference panel
+            * Add Workspaces and Projects definitions
+        * Upgrade Vocabulary Inference
+            * Add alignment based on an arbitrary delimitor
+            * Identification of the definition domain of a field
+            * Add support for environmental dependencies
+            * Add new visualization of data encoding
+                * Format: hex, string and binary
+                * Unit size: bit, 8-bits, 16-bits, 32-bits and 64-bits
+                * Sign: signed and unsigned
+                * Endianess: big and little endian
+            * Add concept of variable :
+                * Include Binary Value
+                * Include Word Value
+                * Include Aggregate Value
+                * Include Alternate Value
+        * Add grammar inference module
+            * Add the definition of the MMSTD model
+            * Implementation of the Angluin L* algorithm
+            * Implementation of the W-Method Algorithm
+            * Add an alpha version of the automatic inferring process
+        * Add simulation module 
+            * Supports Network Server and Client simulations
+        * Add import modules : files and library calls
+            * Add multiple files import
+        * Extra
+            * SVN to GIT migration
+            * Dedicated website (http://www.netzob.org)
+        
+        v0.2 -- 2011-09-01
+        ------------------
+        
+        * Add import modules : IPC, PCAP and Live network flows
+        * Add export module : raw XML format
+        * Improvement of Needleman and Wunsh performance with OpenMP
+        
+        v0.1 -- 2011-08-16
+        ------------------
+        
+        * Initial release
+        
+Keywords: Protocol,Inference,Networking,Reverse Engineering,Fuzzing,Security
+Platform: Linux_x86
+Platform: Linux_x64
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: C
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: X11 Applications :: GTK
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: GNU General Public License (GPL)
+Classifier: Operating System :: OS Independent
+Classifier: Natural Language :: English
+Classifier: Natural Language :: French
+Classifier: Topic :: Security
+Classifier: Topic :: System :: Networking

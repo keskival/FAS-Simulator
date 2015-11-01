@@ -1,0 +1,99 @@
+\select@language {english}
+\contentsline {chapter}{\numberline {1}The big picture}{3}{chapter.1}
+\contentsline {section}{\numberline {1.1}Table of contents}{3}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1}Introduction}{3}{subsection.1.1.1}
+\contentsline {subsection}{\numberline {1.1.2}Import}{3}{subsection.1.1.2}
+\contentsline {subsubsection}{AbstractMessage}{4}{subsubsection*.3}
+\contentsline {subsubsection}{NetworkMessage}{4}{subsubsection*.4}
+\contentsline {subsubsection}{FileMessage}{5}{subsubsection*.5}
+\contentsline {subsection}{\numberline {1.1.3}Modelization}{5}{subsection.1.1.3}
+\contentsline {subsubsection}{Definition of a communication protocol}{5}{subsubsection*.10}
+\contentsline {subsubsection}{Modelization in Netzob}{6}{subsubsection*.11}
+\contentsline {paragraph}{Vocabular inference}{6}{paragraph*.12}
+\contentsline {subparagraph}{Structure inference}{6}{subparagraph*.13}
+\contentsline {subparagraph}{Regoupment of similar structures}{6}{subparagraph*.14}
+\contentsline {subparagraph}{Options during alignment process}{6}{subparagraph*.15}
+\contentsline {subparagraph}{Needleman and Wunsch algorithm}{7}{subparagraph*.16}
+\contentsline {subparagraph}{UPGMA algorithm}{7}{subparagraph*.17}
+\contentsline {subparagraph}{Abstraction of a set of message}{7}{subparagraph*.18}
+\contentsline {subparagraph}{Analyses after alignment process}{8}{subparagraph*.19}
+\contentsline {subparagraph}{Message contextual menu}{8}{subparagraph*.20}
+\contentsline {subparagraph}{Group contextual menu}{8}{subparagraph*.21}
+\contentsline {subparagraph}{Refine regexes}{8}{subparagraph*.22}
+\contentsline {subparagraph}{Slick regexes}{8}{subparagraph*.23}
+\contentsline {subparagraph}{Concatenate}{8}{subparagraph*.24}
+\contentsline {subparagraph}{Split column}{8}{subparagraph*.25}
+\contentsline {subparagraph}{Merge columns}{8}{subparagraph*.26}
+\contentsline {subparagraph}{Delete message}{9}{subparagraph*.27}
+\contentsline {subparagraph}{Field type inference}{9}{subparagraph*.28}
+\contentsline {subparagraph}{Visualization options}{9}{subparagraph*.29}
+\contentsline {subparagraph}{Type structure contextual menu}{9}{subparagraph*.30}
+\contentsline {subparagraph}{Messages distribution}{9}{subparagraph*.31}
+\contentsline {subparagraph}{Data typing}{9}{subparagraph*.32}
+\contentsline {subparagraph}{Domain of definition}{9}{subparagraph*.33}
+\contentsline {subparagraph}{Change type representation}{9}{subparagraph*.34}
+\contentsline {subparagraph}{Field dependencies from the same message and from the environment}{9}{subparagraph*.35}
+\contentsline {subparagraph}{Fields dependancies identification}{9}{subparagraph*.36}
+\contentsline {subparagraph}{Payload extraction}{9}{subparagraph*.37}
+\contentsline {subparagraph}{Field semantic inference}{10}{subparagraph*.38}
+\contentsline {subparagraph}{Data carving}{10}{subparagraph*.39}
+\contentsline {subparagraph}{Search}{10}{subparagraph*.40}
+\contentsline {subparagraph}{Properties}{10}{subparagraph*.41}
+\contentsline {paragraph}{Grammar inference}{10}{paragraph*.42}
+\contentsline {subparagraph}{Identification of the automata of the protocol}{10}{subparagraph*.43}
+\contentsline {subparagraph}{Fields dependencies with messages of previous states}{10}{subparagraph*.44}
+\contentsline {subsection}{\numberline {1.1.4}Vocabular inference}{11}{subsection.1.1.4}
+\contentsline {subsubsection}{Structure inference}{11}{subsubsection*.45}
+\contentsline {subsubsection}{Regoupment of similar structures}{11}{subsubsection*.46}
+\contentsline {paragraph}{Options during alignment process}{11}{paragraph*.47}
+\contentsline {paragraph}{Needleman and Wunsch algorithm}{11}{paragraph*.48}
+\contentsline {paragraph}{UPGMA algorithm}{11}{paragraph*.49}
+\contentsline {paragraph}{Abstraction of a set of message}{12}{paragraph*.50}
+\contentsline {paragraph}{Analyses after alignment process}{12}{paragraph*.51}
+\contentsline {paragraph}{Message contextual menu}{12}{paragraph*.52}
+\contentsline {paragraph}{Group contextual menu}{12}{paragraph*.53}
+\contentsline {paragraph}{Refine regexes}{13}{paragraph*.54}
+\contentsline {paragraph}{Slick regexes}{13}{paragraph*.55}
+\contentsline {paragraph}{Concatenate}{13}{paragraph*.56}
+\contentsline {paragraph}{Split column}{13}{paragraph*.57}
+\contentsline {paragraph}{Merge columns}{13}{paragraph*.58}
+\contentsline {paragraph}{Delete message}{13}{paragraph*.59}
+\contentsline {subsubsection}{Field type inference}{13}{subsubsection*.60}
+\contentsline {paragraph}{Visualization options}{13}{paragraph*.61}
+\contentsline {paragraph}{Type structure contextual menu}{13}{paragraph*.62}
+\contentsline {paragraph}{Messages distribution}{13}{paragraph*.63}
+\contentsline {paragraph}{Data typing}{14}{paragraph*.64}
+\contentsline {paragraph}{Domain of definition}{14}{paragraph*.65}
+\contentsline {paragraph}{Change type representation}{14}{paragraph*.66}
+\contentsline {subsubsection}{Field dependencies from the same message and from the environment}{14}{subsubsection*.67}
+\contentsline {paragraph}{Fields dependancies identification}{14}{paragraph*.68}
+\contentsline {paragraph}{Payload extraction}{14}{paragraph*.69}
+\contentsline {subsubsection}{Field semantic inference}{15}{subsubsection*.70}
+\contentsline {paragraph}{Data carving}{15}{paragraph*.71}
+\contentsline {paragraph}{Search}{15}{paragraph*.72}
+\contentsline {paragraph}{Properties}{15}{paragraph*.73}
+\contentsline {subsection}{\numberline {1.1.5}Grammar inference}{16}{subsection.1.1.5}
+\contentsline {subsubsection}{Identification of the automata of the protocol}{16}{subsubsection*.74}
+\contentsline {subsubsection}{Fields dependencies with messages of previous states}{16}{subsubsection*.75}
+\contentsline {subsection}{\numberline {1.1.6}Export}{16}{subsection.1.1.6}
+\contentsline {subsubsection}{XML Export}{16}{subsubsection*.76}
+\contentsline {subsubsection}{Scapy Dissector}{16}{subsubsection*.77}
+\contentsline {subsubsection}{Wireshark Dissector}{16}{subsubsection*.78}
+\contentsline {subsection}{\numberline {1.1.7}Simulation}{16}{subsection.1.1.7}
+\contentsline {subsection}{\numberline {1.1.8}Fuzzing}{16}{subsection.1.1.8}
+\contentsline {subsection}{\numberline {1.1.9}Annexes}{16}{subsection.1.1.9}
+\contentsline {subsubsection}{GOT Poisoning}{16}{subsubsection*.79}
+\contentsline {paragraph}{Glossary}{17}{paragraph*.80}
+\contentsline {paragraph}{How it works}{17}{paragraph*.81}
+\contentsline {paragraph}{Step1 : Locate binary of targeted process by parsing /proc/\textless {}pid\textgreater {}/maps}{18}{paragraph*.82}
+\contentsline {paragraph}{Step2 : Parse PLT to get desired GOT address}{18}{paragraph*.83}
+\contentsline {paragraph}{Step3 : Attach to the process}{18}{paragraph*.84}
+\contentsline {paragraph}{Step4 : Find a place to inject the parasite loader shellcode}{18}{paragraph*.85}
+\contentsline {paragraph}{Step5 : Inject new code and save original code we are overwriting}{19}{paragraph*.86}
+\contentsline {paragraph}{Step6 : Modify EIP (save old EIP) to point to our code}{19}{paragraph*.87}
+\contentsline {paragraph}{Step7 : Resume traced process so that it executes our parasite loader shellcode and load our parasite}{19}{paragraph*.88}
+\contentsline {paragraph}{Step8 : Reset register, replace original code and allow process to resume}{19}{paragraph*.89}
+\contentsline {subsubsection}{What is a workspace ?}{20}{subsubsection*.90}
+\contentsline {subsection}{\numberline {1.1.10}API}{20}{subsection.1.1.10}
+\contentsline {chapter}{\numberline {2}Indices and tables}{21}{chapter.2}
+\contentsline {chapter}{Python Module Index}{23}{section*.95}

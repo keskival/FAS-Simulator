@@ -1,0 +1,3 @@
+[babel.extractors]
+        glade = resources.sdist.babel_extract:extract_glade
+    

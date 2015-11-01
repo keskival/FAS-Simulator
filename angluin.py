@@ -2,9 +2,9 @@
 
 # This utility reads the given file, and uses an L*, that is, Angluin learner to infer the implicit DFA.
 import json
-from pprint import pprint
-from samba.dcerpc.dfs import DFS_GLOBAL_HIGH_PRIORITY_CLASS
-from encodings import ascii
+import sys, os
+sys.path.append("./lib/netzob/src/")
+from netzob.Inference.Grammar.Angluin import Angluin
 
 outputJsonFile = open('output.json', 'r')
 outputJson = json.load(outputJsonFile)

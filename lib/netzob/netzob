@@ -1,0 +1,87 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+#+---------------------------------------------------------------------------+
+#|          01001110 01100101 01110100 01111010 01101111 01100010            |
+#|                                                                           |
+#|               Netzob : Inferring communication protocols                  |
+#+---------------------------------------------------------------------------+
+#| Copyright (C) 2011 Georges Bossert and Frédéric Guihéry                   |
+#| This program is free software: you can redistribute it and/or modify      |
+#| it under the terms of the GNU General Public License as published by      |
+#| the Free Software Foundation, either version 3 of the License, or         |
+#| (at your option) any later version.                                       |
+#|                                                                           |
+#| This program is distributed in the hope that it will be useful,           |
+#| but WITHOUT ANY WARRANTY; without even the implied warranty of            |
+#| MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the              |
+#| GNU General Public License for more details.                              |
+#|                                                                           |
+#| You should have received a copy of the GNU General Public License         |
+#| along with this program. If not, see <http://www.gnu.org/licenses/>.      |
+#+---------------------------------------------------------------------------+
+#| @url      : http://www.netzob.org                                         |
+#| @contact  : contact@netzob.org                                            |
+#| @sponsors : Amossys, http://www.amossys.fr                                |
+#|             Supélec, http://www.rennes.supelec.fr/ren/rd/cidre/           |
+#+---------------------------------------------------------------------------+
+
+#+---------------------------------------------------------------------------+
+#| Standard library imports
+#+---------------------------------------------------------------------------+
+import sys
+import logging
+logging.basicConfig(level=logging.DEBUG)
+import os
+import optparse
+from gi.repository import GObject
+
+#+---------------------------------------------------------------------------+
+#| Local imports
+#+---------------------------------------------------------------------------+
+sys.path.insert(0, 'src/')
+from netzob.Common.CommandLine import CommandLine
+
+
+if __name__ == "__main__":
+
+    # Parsing Command Line arguments
+    commandLineParser = CommandLine()
+
+    # compute the requested execution following the provided arguments
+    commandLineParser.parse()
+
+    # Starting the dependency checker
+    from netzob.Common.DepCheck import DepCheck
+    if not DepCheck.checkRequiredDependency():
+        logging.fatal("Some required dependency are not available and prevent netzob from starting.")
+        sys.exit()
+
+    # Insert in the path the directory where _libNeedleman.pyd is
+    # TODO here !
+    if os.name == 'nt':
+        sys.path.insert(0, 'lib/libNeedleman/')
+
+    try:
+        # Verify that required C extensions are available
+        from netzob import _libNeedleman
+        from netzob import _libScoreComputation
+        from netzob import _libInterface
+        from netzob import _libRegex
+    except:
+        # Else, assume the path is gotten from the 'python setup.py build' command
+        arch = os.uname()[-1]
+        python_version = sys.version[:3]
+        build_lib_path = "build/lib.linux-" + arch + "-" + python_version
+        sys.path.append(build_lib_path)
+
+
+    if commandLineParser.isStartGUIRequested():
+        GObject.threads_init()  # for handling concurrent GUI access from threads
+        from netzob.NetzobMainController import NetzobMainController
+        netzobController = NetzobMainController()
+        netzobController.run()
+    elif commandLineParser.isManagePluginsRequested():
+        from netzob.NetzobPluginManagement import NetzobPluginManagement
+        netzobPluginManagement = NetzobPluginManagement(commandLineParser)
+        netzobPluginManagement.start()
