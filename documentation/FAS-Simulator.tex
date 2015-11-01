@@ -337,6 +337,21 @@ Misconfiguration & TODO  & TODO \\
 \end{tabular}
 \end{table}
 
+\section{Implementation}
+
+The FAS Simulator\cite{FASSimulator} is implemented in Python as a discrete event simulator. Each step of the assembly process is an actor which receives and generates
+delayed events in model time. Each step of the assembly process manages its own internal state, and possible failure modes.
+
+The example simulation consists of stereotypical models of the steps of the process with input signals and configurable output signals. For example, simulating
+the operation of a crane an instance of a module named Crane is configured and added to the respective position in the process in relation to other module instances.
+The Crane module maintains an internal queue of items to transport, and generates delayed output events for each of the input event in sequence, so that only one item is
+transported at a time. This is in contrast to conveyor module instances which don't have an internal queue, as the conveyors transport the items independently and in parallel.
+
+The simulation is set up by first defining the topology of the process by instantiating the respective modules and configuring their bindings to other modules. The actual simulation
+is done simply by triggering the global process inputs as required, causing sequences of events being generated accordingly.
+
+The events are logged in JSON with a timestamp and an event type, resembling logs in a real Flexible Assembly System.
+
 \section{Evaluation}
 
 The baseline benchmark is done by automatically inferring a deterministic finite automaton from the fault-free log events as was shown by Langer et al.\cite{langer2011self}.
