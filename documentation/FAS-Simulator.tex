@@ -368,6 +368,10 @@ in relation to improving those methods and in creating new ones.
 For the purposes of this article, we will only consider methods which are not trained based on known error conditions beforehand. Thus, the failure prediction challenge
 becomes a challenge of learning the correct operation of the system and flagging any inconsistencies and anomalies.
 
+For evaluation purposes, we will use a generated event sequence with first one complete sequence for one item only, then for 20 items simultaneously going through the system,
+and finally 50 items being assembled in the system simultaneously in the same log file. This results in a log file with a sequence of 2627 ($ = 37 \cdot 31 $) events of 35 different
+event types.
+
 \section{Results}
 
 The trivial DFA model from interpreting all the observed events as both transitions and states is depicted in the Figure \ref{figure:trivial_DFA}
@@ -381,8 +385,9 @@ possible even in fault-free sequences. The trivial DFA model is incapable of inf
  \label{figure:trivial_DFA}
 \end{figure}
 
-The second baseline benchmark is done by automatically inferring a deterministic finite automaton from the fault-free log events using L*, that is, Angluin learner, as was shown
-by Langer et al.\cite{langer2011self}.
+The second baseline benchmark is done by automatically inferring a deterministic finite automaton from the fault-free log events using Angluin learner (L*)\cite{Angluin},
+following the description by Langer et al.\cite{langer2011self}. Langer showed that Angluin learner was able to learn small toy examples very well, but didn't work very well
+for a real world example of a stream of events recorded from a CAN bus of the powertrain network of an electric vehicle.
 
 \section{Conclusion}
 
