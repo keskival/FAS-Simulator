@@ -370,9 +370,19 @@ becomes a challenge of learning the correct operation of the system and flagging
 
 \section{Results}
 
-The baseline benchmark is done by automatically inferring a deterministic finite automaton from the fault-free log events as was shown by Langer et al.\cite{langer2011self}.
-This trivial model does not work very well, but can be used as a baseline for more advanced methods. The finite automaton is then used to evaluate different logs generated to
-contain certain faults.
+The trivial DFA model from interpreting all the observed events as both transitions and states is depicted in the Figure \ref{figure:trivial_DFA}
+It is evident that because of parallel processing of multiple items in the FAS System, almost any state transition is
+possible even in fault-free sequences. The trivial DFA model is incapable of inferring higher level patterns from the sequences.
+\begin{figure}[tb]
+ \centering
+ \includegraphics[width=8 cm,keepaspectratio=true]{./dfa.png}
+ % dfa.png: 9992x3323 pixel, 72dpi, 352.50x117.23 cm, bb=0 0 9992 3323
+ \caption{The trivial DFA interpreting the events as both the states and the transitions}
+ \label{figure:trivial_DFA}
+\end{figure}
+
+The second baseline benchmark is done by automatically inferring a deterministic finite automaton from the fault-free log events using L*, that is, Angluin learner, as was shown
+by Langer et al.\cite{langer2011self}.
 
 \section{Conclusion}
 
