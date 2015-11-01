@@ -167,7 +167,15 @@ def passToStep31():
     scheduler.add(step[31].input, 0)
 step[30].set_next(passToStep31)
 
-# Putting in 20 items, waiting for them to be done, and then putting in 20 more,
+# First running through with one item for debugging reasons, to make sure the
+# event indices follow this order.
+
+step[1].input()
+
+while scheduler.next():
+    pass
+
+# Putting in 20 items, waiting for them to be done, and then putting in 50 more,
 # waiting them to be done also.
 
 for i in range(0, 20):
@@ -176,7 +184,7 @@ for i in range(0, 20):
 while scheduler.next():
     pass
 
-for i in range(0, 20):
+for j in range(0, 50):
     step[1].input()
 
 while scheduler.next():
