@@ -352,6 +352,11 @@ is done simply by triggering the global process inputs as required, causing sequ
 
 The events are logged in JSON with a timestamp and an event type, resembling logs in a real Flexible Assembly System.
 
+The simulator in principle allows defining different kinds of discrete event simulators. Several specific types of simulations are pre-defined for the purposes of benchmarking
+different modelling approaches. These pre-defined simulations vary in complexity and length from trivial one item at a time sequences to complex multiple items at once simulations.
+Each type of simulation can also be configured to fail in specific ways to test different failure detection approaches. All the simulations are based on the Flexible Assembly System
+defined in this article and the simulations are stochastic in respect to delays between steps.
+
 \section{Evaluation}
 
 The baseline benchmark is done by automatically inferring a deterministic finite automaton from the fault-free log events as was shown by Langer et al.\cite{langer2011self}.
