@@ -359,11 +359,20 @@ defined in this article and the simulations are stochastic in respect to delays 
 
 \section{Evaluation}
 
+The FAS Simulator is evaluated by testing several methods for inferring the hidden process behind the event sequences and existing methods of fault detection for
+the event sequences.
+The simulation is considered useful if it can be reasonably expected to mirror the real world contingencies and patterns, and if it is not completely trivial to
+learn or infer by existing methods. If the simulator creates event sequences that are challenging to learn by existing methods, then it is useful as a benchmark
+in relation to improving those methods and in creating new ones.
+
+For the purposes of this article, we will only consider methods which are not trained based on known error conditions beforehand. Thus, the failure prediction challenge
+becomes a challenge of learning the correct operation of the system and flagging any inconsistencies and anomalies.
+
+\section{Results}
+
 The baseline benchmark is done by automatically inferring a deterministic finite automaton from the fault-free log events as was shown by Langer et al.\cite{langer2011self}.
 This trivial model does not work very well, but can be used as a baseline for more advanced methods. The finite automaton is then used to evaluate different logs generated to
 contain certain faults.
-
-\section{Results}
 
 \section{Conclusion}
 
@@ -383,8 +392,6 @@ failures and test anomaly detection methods in a quick iteration.
 Additional research is needed to improve this benchmark simulation by using experiences from real flexible manufacturing systems and their modes of failure
 and respective future fault indicators. For example, continuous measurement values from temperature and vibration sensors would be good targets
 to simulate.
-I will be continuing this work in the future in association to my future research conserning automated anomaly detection
-in flexible assembly systems.
 
 \appendices
 
