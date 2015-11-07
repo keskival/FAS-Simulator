@@ -7,7 +7,7 @@
 \usepackage{algorithmic}
 \usepackage{array}
 \usepackage{url}
-\hyphenation{op-tical net-works semi-conduc-tor}
+\hyphenation{op-tical net-works semi-conduc-tor method}
 
 \ifCLASSOPTIONcompsoc
   \usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
@@ -368,9 +368,19 @@ in relation to improving those methods and in creating new ones.
 For the purposes of this article, we will only consider methods which are not trained based on known error conditions beforehand. Thus, the failure prediction challenge
 becomes a challenge of learning the correct operation of the system and flagging any inconsistencies and anomalies.
 
-For evaluation purposes, we will use a generated event sequence with first one complete sequence for one item only, then for 20 items simultaneously going through the system,
+For evaluation purposes, we will use a generated fault-free event sequence with first one complete sequence for one item only, then for 20 items simultaneously going through the system,
 and finally 50 items being assembled in the system simultaneously in the same log file. This results in a log file with a sequence of 2627 ($ = 37 \cdot 31 $) events of 35 different
-event types.
+event types. A depiction of the simulated event sequence is shown in the Figure \ref{figure:events}. The first item goes through the process alone, so the events on the left side
+of the graph are in perfect, deterministic order. However, for multiple parallel items being processed it becomes evident that the previous event doesn't in itself
+completely determine the next event. Some queuing is also visible in the later parts of the sequences.
+
+\begin{figure}[tb]
+ \centering
+ \includegraphics[width=8 cm,keepaspectratio=true]{./events.png}
+ \caption{A representative log of event types graphed against time}
+ \label{figure:events}
+\end{figure}
+
 
 \section{Results}
 
