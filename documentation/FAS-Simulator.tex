@@ -372,7 +372,8 @@ For evaluation purposes, we will use a generated fault-free event sequence with 
 and finally 50 items being assembled in the system simultaneously in the same log file. This results in a log file with a sequence of 2627 ($ = 37 \cdot 31 $) events of 35 different
 event types. A depiction of the simulated event sequence is shown in the Figure \ref{figure:events}. The first item goes through the process alone, so the events on the left side
 of the graph are in perfect, deterministic order. However, for multiple parallel items being processed it becomes evident that the previous event doesn't in itself
-completely determine the next event. Some queuing is also visible in the later parts of the sequences.
+completely determine the next event. This indeterminate order of sequential events is shown in a zoomed portion of the graph in the Figure \ref{figure:zoomed_events}
+Some queue effects are also visible in the later parts of the sequences.
 
 \begin{figure}[tb]
  \centering
@@ -381,17 +382,23 @@ completely determine the next event. Some queuing is also visible in the later p
  \label{figure:events}
 \end{figure}
 
+\begin{figure}[tb]
+ \centering
+ \includegraphics[width=8 cm,keepaspectratio=true]{./zoomed_events.png}
+ \caption{A detail of the graphed log of events. The lines connect the events in sequence, showing the indeterministic order}
+ \label{figure:zoomed_events}
+\end{figure}
 
 \section{Results}
 
-The trivial DFA model from interpreting all the observed events as both transitions and states is depicted in the Figure \ref{figure:trivial_DFA}
+A trivial DFA model from interpreting all the observed events as both transitions and states is depicted in the Figure \ref{figure:trivial_DFA}
 It is evident that because of parallel processing of multiple items in the FAS System, almost any state transition is
 possible even in fault-free sequences. The trivial DFA model is incapable of inferring higher level patterns from the sequences.
 \begin{figure}[tb]
  \centering
  \includegraphics[width=8 cm,keepaspectratio=true]{./dfa.png}
  % dfa.png: 9992x3323 pixel, 72dpi, 352.50x117.23 cm, bb=0 0 9992 3323
- \caption{The trivial DFA interpreting the events as both the states and the transitions}
+ \caption{A trivial DFA interpreting the events as both the states and the transitions}
  \label{figure:trivial_DFA}
 \end{figure}
 
