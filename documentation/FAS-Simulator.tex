@@ -7,7 +7,7 @@
 \usepackage{algorithmic}
 \usepackage{array}
 \usepackage{url}
-\hyphenation{op-tical net-works semi-conduc-tor method}
+\hyphenation{op-tical net-works semi-conduc-tor method methods}
 
 \ifCLASSOPTIONcompsoc
   \usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
@@ -371,7 +371,7 @@ becomes a challenge of learning the correct operation of the system and flagging
 For evaluation purposes, we will use a generated fault-free event sequence with first one complete sequence for one item only, then for 20 items simultaneously going through the system,
 and finally 50 items being assembled in the system simultaneously in the same log file. This results in a log file with a sequence of 2627 ($ = 37 \cdot 31 $) events of 35 different
 event types. A depiction of the simulated event sequence is shown in the Figure \ref{figure:events}. The first item goes through the process alone, so the events on the left side
-of the graph are in perfect, deterministic order. However, for multiple parallel items being processed it becomes evident that the previous event doesn't in itself
+of the graph are in perfect, deterministic order from the bottom to the top. However, for multiple parallel items being processed it becomes evident that the previous event doesn't in itself
 completely determine the next event. This indeterminate order of sequential events is shown in a zoomed portion of the graph in the Figure \ref{figure:zoomed_events}
 Some queue effects are also visible in the later parts of the sequences.
 
