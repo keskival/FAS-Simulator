@@ -391,9 +391,13 @@ Some queue effects are also visible in the later parts of the sequences.
 
 \section{Results}
 
-A trivial DFA model from interpreting all the observed events as both transitions and states is depicted in the Figure \ref{figure:trivial_DFA}
+A trivial DFA model from interpreting all the observed events as both transitions and states is depicted in the Figure \ref{figure:trivial_DFA}.
+This DFA accepts any sequence consisting of transitions between any two events observed in the training data. The trivial DFA cannot be minimized by Moore minimization,
+as there are no two states with exactly the same outwards transitions at least in the training sequence tested.
 It is evident that because of parallel processing of multiple items in the FAS System, almost any state transition is
-possible even in fault-free sequences. The trivial DFA model is incapable of inferring higher level patterns from the sequences.
+in practice possible even in fault-free sequences, but some didn't happen in the training data.
+The trivial DFA model is incapable of inferring higher level patterns from the sequences, and would simultaneously make a great number of false positive
+and false negative errors.
 \begin{figure}[tb]
  \centering
  \includegraphics[width=8 cm,keepaspectratio=true]{./dfa.png}
