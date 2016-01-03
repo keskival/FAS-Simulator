@@ -357,7 +357,20 @@ different modelling approaches. These pre-defined simulations vary in complexity
 Each type of simulation can also be configured to fail in specific ways to test different failure detection approaches. All the simulations are based on the Flexible Assembly System
 defined in this article and the simulations are stochastic in respect to delays between steps.
 
-\section{Evaluation}
+\section{Mathematical Evaluation}
+
+Mathematically, the FAS Simulator can be described as a set of independent sequences each describing a successful assembly of one product instance shuffled, or interleaved
+together.
+For simplicity we consider only sequences where the assembly line is run successfully from empty start state to empty end state without modelling delays and queues.
+A formal language that accepts such sequences is called shuffled language\cite{berglund2011recognizing}. These languages are context-sensitive, so modelling methods
+relating to regular and context-free languages are inadequate. For example Langer et al.\cite{langer2011self} showed that Angluin learner was able to learn small
+toy examples very well, but didn't work very well for a real world example of a stream of events recorded from a CAN bus of the powertrain network of an electric vehicle.
+
+Deinterleaving the logs would simplify the automatas required for evaluating the allowed sequences. For example, if the log events contained the identifier of the product
+item under the assembly step, anomaly detection would be much easier but such detection algorithms would not generalize as well
+to new environments where such information is not available.
+
+\section{Practical Evaluation}
 
 The FAS Simulator is evaluated by testing several methods for inferring the hidden process behind the event sequences and existing methods of fault detection for
 the event sequences.
@@ -397,7 +410,7 @@ as there are no two states with exactly the same outwards transitions at least i
 It is evident that because of parallel processing of multiple items in the FAS System, almost any state transition is
 in practice possible even in fault-free sequences, but some didn't happen in the training data.
 The trivial DFA model is incapable of inferring higher level patterns from the sequences, and would simultaneously make a great number of false positive
-and false negative errors.
+and false negative errors. This result is in line with regular language automatas being inadequate in modelling shuffled languages.
 \begin{figure}[tb]
  \centering
  \includegraphics[width=8 cm,keepaspectratio=true]{./dfa.png}
@@ -405,10 +418,6 @@ and false negative errors.
  \caption{A trivial DFA interpreting the events as both the states and the transitions}
  \label{figure:trivial_DFA}
 \end{figure}
-
-The second baseline benchmark is done by automatically inferring a deterministic finite automaton from the fault-free log events using Angluin learner (L*)\cite{Angluin},
-following the description by Langer et al.\cite{langer2011self}. Langer showed that Angluin learner was able to learn small toy examples very well, but didn't work very well
-for a real world example of a stream of events recorded from a CAN bus of the powertrain network of an electric vehicle.
 
 \section{Conclusion}
 
