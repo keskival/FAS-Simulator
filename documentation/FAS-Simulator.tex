@@ -379,9 +379,10 @@ toy examples very well, but didn't work very well for a real world example of a 
 
 Currently FMS processes are often modelled as colored Petri nets \cite{saitou2002robust}.
 In process mining there are several approaches in automatically extracting such models such as Alpha algorithm and its 
-variants, genetic process mining, heuristic process mining, multi phase mining, and region-based process mining. Alpha algorithm only work well for simple processes
-with log messages labelled with the process instance. If the process instances are known for log messages, the corresponding Petri Net model is considered ``colored''.
-In practice, process instances can only be known in the process
+variants, genetic process mining, heuristic process mining, multi phase mining, and region-based process mining. Alpha algorithm only work well for simple processes,
+and in general these algorithms work with log messages labelled with the process instance. These algorithms are not very robust against noise in the logs.
+If the process instances are known for log messages, the corresponding Petri Net model is considered ``colored''.
+In practice, the process instances for log messages can only be known in the process
 if the process is at least implicitly known in advance. For the general case we do not know which events correspond to which process instances, and some systemic events
 in fact might affect multiple process instances at once. Flexible Manufacturing Systems are reconfigured often for different workloads and manually reconfiguring the anomaly
 detection process model each time would be costly.
@@ -389,9 +390,10 @@ detection process model each time would be costly.
 In addition, the basic business process mining algorithms cannot discover controlled choices where previous process states
 determine the future transitions more than one step ahead. This makes it impossible to detect deviances in such cases. Process sequences with common intermediate states
 are very common in automatic systems because certain generic events often occur between events which are more strictly bound to specific process states. Some Alpha algorithm
-variants, such as $\alpha^{++}$ \cite{wen2007mining} can discover some simple cases of controlled choice.
+variants, such as $\alpha^{++}$ \cite{wen2007mining} can discover some simple cases of controlled choice, but is not applicable for logs not labeled with process instances.
 
-Deinterleaving the logs would simplify the automatas required for evaluating the allowed sequences. For example, if the log events contained the identifier of the product
+Deinterleaving the logs and mining the process instances for the log messages would simplify the model generators and models required for evaluating the allowed sequences.
+For example, if the log events contained the identifier of the product
 item under the assembly step, anomaly detection would be much easier but such detection algorithms would not generalize as well
 to new environments where such information is not available.
 
