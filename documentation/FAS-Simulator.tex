@@ -377,6 +377,20 @@ A formal language that accepts such sequences is called shuffled language \cite{
 relating to regular and context-free languages are inadequate. For example Langer et al. \cite{langer2011self} showed that Angluin learner was able to learn small
 toy examples very well, but didn't work very well for a real world example of a stream of events recorded from a CAN bus of the powertrain network of an electric vehicle.
 
+Currently FMS processes are often modelled as colored Petri nets \cite{saitou2002robust}.
+In process mining there are several approaches in automatically extracting such models such as Alpha algorithm and its 
+variants, genetic process mining, heuristic process mining, multi phase mining, and region-based process mining. Alpha algorithm only work well for simple processes
+with log messages labelled with the process instance. If the process instances are known for log messages, the corresponding Petri Net model is considered ``colored''.
+In practice, process instances can only be known in the process
+if the process is at least implicitly known in advance. For the general case we do not know which events correspond to which process instances, and some systemic events
+in fact might affect multiple process instances at once. Flexible Manufacturing Systems are reconfigured often for different workloads and manually reconfiguring the anomaly
+detection process model each time would be costly.
+
+In addition, the basic business process mining algorithms cannot discover controlled choices where previous process states
+determine the future transitions more than one step ahead. This makes it impossible to detect deviances in such cases. Process sequences with common intermediate states
+are very common in automatic systems because certain generic events often occur between events which are more strictly bound to specific process states. Some Alpha algorithm
+variants, such as $\alpha^{++}$ \cite{wen2007mining} can discover some simple cases of controlled choice.
+
 Deinterleaving the logs would simplify the automatas required for evaluating the allowed sequences. For example, if the log events contained the identifier of the product
 item under the assembly step, anomaly detection would be much easier but such detection algorithms would not generalize as well
 to new environments where such information is not available.
@@ -398,6 +412,10 @@ event types. A depiction of the simulated event sequence is shown in the Figure 
 of the graph are in perfect, deterministic order from the bottom to the top. However, for multiple parallel items being processed it becomes evident that the previous event doesn't in itself
 completely determine the next event. This indeterminate order of sequential events is shown in a zoomed portion of the graph in the Figure \ref{figure:zoomed_events}
 Some queue effects are also visible in the later parts of the sequences.
+
+TODO: Run $\alpha^{++}$, genetic process mining against the log.
+
+TODO: Compare with real logs, salient details.
 
 \begin{figure}[tb]
  \centering
