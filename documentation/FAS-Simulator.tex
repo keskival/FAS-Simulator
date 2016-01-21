@@ -118,7 +118,9 @@ external factors, such as accidents and human errors, but also for example by ti
 Tool wear and tear depends on the workload. Typically tools that wear out fast, for example multiple times for one unit of work in a cell, receive much attention and such tools are generally
 well maintained. Tools that have wear and tear but have longer life spans are more susceptible to being overlooked by operators and might have some indicators of degrading
 before a failure. Cranes, hatches and conveyors have relatively long life spans and are primarily maintained in periodic preventive maintenance. If we could get indicators
-for impending failure for these components, the periodical maintenance could be scheduled earlier to prevent downtime. In addition to these physical faults the flexible
+for impending failure for these components, the periodical maintenance could be scheduled earlier to prevent downtime.
+
+In addition to these physical faults the flexible
 assembly system can suffer from human errors. Human operator can inadvertently misconfigure the flexible assembly system so that its operating mode changes unexpectedly,
 for example by disabling a cell which can lead to the system stopping without a proper failure. In addition to configuration
 errors, human operators might fail in manual assembly steps for example by pressing the button to mark the step
@@ -129,6 +131,12 @@ There has lately been an increase of computer crime against industrial networks 
 Nation states execute industrial espionage and even sabotage against each other\cite{stuxnet}. An electronic sabotage attack might present itself
 much like a human misconfiguration error, and would be potentially detected in a similar fashion even if the attack itself would not be
 directly visible in the logs as anomalous activity.
+
+Modelling the failure events can be based on Process Failure Mode and Effects Analysis (FMEA, PFMEA) \cite{teng1996failure} methodology which produces lists of
+failure modes of components
+in an assembly and machining process, and the respective effects of failures. For the purposes of learning systems it is not required that these failure modes and their frequencies
+are perfectly realistic. However, the simulated failure modes should be expected to reasonably reflect the potentially detectable and anomalous failure modes of the process.
+Ultimately, the learning system should model the correct operation of the system and detect deviances, rather than to learn specific failure modes.
 
 For useful anomaly detection systems we need to concentrate on faults that are unexpected without pre-existing diagnostic error codes, and that potentially have early indications
 in collected event-based logs. Early indication in this context means that the error can be detected in the system logs before the failure becomes otherwise evident.
@@ -173,7 +181,7 @@ The simulation framework consists of a scheduler that takes the next event from 
 execute when events are applied to them and generate new events and immediate log entries with timestamps and other metadata.
 The simulated modules have optional active failure modes that affect the simulated operation of the component through
 generated log messages or the subsequent generated events. Failure modes are set up to the simulated modules in a separate failure module.
-The overall framework sets up the simulation and events.
+The overall framework sets up the simulation, that is the configuration of the process, bootstrap events and optional failures.
 
 \subsection{Normal Operation of the Simulated System}
 The simulated hypothetical system assembles and tools a car transmission block loosely inspired by a Youtube video of Chrysler transmission assembly\cite{transmission}.
@@ -281,16 +289,19 @@ Step & Description & Duration & Log messages & Potential failures \\
 \end{table}
 
 \subsection{Simulated Failure Modes}
-It is regrettable that real data on faults in real flexible assembly systems are not available, but in any case it is possible to make reasonable
-models based on existing data from other analogous sources such as \cite{nasaames} and \cite{tsarouhas2009classification}.
+It is regrettable that real data on fault modes in real flexible assembly systems is not publicly available, but in any case it is possible to make reasonable
+models based on existing data from other analogous sources such as \cite{nasaames} and \cite{tsarouhas2009classification}. Specialized simulations designed
+to reflect specific assembly line conditions can be based on process FMEA reports. In the example described in this article, the fault modes are arbitrary, but 
+can be reasonably expected to roughly reflect real conditions.
 
-The previous subsection describes the normal operation of the system. The failure modes of the manual steps include human errors by pressing OK
-prematurely without properly executing the step. This leads to the next manual step failing and returning the block back to the previous step or
+The previous subsection describes the normal operation of the system. The failure modes of the manual steps include human errors by pressing an OK button
+signifying a completed manual assembly step prematurely without properly executing the step. This leads to the next manual step failing and
+returning the block back to the previous step or
 removing it from the assembly line altogether. Misconfiguration can cause different kinds of results, but here we assume some work step is skipped
 so that it is not noticed and doesn't directly prevent other steps from being executed. Failed manual steps also include wear and tear
 on the tools which gradually increases the duration of the work before causing a fault. The human operator can also tire and lose concentration
 when doing lots of repetitive steps. There are studies showing how speed performance degrades in general in a linear fashion in humans
-under fatigue and boredom, for example\cite{fatigue}. Switching human operators during the day might change the effective performance slightly.
+under fatigue and boredom, for example \cite{fatigue}. Switching human operators during the day might change the effective performance slightly.
 
 The automatic steps wear and tear cause gradually increasing durations for the step also until at some point the step stops functioning and
 intermediate assemblies start piling up until a fault is signalled because of exceeding the limits of intermediate storage space.
@@ -362,8 +373,8 @@ defined in this article and the simulations are stochastic in respect to delays 
 Mathematically, the FAS Simulator can be described as a set of independent sequences each describing a successful assembly of one product instance shuffled, or interleaved
 together.
 For simplicity we consider only sequences where the assembly line is run successfully from empty start state to empty end state without modelling delays and queues.
-A formal language that accepts such sequences is called shuffled language\cite{berglund2011recognizing}. These languages are context-sensitive, so modelling methods
-relating to regular and context-free languages are inadequate. For example Langer et al.\cite{langer2011self} showed that Angluin learner was able to learn small
+A formal language that accepts such sequences is called shuffled language \cite{berglund2011recognizing}. These languages are context-sensitive, so modelling methods
+relating to regular and context-free languages are inadequate. For example Langer et al. \cite{langer2011self} showed that Angluin learner was able to learn small
 toy examples very well, but didn't work very well for a real world example of a stream of events recorded from a CAN bus of the powertrain network of an electric vehicle.
 
 Deinterleaving the logs would simplify the automatas required for evaluating the allowed sequences. For example, if the log events contained the identifier of the product
@@ -428,14 +439,14 @@ for such devices. They also concentrate on continuous measurement data instead o
 The diagnostic data for flexible assembly systems is a closely guarded secret for business reasons, but it is possible to make reasonable models
 of faults based on other analogous sources.
 
-The flexible assembly system simulator, FAS Simulator, is published in GitHub\cite{FASSimulator} as open source. This kind of simulator would have
+The flexible assembly system simulator, FAS Simulator, is published in GitHub \cite{FASSimulator} as open source. This kind of simulator would have
 little realism, and in fact little use unless it was continuously developed in dialogue with real flexible assembly systems. While the simulation
 approach adds an indirection between real data and developed methods, it is necessary to veil the business critical real fault and diagnostic
 data of the fast assembly systems and to make the different methods comparable. The simulator also provides means to incorporate new types of
 failures and test anomaly detection methods in a quick iteration.
 
 Additional research is needed to improve this benchmark simulation by using experiences from real flexible manufacturing systems and their modes of failure
-and respective future fault indicators. For example, continuous measurement values from temperature and vibration sensors would be good targets
+and respective future fault indicators. For example, continuous measurement values from temperature, acoustic and vibration sensors would be good targets
 to simulate.
 
 \appendices
