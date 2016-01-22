@@ -361,14 +361,15 @@ transported at a time. This is in contrast to conveyor module instances which do
 The simulation is set up by first defining the topology of the process by instantiating the respective modules and configuring their bindings to other modules. The actual simulation
 is done simply by triggering the global process inputs as required, causing sequences of events being generated accordingly.
 
-The events are logged in JSON with a timestamp and an event type, resembling logs in a real Flexible Assembly System.
+The events are logged in JSON with a timestamp and an event type, resembling logs in a real Flexible Assembly System. The logs are not exported to
+Mining eXtensible Markup Language (MXML) format, because MXML requires that separate process instances are identified.
 
 The simulator in principle allows defining different kinds of discrete event simulators. Several specific types of simulations are pre-defined for the purposes of benchmarking
 different modelling approaches. These pre-defined simulations vary in complexity and length from trivial one item at a time sequences to complex multiple items at once simulations.
 Each type of simulation can also be configured to fail in specific ways to test different failure detection approaches. All the simulations are based on the Flexible Assembly System
 defined in this article and the simulations are stochastic in respect to delays between steps.
 
-\section{Mathematical Evaluation}
+\section{Mathematical Description}
 
 Mathematically, the FAS Simulator can be described as a set of independent sequences each describing a successful assembly of one product instance shuffled, or interleaved
 together.
@@ -377,22 +378,15 @@ A formal language that accepts such sequences is called shuffled language \cite{
 relating to regular and context-free languages are inadequate. For example Langer et al. \cite{langer2011self} showed that Angluin learner was able to learn small
 toy examples very well, but didn't work very well for a real world example of a stream of events recorded from a CAN bus of the powertrain network of an electric vehicle.
 
-Currently FMS processes are often modelled as colored Petri nets \cite{saitou2002robust}.
-In process mining there are several approaches in automatically extracting such models such as Alpha algorithm and its 
-variants, genetic process mining, heuristic process mining, multi phase mining, and region-based process mining. Alpha algorithm only work well for simple processes,
-and in general these algorithms work with log messages labelled with the process instance. These algorithms are not very robust against noise in the logs.
-If the process instances are known for log messages, the corresponding Petri Net model is considered ``colored''.
+FMS processes are often modelled as colored Petri nets \cite{saitou2002robust}, which require that the process instances are known for log messages
 In practice, the process instances for log messages can only be known in the process
 if the process is at least implicitly known in advance. For the general case we do not know which events correspond to which process instances, and some systemic events
-in fact might affect multiple process instances at once. Flexible Manufacturing Systems are reconfigured often for different workloads and manually reconfiguring the anomaly
-detection process model each time would be costly.
+in fact might affect multiple process instances at once. As in this
+case process instances are not known, and all events are interleaved together for each process instance running concurrently, the most appropriate formal
+model would be a Petri Net.
 
-In addition, the basic business process mining algorithms cannot discover controlled choices where previous process states
-determine the future transitions more than one step ahead. This makes it impossible to detect deviances in such cases. Process sequences with common intermediate states
-are very common in automatic systems because certain generic events often occur between events which are more strictly bound to specific process states. Some Alpha algorithm
-variants, such as $\alpha^{++}$ \cite{wen2007mining} can discover some simple cases of controlled choice, but is not applicable for logs not labeled with process instances.
-
-Deinterleaving the logs and mining the process instances for the log messages would simplify the model generators and models required for evaluating the allowed sequences.
+Automatic deinterleaving the logs and deducing the process instances for the log messages would simplify the model generators and models required
+for evaluating the allowed sequences.
 For example, if the log events contained the identifier of the product
 item under the assembly step, anomaly detection would be much easier but such detection algorithms would not generalize as well
 to new environments where such information is not available.
@@ -415,10 +409,6 @@ of the graph are in perfect, deterministic order from the bottom to the top. How
 completely determine the next event. This indeterminate order of sequential events is shown in a zoomed portion of the graph in the Figure \ref{figure:zoomed_events}
 Some queue effects are also visible in the later parts of the sequences.
 
-TODO: Run $\alpha^{++}$, genetic process mining against the log.
-
-TODO: Compare with real logs, salient details.
-
 \begin{figure}[tb]
  \centering
  \includegraphics[width=8 cm,keepaspectratio=true]{./events.png}
@@ -432,6 +422,19 @@ TODO: Compare with real logs, salient details.
  \caption{A detail of the graphed log of events. The lines connect the events in sequence, showing the indeterministic order}
  \label{figure:zoomed_events}
 \end{figure}
+
+TODO: Compare with real logs, salient details.
+
+In process mining there are several approaches in automatically extracting such models such as Alpha algorithm and its 
+variants, genetic process mining, heuristic process mining, multi phase mining, and region-based process mining. Alpha algorithm only work well for simple processes,
+and in general these algorithms work with log messages labelled with the process instance. These algorithms are not very robust against noise in the logs.
+Flexible Manufacturing Systems are reconfigured often for different workloads and manually reconfiguring the anomaly
+detection process model each time would be costly.
+
+In addition, the basic business process mining algorithms cannot discover controlled choices where previous process states
+determine the future transitions more than one step ahead. This makes it impossible to detect deviances in such cases. Process sequences with common intermediate states
+are very common in automatic systems because certain generic events often occur between events which are more strictly bound to specific process states. Some Alpha algorithm
+variants, such as $\alpha^{++}$ \cite{wen2007mining} can discover some simple cases of controlled choice, but is not applicable for logs not labeled with process instances.
 
 \section{Results}
 
