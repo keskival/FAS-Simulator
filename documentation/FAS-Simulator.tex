@@ -409,6 +409,9 @@ of the graph are in perfect, deterministic order from the bottom to the top. How
 completely determine the next event. This indeterminate order of sequential events is shown in a zoomed portion of the graph in the Figure \ref{figure:zoomed_events}
 Some queue effects are also visible in the later parts of the sequences.
 
+For evaluating whether there is enough information in the sequence to determine some structure in the model, the sequence was visualized as colored pixels \ref{figure:color_vis2}.
+If human eye can make out some structure in the sequence, then in principle it is possible for the automated algorithms to do so also.
+
 \begin{figure}[tb]
  \centering
  \includegraphics[width=8 cm,keepaspectratio=true]{./events.png}
@@ -422,6 +425,14 @@ Some queue effects are also visible in the later parts of the sequences.
  \caption{A detail of the graphed log of events. The lines connect the events in sequence, showing the indeterministic order}
  \label{figure:zoomed_events}
 \end{figure}
+
+\begin{figure}[tb]
+ \centering
+ \includegraphics[width=8 cm,keepaspectratio=true]{./color_vis2.png}
+ \caption{The event sequence as color pixels from left to right, top to botton}
+ \label{figure:color_vis2}
+\end{figure}
+
 
 TODO: Compare with real logs, salient details.
 
