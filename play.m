@@ -21,13 +21,11 @@ for ind = 1:length(St)
   tone = sin((1:sample_len)./44100 .* 2 .* pi .* (440*(tone_step^note))) .* \
     (1 - (1/sample_len) .* (1:sample_len));
   place = floor((timestep*time * 44100)) + 1;
-  fft_sound = fft(sound(place:(place+sample_len-1)));
-  fft_tone = fft(tone');
-  mixed_sound = ifft((fft_sound .+ fft_tone));
+  sound_sample = sound(place:(place+sample_len-1));
+  signal = (sound_sample + tone')/2;
+  mixed_sound = signal;
   sound(place:(place+sample_len - 1)) = mixed_sound;
 endfor
-#sound=2*sound/(max(sound)-min(sound));
-#sound=sound-min(sound)-1;
 
 wavwrite(sound, 44100, 'sequence.wav');
 
