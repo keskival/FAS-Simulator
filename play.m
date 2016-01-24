@@ -1,10 +1,12 @@
 sequence2;
+# set(0, 'defaultfigurevisible', 'off');
+graphics_toolkit gnuplot
+figure('visible','off');
+colormap('hot');
 # returns St with event id and timestamp.
 
 # Making stereotypical sound
 tone_step = 1.0095;
-
-base_tone = sin((1:44100)./44100.*440);
 
 # The first time index: 0
 # The last time index: 7361074.7
@@ -25,7 +27,27 @@ for ind = 1:length(St)
   mixed_sound = (sound_sample + tone');
   sound(place:(place+sample_len - 1)) = mixed_sound;
 endfor
-sound = sound./max(sound);
+sound = sound./max(abs(sound));
 wavwrite(sound, 44100, 'sequence.wav');
+
+grid = zeros(6);
+nextEvent = 1;
+# One video frame for each 1/10 s.
+for t = [0:4410:length(sound)]
+  grid = grid .* 0.9;
+  note = St(ind,1);
+  time = St(ind,2);
+  # While the next event timestamp is smaller than equal to this time.
+  while St(nextEvent,2)*timestep <= t/44100
+    event = St(nextEvent,1);
+    y = mod(event, 6) + 1;
+    x = floor(event / 6) + 1;
+    grid(x,y) = 1.0;
+    nextEvent++;
+  endwhile
+  imagesc(grid, [0 1]);
+  filename=sprintf('output/%05d.png',floor(t/4410));
+  print(filename, '-dpng');
+endfor
 
 # soundsc(sound, 44100);
