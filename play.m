@@ -22,11 +22,10 @@ for ind = 1:length(St)
     (1 - (1/sample_len) .* (1:sample_len));
   place = floor((timestep*time * 44100)) + 1;
   sound_sample = sound(place:(place+sample_len-1));
-  signal = (sound_sample + tone')/2;
-  mixed_sound = signal;
+  mixed_sound = (sound_sample + tone');
   sound(place:(place+sample_len - 1)) = mixed_sound;
 endfor
-
+sound = sound./max(sound);
 wavwrite(sound, 44100, 'sequence.wav');
 
-soundsc(sound, 44100);
+# soundsc(sound, 44100);
