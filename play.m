@@ -1,11 +1,10 @@
+# returns St with event id and timestamp.
 sequence2;
-# set(0, 'defaultfigurevisible', 'off');
+
 graphics_toolkit gnuplot
 figure('visible','off');
 colormap('hot');
-# returns St with event id and timestamp.
 
-# Making stereotypical sound
 tone_step = 1.0095;
 
 # The first time index: 0
