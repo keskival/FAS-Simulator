@@ -74,7 +74,7 @@ Going from preventive maintenance towards predictive maintenance optimizes and t
 on improving the availability and operation of deployed flexible manufacturing systems.
 Predictive maintenance in flexible assembly systems benefits from automatic indicators for potential future faults.
 Current predictive maintenance systems concentrate on measuring device health for example by means of measuring temperature and vibration
-\cite{contreras2002integrating}. Less research effort is done in the context of event-oriented data sources (logs), and about systemic failures.
+\cite{TODO}. Less research effort is done in the context of event-oriented data sources (logs), and about systemic failures.
 
 Evaluating novel automatic methods for fault prediction requires standard benchmarks to compare these methods against. Currently there are no standard benchmarks to test
 different anomaly detection methods and compare their performance against each other. Such standard benchmarks exist in other fields of machine learning,
@@ -107,12 +107,14 @@ mean faults and degradation of output where each of the component modules of the
 
 \section{Modes of Failures in Flexible Assembly Systems}
 
-Flexible assembly system failures are typically component failures where a failure of a single module or a component will lead to the system becoming inoperational.
-Since the flexible assembly systems are dynamic systems with numerous moving parts, the wear and tear of the components and tools are a significant source of downtime.
-In addition to the component failures, certain systemic failures can cause downtime, such as power loss and network communication failures.
+Flexible assembly system failures are typically component failures where a failure of a single module or a component will lead to the part of the system becoming inoperational.
+Since the flexible assembly systems are dynamic systems with numerous moving parts, the wear and tear of the components and tools are a significant source of faults.
+
+In addition to the component failures, certain critical systemic failures can cause downtime, such as power loss and network communication failures.
 The critical systemic failures mentioned don't typically show any indication before they happen so predictive maintenance has little potential to be applied there.
 In addition to these critical system failures,
-the whole system can exhibit modes of failure and degradation which are not directly attributable to single component degradation or failure. Some of these might be caused by
+the whole system can exhibit modes of failure and degradation which are not directly attributable to single component degradation or failure.
+Some of these might be caused by
 external factors, such as accidents and human errors, but also for example by timing issues in the whole process causing unexpected queues or traffic jams.
 
 Tool wear and tear depends on the workload. Typically tools that wear out fast, for example multiple times for one unit of work in a cell, receive much attention and such tools are generally
@@ -138,6 +140,17 @@ in an assembly and machining process, and the respective effects of failures. Fo
 are perfectly realistic. However, the simulated failure modes should be expected to reasonably reflect the potentially detectable and anomalous failure modes of the process.
 Ultimately, the learning system should model the correct operation of the system and detect deviances, rather than to learn specific failure modes.
 
+For the purposes of describing the fault types we divide system components into slowly and
+quickly degrading tools and auxilliary components. Tools are the components such as drill bits which are directly used to assemble or
+machine the product. The auxilliary components are components with less expected wear and tear which are used to transport the products,
+inspect the intermediate assemblies or dispense assembly components.
+
+The fault types and distribution depend on the assembly system
+and on the products being assembled. For one
+specific assembly line \cite{cong1997fault} the common fault types were feeder errors, robot insertion errors,
+robot grip errors, unqualified parts, fixture position errors, emergency stops, robot gripper collision,
+grip sensor line break, and inspection equipment failures. The root causes for these are wear and tear, and incompatible parts.
+
 For useful anomaly detection systems we need to concentrate on faults that are unexpected without pre-existing diagnostic error codes, and that potentially have early indications
 in collected event-based logs. Early indication in this context means that the error can be detected in the system logs before the failure becomes otherwise evident.
 The table \ref{faults} summarizes the classes of faults.
@@ -154,17 +167,19 @@ Fault type & Unexpected faults & Potentially has an early indication & Useful ta
 \hline
 Auxilliary component wear and tear & X & X & X \\
 \hline
-Critical systemic failures (power, network) & X & & \\
+Cell operation failures (feeder error, insertion error, grip error, fixture position errors) & & & \\
+\hline
+Critical systemic failures (power, network, emergency stop) & X & & \\
 \hline
 Human error, failed manual step & X & X & X \\
 \hline
 Incompatible parts, materials or replacement tools & X & & \\
 \hline
-Systemic failures (jams, accidents, misconfigurations, cyberattacks) & X & X & X \\
+Systemic failures (e.g. accidents and cyberattacks) & X & X & X \\
 \hline
-Tool wear and tear for quickly degrading tools & & X & \\
+Tool wear and tear for quickly degrading tools (e.g. drill bits) & & X & \\
 \hline
-Tool wear and tear for slowly degrading tools & X & X & X \\
+Tool wear and tear for slowly degrading tools (e.g. screwdriver) & X & X & X \\
 \hline
 \end{tabular}
 \end{table}
@@ -173,6 +188,8 @@ Tool wear and tear for slowly degrading tools & X & X & X \\
 
 The simulation consists of a realistic model of a flexible assembly system with a class of faults randomly injected into the process.
 The simulation will not be fully deterministic and contains soft faults which do not affect operation in addition to hard faults which result in immediate downtime.
+Flexible Assembly System scheduling and production optimization is an active research field. Different scheduling models can be implemented into the simulation,
+but the provided initial example is a simple sequence of mostly independent steps, as it roughly matches the studied Chrysler transmission assembly line.
 
 The simulator is implemented in Python and it generates a JSON file which models the logs from the system. The log message fields are defined in Table \ref{fields} and
 and example message is shown in \ref{samplemessage}.
@@ -186,7 +203,7 @@ The overall framework sets up the simulation, that is the configuration of the p
 \subsection{Normal Operation of the Simulated System}
 The simulated hypothetical system assembles and tools a car transmission block loosely inspired by a Youtube video of Chrysler transmission assembly\cite{transmission}.
 The workflow consists of several manual assembly steps in separate cells and transporting the subassemblies between the cells by the means of
-cranes and conveyors. Multiple transmission blocks are being assembled simultaneously in separate cells.
+cranes and conveyors. Multiple transmission blocks are being assembled simultaneously in separate, independent cells.
 
 The transmission component consists of four subassemblies. The main sequence starts from the frame of the transmission block
 and continues through several manual steps done in separate cells. The steps of the main sequence are given in
@@ -196,7 +213,7 @@ The mean durations for manual steps can vary in normal operation $\pm$ thirty pe
 $\pm$ five percent.
 
 The production frequency of the transmission blocks depends on the slowest step as in this case there is only one cell for one step and no
-parallel work is possible within one step. The slowest step takes about 76 seconds. In this hypothetical assembly plant, new transmission block
+parallel work is possible within one cell. The slowest step takes about 76 seconds. In this hypothetical assembly plant, new transmission block
 frames are added every 100 seconds and the final transmission blocks are being produced roughly in the same interval. This means that there
 will be at maximum roughly seven transmission blocks in different stages being produced at the same time.
 
@@ -326,6 +343,7 @@ on and off when the working step is active, but never while the step is not acti
 future fault.
 
 In addition to unexpected component failures, we have to simulate systemic failures. The simulated systemic failures and their effects are listed in the table \ref{systemicfailures}.
+To have a meaningful simulation of a system under systemic faults we only need to simulate some representative fault conditions.
 
 \begin{table}[!t]
 \renewcommand{\arraystretch}{1.3}
@@ -337,16 +355,31 @@ In addition to unexpected component failures, we have to simulate systemic failu
 Failure & Description & Effect \\
 \hline
 \hline
-Accident & TODO  & TODO \\
+Accident & A human assembly worker becomes incapacitated for a medical reason & Combine with subassembly B step stops \\
 \hline
-Cyberattack & TODO  & TODO \\
-\hline
-Jam & TODO  & TODO \\
-\hline
-Misconfiguration & TODO  & TODO \\
+Cyberattack & An attacker disables a crane by flooding it with commands  & The Crane with subassembly A is repeatedly moving to end position without transporting the subassembly A \\
 \hline
 \end{tabular}
 \end{table}
+
+When there are human operators or assembly line workers in the assembly process, there are always human errors and accidents. For the purposes of this simulation we
+assume a specific assembly worker has become incapacitated for a medical reason. This is a good target for anomaly detection, because sometimes there is no specific fault code
+triggered if the human operator stops performing the assembly step.
+
+Cyberattacks are becoming more frequent in the industrial domain. Both Stuxnet and BlackEnergy have been developed to specifically target SCADA industrial control systems.
+These malware frameworks are modular with switchable components for different vectors, different targets and different functions.
+In practice, these have been used for industrial espionage and sabotage. For the purposes of this article, only sabotage is considered.
+
+There are at least two methods for how these kinds of malware can affect the industrial operations
+after successfully penetrating such facilities. One, the control computer systems are destroyed by wiping the disks and shutting them down. BlackEnergy malware
+successfully shutdown an Ukrainian Prykarpattyaoblenergo electric utility in Ivano-Frankivsk Oblask with this mechanism in 2015 December 23th.
+Two, a tailored attack is implemented, so that specific physical vulnerabilities are abused in the plant systems. Stuxnet allegedly used a special function
+to affect Iranian uranium enrichment centrifuges in a subtle way to causing the centrifuges to tear themselves apart.
+
+This kind of sabotage is a good target for anomaly detection, because the effects and failures they cause are unexpected and it is possible that the primary control systems
+have been disabled so they are incapable of handling faults in the normal way. For this example simulation, we disable the Crane with subassembly A by flooding it with commands
+to repeatedly transport it to the other end position. The hypothetical attacker assumes this causes the system to jam up as the products are not being transported to the next
+assembly cells. The attacker also assumes that this does not trigger a fault code as the crane is technically functioning perfectly.
 
 \section{Implementation}
 
@@ -413,7 +446,7 @@ For evaluating whether there is enough information in the sequence to determine 
 If human eye can make out some structure in the sequence, then in principle it is possible for the automated algorithms to do so also. To assist the eye, the pixel colors are chosen
 from an ordered color map, and the states are indexed in the order they are met in the log.
 
-There is also a phonozation of the event log generated with timestamps and delays taken into account \cite{PHONOZATION}. Delays bring new features into the model, and
+There is also a sonification\cite{refKra} of the event log generated with timestamps and delays taken into account \cite{PHONOZATION}. Delays bring new features into the model, and
 we can immediately note that certain events happen practically simultaneously (as multiple log lines are generated at the same event). Also, slower tempo tells us that less is
 going on in the assembly line, and this could in principle give us a baseline for decomposing the canon-like interleaving of separate process instances from the whole.
 If a human test subject can discern between the proper operation of the assembly line from random, or anomalous operation by the event log sounds,
