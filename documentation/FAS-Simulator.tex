@@ -224,40 +224,40 @@ will be at maximum roughly seven transmission blocks in different stages being p
 \centering
 \begin{tabular}{|p{5mm}|p{20mm}|p{10mm}|p{15mm}|p{15mm}|}
 \hline
-Step & Description & Duration & Log messages & Potential failures \\
+Step & Description & Duration & Log messages \\
 \hline
 \hline
-1 & Crane & 30 s & Going forward, stopping, going back, stopping & Wear \& tear \\
+1 & Crane & 30 s & Going forward, stopping, going back, stopping \\
 \hline
-2 & Manual inspection & 37 s & OK pressed & Failed manual step \\
+2 & Manual inspection & 37 s & OK pressed \\
 \hline
-3 & Conveyor & 30 s & To cell, stop, to next cell & Wear \& tear \\
+3 & Conveyor & 30 s & To cell, stop, to next cell \\
 \hline
-4 & Bowl feeder gives components & 5 s & Given & Wear \& tear \\
+4 & Bowl feeder gives components & 5 s & Given \\
 \hline
-5 & Add components & 21 s & OK pressed & Failed manual step \\
+5 & Add components & 21 s & OK pressed \\
 \hline
-6 & Conveyor & 30 s & To cell, stop, to next cell & Wear \& tear \\
+6 & Conveyor & 30 s & To cell, stop, to next cell \\
 \hline
-7 & Bowl feeder gives components & 10 s & Given & Wear \& tear \\
+7 & Bowl feeder gives components & 10 s & Given \\
 \hline
-8 & Add components & 34 s & OK pressed & Failed manual step \\
+8 & Add components & 34 s & OK pressed \\
 \hline
-9 & Conveyor & 30 s & To cell, stop, to next cell & Wear \& tear \\
+9 & Conveyor & 30 s & To cell, stop, to next cell \\
 \hline
-10 & Crane with subassembly A & 10 s & Going forward, stopping, going back, stopping & Wear \& tear \\
+10 & Crane with subassembly A & 10 s & Going forward, stopping, going back, stopping \\
 \hline
-11 & Combine with subassembly A & 34 s & OK pressed & Failed manual step \\
+11 & Combine with subassembly A & 34 s & OK pressed \\
 \hline
-12 & Conveyor & 30 s & To cell, stop, to next cell & Wear \& tear \\
+12 & Conveyor & 30 s & To cell, stop, to next cell \\
 \hline
-13 & Conveyor with subassembly B & 10 s & To cell, stop & Wear \& tear \\
+13 & Conveyor with subassembly B & 10 s & To cell, stop \\
 \hline
-14 & Combine with subassembly B & 35 s & OK pressed & Failed manual step \\
+14 & Combine with subassembly B & 35 s & OK pressed \\
 \hline
-15 & Conveyor & 30 s & To cell, stop, to next cell & Wear \& tear \\
+15 & Conveyor & 30 s & To cell, stop, to next cell \\
 \hline
-16 & Bowl feeder gives components & 5 s & Given & Wear \& tear \\
+16 & Bowl feeder gives components & 5 s & Given \\
 \hline
 \end{tabular}
 \end{table}
@@ -269,38 +269,38 @@ Step & Description & Duration & Log messages & Potential failures \\
 \centering
 \begin{tabular}{|p{5mm}|p{20mm}|p{10mm}|p{15mm}|p{15mm}|}
 \hline
-Step & Description & Duration & Log messages & Potential failures \\
+Step & Description & Duration & Log messages \\
 \hline
 \hline
-17 & Conveyor with cover & 10 s & To cell, stop & Wear \& tear \\
+17 & Conveyor with cover & 10 s & To cell, stop \\
 \hline
-18 & Add cover and bolts & 76 s & OK pressed & Failed manual step \\
+18 & Add cover and bolts & 76 s & OK pressed \\
 \hline
-19 & Conveyor & 30 s & To cell, stop, to next cell & Wear \& tear \\
+19 & Conveyor & 30 s & To cell, stop, to next cell \\
 \hline
-20 & Tighten the bolts & 28 s & OK pressed & Failed manual step \\
+20 & Tighten the bolts & 28 s & OK pressed \\
 \hline
-21 & Conveyor & 30 s & To cell, stop, to next cell & Wear \& tear \\
+21 & Conveyor & 30 s & To cell, stop, to next cell \\
 \hline
-22 & Conveyor with subassembly C & 10 s & To cell, stop & Wear \& tear \\
+22 & Conveyor with subassembly C & 10 s & To cell, stop \\
 \hline
-23 & Combine with subassembly C & 60 s & OK pressed & Failed manual step \\
+23 & Combine with subassembly C & 60 s & OK pressed \\
 \hline
-24 & Conveyor & 21 s & To cell, stop, to next cell & Wear \& tear \\
+24 & Conveyor & 21 s & To cell, stop, to next cell \\
 \hline
-25 & Tighten the bolts & 16 s & OK pressed & Failed manual step \\
+25 & Tighten the bolts & 16 s & OK pressed \\
 \hline
-26 & Conveyor & 21 s & To cell, stop, to next cell & Wear \& tear \\
+26 & Conveyor & 21 s & To cell, stop, to next cell \\
 \hline
-27 & Bowl feeder gives components & 5 s & Given & Wear \& tear \\
+27 & Bowl feeder gives components & 5 s & Given \\
 \hline
-28 & Add components & 11 s & OK pressed & Failed manual step \\
+28 & Add components & 11 s & OK pressed \\
 \hline
-29 & Conveyor & 21 s & To cell, stop, to next cell & Wear \& tear \\
+29 & Conveyor & 21 s & To cell, stop, to next cell \\
 \hline
-30 & Tighten the bolts & 32 s & OK pressed & Failed manual step \\
+30 & Tighten the bolts & 32 s & OK pressed \\
 \hline
-31 & Conveyor & 21 s & To output gate & Wear \& tear \\
+31 & Conveyor & 21 s & To output gate \\
 \hline
 \end{tabular}
 \end{table}
@@ -313,9 +313,8 @@ can be reasonably expected to roughly reflect real conditions.
 
 The previous subsection describes the normal operation of the system. The failure modes of the manual steps include human errors by pressing an OK button
 signifying a completed manual assembly step prematurely without properly executing the step. This leads to the next manual step failing and
-returning the block back to the previous step or
-removing it from the assembly line altogether. Misconfiguration can cause different kinds of results, but here we assume some work step is skipped
-so that it is not noticed and doesn't directly prevent other steps from being executed. Failed manual steps also include wear and tear
+returning the block back to the previous step or removing it from the assembly line altogether.
+Failed manual steps also include wear and tear
 on the tools which gradually increases the duration of the work before causing a fault. The human operator can also tire and lose concentration
 when doing lots of repetitive steps. There are studies showing how speed performance degrades in general in a linear fashion in humans
 under fatigue and boredom, for example \cite{fatigue}. Switching human operators during the day might change the effective performance slightly.
@@ -335,32 +334,8 @@ might fail to grab a bolt from time to time. Typically human operator tries agai
 slowly and roughly following an exponential curve until the failure rate becomes apparent and causes the operator to take corrective action,
 typically causing downtime. These failures cause a random delay if they happen. This characteristic delay profile is depicted in \ref{retrydelays}.
 
-While the directly visible fault modes are easier to model and characterise, complex flexible assembly systems also have warnings and trace messages
-which are signalled into logs, but are not signalled to operators in real time because most of the time these messages are not a cause for concern.
-An example of such a signal could be for example a health warning of a device that happens spuriously once every now and then for normal operation,
-but increases in frequency when the device actually starts to fail. There can also be log messages for example for electrical switches turning
-on and off when the working step is active, but never while the step is not active. Anomalies in such messages are an indicator of potential
-future fault.
-
-In addition to unexpected component failures, we have to simulate systemic failures. The simulated systemic failures and their effects are listed in the table \ref{systemicfailures}.
-To have a meaningful simulation of a system under systemic faults we only need to simulate some representative fault conditions.
-
-\begin{table}[!t]
-\renewcommand{\arraystretch}{1.3}
-\caption{Table of the simulated systemic failures}
-\label{systemicfailures}
-\centering
-\begin{tabular}{|p{20mm}|p{20mm}|p{20mm}|}
-\hline
-Failure & Description & Effect \\
-\hline
-\hline
-Accident & A human assembly worker becomes incapacitated for a medical reason & Combine with subassembly B step stops \\
-\hline
-Cyberattack & An attacker disables a crane by flooding it with commands  & The Crane with subassembly A is repeatedly moving to end position without transporting the subassembly A \\
-\hline
-\end{tabular}
-\end{table}
+Misconfiguration can cause different kinds of results, but here we assume some work step is skipped
+so that it is not noticed and doesn't directly prevent the subsequent steps from being executed. 
 
 When there are human operators or assembly line workers in the assembly process, there are always human errors and accidents. For the purposes of this simulation we
 assume a specific assembly worker has become incapacitated for a medical reason. This is a good target for anomaly detection, because sometimes there is no specific fault code
@@ -380,6 +355,39 @@ This kind of sabotage is a good target for anomaly detection, because the effect
 have been disabled so they are incapable of handling faults in the normal way. For this example simulation, we disable the Crane with subassembly A by flooding it with commands
 to repeatedly transport it to the other end position. The hypothetical attacker assumes this causes the system to jam up as the products are not being transported to the next
 assembly cells. The attacker also assumes that this does not trigger a fault code as the crane is technically functioning perfectly.
+
+While the directly visible fault modes are easier to model and characterise, complex flexible assembly systems also have warnings and trace messages
+which are signalled into logs, but are not signalled to operators in real time because most of the time these messages are not a cause for concern.
+An example of such a signal could be for example a health warning of a device that happens spuriously once every now and then for normal operation,
+but increases in frequency when the device actually starts to fail. There can also be log messages for example for electrical switches turning
+on and off when the working step is active, but never while the step is not active. Anomalies in such messages can be indicators of potential
+future faults.
+
+The simulated failures and their effects are listed in the table \ref{failures}.
+To have a meaningful simulation of a system under faults we only need to simulate some representative fault conditions.
+
+\begin{table}[!t]
+\renewcommand{\arraystretch}{1.3}
+\caption{Table of the simulated failures}
+\label{failures}
+\centering
+\begin{tabular}{|p{20mm}|p{20mm}|p{20mm}|}
+\hline
+Failure & Description & Effect \\
+\hline
+\hline
+Failed manual step & & \\
+\hline
+Wear \& tear & & \\
+\hline
+Misconfiguration & & \\
+\hline
+Accident & A human assembly worker becomes incapacitated for a medical reason & Combine with subassembly B step stops \\
+\hline
+Cyberattack & An attacker disables a crane by flooding it with commands  & The Crane with subassembly A is repeatedly moving to end position without transporting the subassembly A \\
+\hline
+\end{tabular}
+\end{table}
 
 \section{Implementation}
 
