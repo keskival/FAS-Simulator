@@ -7,6 +7,7 @@
 \usepackage{algorithmic}
 \usepackage{array}
 \usepackage{url}
+\usepackage{mathtools}
 \hyphenation{op-tical net-works semi-conduc-tor method methods}
 
 \ifCLASSOPTIONcompsoc
@@ -52,7 +53,7 @@ Version: \today
 
 \section{Introduction}
 This paper describes a method for simulating event-oriented data sources of a flexible assembly system including faults. Such simulator is required for creating representative corpuses
-of data for teaching automated learning algorithms for predictive maintenance and systemic fault detection.
+of data for teaching automated learning algorithms for predictive maintenance, condition monitoring and systemic fault detection.
 
 Flexible assembly system was described by Donath and Graves \cite{donath1988flexible} as a system consisting of a set of products each with a specified volume
 assembled on a workshop consisting of a fixed number of cells. In practise, a flexible assembly system contains parts and materials stored in an intermediate storage,
@@ -68,22 +69,25 @@ System downtime is a significant cost for flexible assembly systems. System down
 Recently Internet of Things and opening of the networked industrial system APIs have created new possibilities for predictive maintenance and systemic fault detection. Different sites with similar
 flexible automation systems have widely different environmental and workload conditions which has an impact on the wear and tear of the flexible automation system components.
 Taking different site environments and workloads into account when planning preventive maintenance cycles is non-trivial. There is a clear need to adapt maintenance based on actual
-conditions in the operation rather than by simply scheduling maintenance periodically. It is also important to indicate potential faults early to improve the response time of corrective action.
+conditions in the operation rather than by simply scheduling maintenance periodically\cite{hashemian2011state}.
+It is also important to indicate potential faults early to improve the response time of corrective action.
 
 Going from preventive maintenance towards predictive maintenance optimizes and targets the maintenance related costs towards the activities that have best impact
 on improving the availability and operation of deployed flexible manufacturing systems.
 Predictive maintenance in flexible assembly systems benefits from automatic indicators for potential future faults.
-Current predictive maintenance systems concentrate on measuring device health for example by means of measuring temperature and vibration
-\cite{TODO}. Less research effort is done in the context of event-oriented data sources (logs), and about systemic failures.
+Current predictive maintenance and condition monitoring systems concentrate on measuring device health for example by means of measuring temperature\cite{mobley2002introduction},
+vibration\cite{scheffer2004practical}, lube oil particle analysis\cite{hunt1993handbook} and electrical current signals
+\cite{thomson2001current}. There exists some research on anomaly detection for non-interleaved discrete sequences\cite{chandola2012anomaly}.
+Less published research exists in the context of interleaved discrete sequences, i.e. uncorrelated process traces, and about systemic failure conditions.
 
 Evaluating novel automatic methods for fault prediction requires standard benchmarks to compare these methods against. Currently there are no standard benchmarks to test
-different anomaly detection methods and compare their performance against each other. Such standard benchmarks exist in other fields of machine learning,
+different symbolic log anomaly detection methods and compare their performance against each other. Such standard benchmarks exist in other fields of machine learning,
 such as the MNIST handwritten digits benchmark\cite{lecun-mnisthandwrittendigit-2010}. Realistic simulations are often used\cite{jager2014assessing} for domains where
 real data is hard to collect or where real data would be subject to business confidentiality. Training neural network and other learning systems often utilizes realistic
 simulations instead of real data. Real measured data is often limited in both state space and in volume, and often simulations give better results \cite{duch2005artificial}.
 
-Fault-free simulations of flexible assembly systems are generally available\cite{giulio} and have been studied for visualization and optimization purposes.
-These are not directly suitable for benchmarking fault detection methods.
+Some simulations of flexible assembly systems are generally available\cite{giulio} and have been studied for visualization and optimization purposes.
+However, these are not directly suitable for benchmarking fault detection methods regarding interleaved discrete sequences.
 
 \section{Problem Formulation}
 
@@ -186,7 +190,30 @@ Tool wear and tear for slowly degrading tools (e.g. screwdriver) & X & X & X \\
 
 \section{Flexible Assembly System Model}
 
-The simulation consists of a realistic model of a flexible assembly system with a class of faults randomly injected into the process.
+The simulation consists of a realistic model of a flexible assembly system with a class of faults optionally injected into the process.
+Introducing synthetic faults into process data is a common method for testing whether the fault detection model works \cite{able2016model}.
+Discrete Event Systems can be conveniently
+described using Mixed Process Algebra Petri Nets (MPPN)\cite{falkman2001modeling}. In the following description we augment the MPPN with intervals between state transitions,
+because event intervals are important information for deinterleaving the process traces.
+
+Using the notation defined in \cite{falkman2001combined}, we note that the system can be described as an interleaved execution of $ n $ process instances $ P_i $, shown in
+equation \ref{interleaved_processes}.
+\begin{equation}
+ P_1 \oplus P_2 \oplus \textellipsis \oplus P_n
+ \label{interleaved_processes}
+\end{equation}
+
+The interleaved process instances consist of sequences of $ m $ steps which are typically identical within a production batch, shown in equation \ref{identical_steps}.
+The sets B and U above the arrows denote the booking/unbooking sets constraining this transition.
+\begin{equation}
+ P_i = a_1 \xrightarrow{B_2 \& U_1} a_2 \rightarrow \textellipsis \rightarrow a_m
+ \label{identical_steps}
+\end{equation}
+
+Some steps are associated with exclusive resources which can be described by associating the transitions in the MPPN model with booking and unbooking resources, so that
+the corresponding transitions in the general resource model Petri net \ref{resource_model} trigger changes in the status of the resource and
+are gated by the status of the resource.
+
 The simulation will not be fully deterministic and contains soft faults which do not affect operation in addition to hard faults which result in immediate downtime.
 Flexible Assembly System scheduling and production optimization is an active research field. Different scheduling models can be implemented into the simulation,
 but the provided initial example is a simple sequence of mostly independent steps, as it roughly matches the studied Chrysler transmission assembly line.
@@ -424,7 +451,7 @@ In practice, the process instances for log messages can only be known in the pro
 if the process is at least implicitly known in advance. For the general case we do not know which events correspond to which process instances, and some systemic events
 in fact might affect multiple process instances at once. As in this
 case process instances are not known, and all events are interleaved together for each process instance running concurrently, the most appropriate formal
-model would be a Petri Net.
+model in the analysis time would be a Petri Net.
 
 Automatic deinterleaving the logs and deducing the process instances for the log messages would simplify the model generators and models required
 for evaluating the allowed sequences.
