@@ -376,7 +376,7 @@ There are at least two methods for how these kinds of malware can affect the ind
 after successfully penetrating such facilities. One, the control computer systems are destroyed by wiping the disks and shutting them down. BlackEnergy malware
 successfully shutdown an Ukrainian Prykarpattyaoblenergo electric utility in Ivano-Frankivsk Oblask with this mechanism in 2015 December 23th.
 Two, a tailored attack is implemented, so that specific physical vulnerabilities are abused in the plant systems. Stuxnet allegedly used a special function
-to affect uranium enrichment centrifuges in Iran’s Natanz nuclear facility in 2010 in a subtle way to causing the centrifuges to tear themselves apart.
+to affect uranium enrichment centrifuges in Iran’s Natanz nuclear facility in 2010 in a subtle way causing the centrifuges to tear themselves apart.
 
 This kind of sabotage is a good target for anomaly detection, because the effects and failures they cause are unexpected and it is possible that the primary control systems
 have been disabled so they are incapable of handling faults in the normal way. For this example simulation, we disable the Crane with subassembly A by flooding it with commands
@@ -418,21 +418,25 @@ Cyberattack & An attacker disables a crane by flooding it with commands  & The C
 
 \section{Implementation}
 
-The FAS Simulator\cite{FASSimulator} is implemented in Python as a discrete event simulator. Each step of the assembly process is an actor which receives and generates
+The FAS Simulator\cite{FASSimulator} is implemented in Python as a discrete event simulator using Simpy discrete event simulation library.
+Each step of the assembly process is a Simpy resource and a process which receives and generates
 delayed events in model time. Each step of the assembly process manages its own internal state, and possible failure modes.
 
 The example simulation consists of stereotypical models of the steps of the process with input signals and configurable output signals. For example, simulating
 the operation of a crane an instance of a module named Crane is configured and added to the respective position in the process in relation to other module instances.
-The Crane module maintains an internal queue of items to transport, and generates delayed output events for each of the input event in sequence, so that only one item is
-transported at a time. This is in contrast to conveyor module instances which don't have an internal queue, as the conveyors transport the items independently and in parallel.
+The Crane module has a capacity of one item to transport at a time, and generates delayed output events for each of the input event in sequence, so that only one item is
+transported at a time. This is in contrast to conveyor module instances which don't have a limited capacity, as the conveyors transport the items independently and in parallel.
 
-The simulation is set up by first defining the topology of the process by instantiating the respective modules and configuring their bindings to other modules. The actual simulation
-is done simply by triggering the global process inputs as required, causing sequences of events being generated accordingly.
+The simulation is set up by first defining the all the modules in the assembly plant, and then the sequence of the activities by defining the process. The actual simulation
+is done simply by triggering the global process inputs as required, causing sequences of events being generated accordingly. For interleaved process traces we instantiate multiple
+parallel processes that share the resources in the simulated assembly plant.
 
 The events are logged in JSON with a timestamp and an event type, resembling logs in a real Flexible Assembly System. The logs are not exported to
-Mining eXtensible Markup Language (MXML) format, because MXML requires that separate process instances are identified.
+Mining eXtensible Markup Language (MXML) format, because MXML requires that separate process instances are identified. It is possible to make statistics of the internal simulator
+state, for example graphing the queues forming at different points of the assembly plant. However, for the purposes of learning system development, the generated log output is the most
+interesting resulting artifact.
 
-The simulator in principle allows defining different kinds of discrete event simulators. Several specific types of simulations are pre-defined for the purposes of benchmarking
+The simulator in principle allows defining different kinds of discrete event simulations. Several specific types of simulations are pre-defined for the purposes of benchmarking
 different modelling approaches. These pre-defined simulations vary in complexity and length from trivial one item at a time sequences to complex multiple items at once simulations.
 Each type of simulation can also be configured to fail in specific ways to test different failure detection approaches. All the simulations are based on the Flexible Assembly System
 defined in this article and the simulations are stochastic in respect to delays between steps.
