@@ -1,23 +1,26 @@
 #!/usr/bin/python
-from random_delay import delay
+import simpy
+from modules.random_delay import delay
 
-class BowlFeeder:
+class BowlFeeder(simpy.Resource):
     """ This class represents the bowl feeders giving parts to the manual assembly steps. """
-    def __init__(self, name, duration, scheduler, logger):
+    def __init__(self, name, duration, logger, env):
+        super(BowlFeeder, self).__init__(env, capacity=1)
         self.duration = duration
-        self.scheduler = scheduler
         self.logger = logger
         self.name = name
         self.state = "waiting"
-        self.next_step = lambda: None
-    def set_next(self, next_step):
-        self.next_step = next_step
-    def input(self):
-        print self.name + ": give"
-        self.state = "giving"
-        self.scheduler.add(self.given, delay(self.duration, 5))
-    def given(self):
-        print self.name + ": given"
-        self.logger.addMessage(self.name + " GIVEN");
+        self.env = env
+    def process(self):
+        with self.request() as req:
+            yield req
+            print(self.name + ": give")
+            self.state = "giving"
+            yield self.env.timeout(delay(self.duration, 5))
+            print(self.name + ": given")
+            self.logger.addMessage(self.name + " GIVEN");
         self.state = "waiting"
-        self.next_step()
+        return
+
+    def spawn(self):
+        return self.env.process(self.process())

@@ -1,21 +1,24 @@
 #!/usr/bin/python
-from random_delay import delay
+import simpy
+from modules.random_delay import delay
 
-class Conveyor:
+class Conveyor(simpy.Resource):
     """ This class represents the conveyors. The difference to cranes is that conveyors do not wait
         before processing the next item. There is no queue for the conveyor."""
-    def __init__(self, name, duration, scheduler, logger):
+    def __init__(self, name, duration, logger, env):
+        super(Conveyor, self).__init__(env)
         self.duration = duration
-        self.scheduler = scheduler
         self.logger = logger
         self.name = name
-        self.next_step = lambda: None
-    def set_next(self, next_step):
-        self.next_step = next_step
-    def input(self):
-        print self.name + ": input"
-        self.logger.addMessage(self.name + " CONVEYOR GATE");
-        self.scheduler.add(self.to_next_step, delay(self.duration, 5))
-    def to_next_step(self):
-        print self.name + ": to_next_step"
-        self.next_step()
+        self.env = env
+    def process(self):
+        with self.request() as req:
+            yield req
+            print(self.name + ": input")
+            self.logger.addMessage(self.name + " CONVEYOR GATE");
+            yield self.env.timeout(delay(self.duration, 5))
+        print(self.name + ": to_next_step")
+        return
+
+    def spawn(self):
+        return self.env.process(self.process())
