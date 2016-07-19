@@ -1,7 +1,0 @@
-babel
-bitarray >= 0.4
-lxml
-httplib2
-
-[docs]
-Sphinx>=1.1.3
