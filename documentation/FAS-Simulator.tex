@@ -9,6 +9,8 @@
 \usepackage{url}
 \usepackage{mathtools}
 \hyphenation{op-tical net-works semi-conduc-tor method methods}
+\usepackage{float}
+
 
 \ifCLASSOPTIONcompsoc
   \usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
@@ -34,6 +36,10 @@
   % every instance of \includegraphics
   \DeclareGraphicsExtensions{.eps}
 \fi
+
+\floatstyle{ruled}
+\newfloat{json}{thp}{lop}
+\floatname{program}{Program}
 
 %opening
 \title{A Simulator for Event-oriented Data in Flexible Assembly System Fault Prediction - DRAFT}
@@ -77,7 +83,7 @@ on improving the availability and operation of deployed flexible manufacturing s
 Predictive maintenance in flexible assembly systems benefits from automatic indicators for potential future faults.
 Current predictive maintenance and condition monitoring systems concentrate on measuring device health for example by means of measuring temperature\cite{mobley2002introduction},
 vibration\cite{scheffer2004practical}, lube oil particle analysis\cite{hunt1993handbook} and electrical current signals
-\cite{thomson2001current}. There exists some research on anomaly detection for non-interleaved discrete sequences\cite{chandola2012anomaly}.
+\cite{thomson2001current}. There exists some research on anomaly detection for non-interleaved discrete sequences, summarized in this survey\cite{chandola2012anomaly}.
 Less published research exists in the context of interleaved discrete sequences, i.e. uncorrelated process traces, and about systemic failure conditions.
 
 Evaluating novel automatic methods for fault prediction requires standard benchmarks to compare these methods against. Currently there are no standard benchmarks to test
@@ -197,13 +203,13 @@ described using Mixed Process Algebra Petri Nets (MPPN)\cite{falkman2001modeling
 because event intervals are important information for deinterleaving the process traces.
 
 Using the notation defined in \cite{falkman2001combined}, we note that the system can be described as an interleaved execution of $ n $ process instances $ P_i $, shown in
-equation \ref{interleaved_processes}.
+Equation \ref{interleaved_processes}.
 \begin{equation}
  P_1 \oplus P_2 \oplus \textellipsis \oplus P_n
  \label{interleaved_processes}
 \end{equation}
 
-The interleaved process instances consist of sequences of $ m $ steps which are typically identical within a production batch, shown in equation \ref{identical_steps}.
+The interleaved process instances consist of sequences of $ m $ steps which are typically identical within a production batch, shown in Equation \ref{identical_steps}.
 The sets B and U above the arrows denote the booking/unbooking sets constraining this transition.
 \begin{equation}
  P_i = a_1 \xrightarrow{B_2 \& U_1} a_2 \rightarrow \textellipsis \rightarrow a_m
@@ -211,15 +217,39 @@ The sets B and U above the arrows denote the booking/unbooking sets constraining
 \end{equation}
 
 Some steps are associated with exclusive resources which can be described by associating the transitions in the MPPN model with booking and unbooking resources, so that
-the corresponding transitions in the general resource model Petri net \ref{resource_model} trigger changes in the status of the resource and
+the corresponding transitions in the general resource model Petri net shown in Figure \ref{figure:resource_model} trigger changes in the status of the resource and
 are gated by the status of the resource.
+
+\begin{figure}[tb]
+ \centering
+ \includegraphics[width=8 cm,keepaspectratio=true]{./general_resource_model.png}
+ \caption{The general resource model Petri net showing resource booking and unbooking transitions for a single resource $ R_l $}
+ \label{figure:resource_model}
+\end{figure}
 
 The simulation will not be fully deterministic and contains soft faults which do not affect operation in addition to hard faults which result in immediate downtime.
 Flexible Assembly System scheduling and production optimization is an active research field. Different scheduling models can be implemented into the simulation,
 but the provided initial example is a simple sequence of mostly independent steps, as it roughly matches the studied Chrysler transmission assembly line.
 
-The simulator is implemented in Python and it generates a JSON file which models the logs from the system. The log message fields are defined in Table \ref{fields} and
-and example message is shown in \ref{samplemessage}.
+The simulator is implemented in Python using Simpy discrete event simulation library and it generates a JSON file which models the logs from the system.
+The log message fields are defined in Table \ref{fields}.
+
+\begin{table}[!t]
+\renewcommand{\arraystretch}{1.3}
+\caption{Log message fields}
+\label{fields}
+\centering
+\begin{tabular}{|p{5mm}|p{20mm}|p{10mm}|p{15mm}|p{15mm}|}
+\hline
+Field & Description \\
+\hline
+\hline
+Timestamp & The time of the log message in milliseconds since the start of the simulation \\
+\hline
+Event type & A string identifier of the event type that also uniquely identifies the work step or the device notifying the event \\
+\hline
+\end{tabular}
+\end{table}
 
 The simulation framework consists of a scheduler that takes the next event from the event queue and applies it to the respective module. The simulated modules
 execute when events are applied to them and generate new events and immediate log entries with timestamps and other metadata.
@@ -235,7 +265,8 @@ cranes and conveyors. Multiple transmission blocks are being assembled simultane
 The transmission component consists of four subassemblies. The main sequence starts from the frame of the transmission block
 and continues through several manual steps done in separate cells. The steps of the main sequence are given in
 the Tables \ref{mainsteps1} and \ref{mainsteps2}.
-Each step can contain a separate sequence of events and associated log messages.
+Each step contains a separate sequence of events and associated log messages defined in the tables. The log messages include the component which logged the event, but
+not the process instance.
 The mean durations for manual steps can vary in normal operation $\pm$ thirty percent. The mean durations for automatic steps can vary
 $\pm$ five percent.
 
@@ -351,7 +382,7 @@ intermediate assemblies start piling up until a fault is signalled because of ex
 
 Duration increases before a fault are non-deterministic and for some faults they don't actually happen before the fault. The profile of the duration
 increase depends on the type of device used for the step. Generally mechanical wear and tear effect on machine health profile follows
-an accelerating curve downwards \cite{eker2012major}, \cite{milldataset}. For the purposes of simulation I assume machine health has an approximately
+an accelerating curve downwards \cite{eker2012major}, \cite{milldataset}. For the purposes of simulation we can assume machine health has an approximately
 linear effect on machine performance measured in delays and success rates in applicable types of faults.
 
 Simulated wear and tear causes two types of delay profiles. First,
@@ -450,6 +481,9 @@ A formal language that accepts such sequences is called shuffled language \cite{
 relating to regular and context-free languages are inadequate. For example Langer et al. \cite{langer2011self} showed that Angluin learner was able to learn small
 toy examples very well, but didn't work very well for a real world example of a stream of events recorded from a CAN bus of the powertrain network of an electric vehicle.
 
+Some success have been reported by Niels Landwehr using Mixture Hidden Markov Models \cite{landwehr2008modeling} in labelling interleaved activities from event logs.
+These methods require manual labelling of the training data and are therefore unsuitable for an unsupervised setting.
+
 FMS processes are often modelled as colored Petri nets \cite{saitou2002robust}, which require that the process instances are known for log messages
 In practice, the process instances for log messages can only be known in the process
 if the process is at least implicitly known in advance. For the general case we do not know which events correspond to which process instances, and some systemic events
@@ -481,7 +515,7 @@ of the graph are in perfect, deterministic order from the bottom to the top. How
 completely determine the next event. This indeterminate order of sequential events is shown in a zoomed portion of the graph in the Figure \ref{figure:zoomed_events}
 Some queue effects are also visible in the later parts of the sequences.
 
-For evaluating whether there is enough information in the sequence to determine some structure in the model, the sequence was visualized as colored pixels \ref{figure:color_vis2}.
+For evaluating whether there is enough information in the sequence to determine some structure in the model, the sequence was visualized as colored pixels in Figure \ref{figure:color_vis2}.
 If human eye can make out some structure in the sequence, then in principle it is possible for the automated algorithms to do so also. To assist the eye, the pixel colors are chosen
 from an ordered color map, and the states are indexed in the order they are met in the log.
 
@@ -514,8 +548,6 @@ therefore the associated log events must be present. Analogously this relates to
  \caption{The event sequence as color pixels from left to right, top to bottom, padded in the end with zeros.}
  \label{figure:color_vis2}
 \end{figure}
-
-TODO: Compare with real logs, salient details.
 
 In process mining there are several approaches in automatically extracting such models such as Alpha algorithm and its 
 variants, genetic process mining, heuristic process mining, multi phase mining, and region-based process mining. Alpha algorithm only work well for simple processes,
