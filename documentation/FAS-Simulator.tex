@@ -387,10 +387,24 @@ linear effect on machine performance measured in delays and success rates in app
 
 Simulated wear and tear causes two types of delay profiles. First,
 a continuous wear and tear typically causes no measurable delays at first, but when the degradation accumulates the delay increases following
-a roughly exponential curve \ref{continuouswearandtear}. Second, for certain steps, such as taking bolts from the bowl feeder a human operator
+a roughly exponential curve shown in the Figure \ref{figure:continuouswearandtear}. Second, for certain steps, such as taking bolts from the bowl feeder a human operator
 might fail to grab a bolt from time to time. Typically human operator tries again and succeeds. The frequency of the failure increases
 slowly and roughly following an exponential curve until the failure rate becomes apparent and causes the operator to take corrective action,
-typically causing downtime. These failures cause a random delay if they happen. This characteristic delay profile is depicted in \ref{retrydelays}.
+typically causing downtime. These failures cause a random delay if they happen. This characteristic delay profile is depicted in the Figure \ref{figure:retrydelays}.
+
+\begin{figure}[tb]
+ \centering
+ \includegraphics[width=8 cm,keepaspectratio=true]{./failure_profile.eps}
+ \caption{A delay profile of continuous wear and tear}
+ \label{figure:continuouswearandtear}
+\end{figure}
+
+\begin{figure}[tb]
+ \centering
+ \includegraphics[width=8 cm,keepaspectratio=true]{./retry_profile.eps}
+ \caption{A characteristic delay profile of human operator retry delays}
+ \label{figure:retrydelays}
+\end{figure}
 
 Misconfiguration can cause different kinds of results, but here we assume some work step is skipped
 so that it is not noticed and doesn't directly prevent the subsequent steps from being executed. 
@@ -576,6 +590,19 @@ and false negative errors. This result is in line with regular language automata
  \caption{A trivial DFA interpreting the events as both the states and the transitions}
  \label{figure:trivial_DFA}
 \end{figure}
+
+Some initial experiments were run with the representative data using Long Short-Term Memory (LSTM) networks. This is to show feasibility for use of learning systems
+against this kind of data.
+
+An LSTM model with an input layer of 77, two consequtive LSTM layers of 39 and 38 nodes and an output layer of 35 symbols softmaxed and 1 extra output for timestamp
+difference to the previous symbol,
+predicting the next symbol in the sequence was executed against this test data. The LSTM uses RELU activation functions.
+Training used batch size of 14 and truncated back propagation through time of 17 steps.
+For the complex example data, the network cannot extract structure, and simply predicts the overall statistical histogram of the symbols irrespective of preceding
+symbol sequence.
+
+However, training a model against a simpler test data with only single, two and three simultaneous process instances with the same network produces a reasonable
+prediction of the subsequent symbol which is capable of ruling out most of the possible subsequent symbols allowing working anomaly detection.
 
 \section{Conclusion}
 
