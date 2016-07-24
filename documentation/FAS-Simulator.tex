@@ -495,9 +495,6 @@ A formal language that accepts such sequences is called shuffled language \cite{
 relating to regular and context-free languages are inadequate. For example Langer et al. \cite{langer2011self} showed that Angluin learner was able to learn small
 toy examples very well, but didn't work very well for a real world example of a stream of events recorded from a CAN bus of the powertrain network of an electric vehicle.
 
-Some success have been reported by Niels Landwehr using Mixture Hidden Markov Models \cite{landwehr2008modeling} in labelling interleaved activities from event logs.
-These methods require manual labelling of the training data and are therefore unsuitable for an unsupervised setting.
-
 FMS processes are often modelled as colored Petri nets \cite{saitou2002robust}, which require that the process instances are known for log messages
 In practice, the process instances for log messages can only be known in the process
 if the process is at least implicitly known in advance. For the general case we do not know which events correspond to which process instances, and some systemic events
@@ -575,6 +572,9 @@ determine the future transitions more than one step ahead. This makes it impossi
 are very common in automatic systems because certain generic events often occur between events which are more strictly bound to specific process states. Some Alpha algorithm
 variants, such as $\alpha^{++}$ \cite{wen2007mining} can discover some simple cases of controlled choice, but is not applicable for logs not labeled with process instances.
 
+Some success have been reported by Niels Landwehr using Mixture Hidden Markov Models \cite{landwehr2008modeling} in labelling interleaved activities from event logs.
+However, these methods require manual labelling of the training data and are therefore unsuitable for an unsupervised setting.
+
 \section{Results}
 
 A trivial DFA model from interpreting all the observed events as both transitions and states is depicted in the Figure \ref{figure:trivial_DFA}.
@@ -594,15 +594,20 @@ and false negative errors. This result is in line with regular language automata
 Some initial experiments were run with the representative data using Long Short-Term Memory (LSTM) networks. This is to show feasibility for use of learning systems
 against this kind of data.
 
-An LSTM model with an input layer of 77, two consequtive LSTM layers of 39 and 38 nodes and an output layer of 35 symbols softmaxed and 1 extra output for timestamp
-difference to the previous symbol,
-predicting the next symbol in the sequence was executed against this test data. The LSTM uses RELU activation functions.
-Training used batch size of 14 and truncated back propagation through time of 17 steps.
+An LSTM model with an input layer of 77, two consequtive LSTM layers of 43 and 41 nodes and an output layer of 35 symbols softmaxed,
+predicting the next symbol in the sequence was executed against this test data. The LSTM uses RELU activation functions. This network made no use of the timestamps
+of the logged data.
+Training used a batch size of 14 and truncated back propagation through time of 10 steps. The learning rate used with ADAM optimizer was 0.0068. All these parameters
+were metaoptimized using random sampling, and running the system 30 minutes for each value of random-valued parameters. Another separately generated log was used
+to determine validation set loss for parameter optimization.
+
 For the complex example data, the network cannot extract structure, and simply predicts the overall statistical histogram of the symbols irrespective of preceding
 symbol sequence.
 
-However, training a model against a simpler test data with only single, two and three simultaneous process instances with the same network produces a reasonable
+However, training a similar model against a simpler test data with only single, two and three simultaneous process instances with the same network produces a reasonable
 prediction of the subsequent symbol which is capable of ruling out most of the possible subsequent symbols allowing working anomaly detection.
+Developing a learning algorithm that scales well to more heavily interleaved process traces, and is able to quickly learn the process characteristics in an online,
+unsupervised fashion, is a research problem that benefits from this kind of benchmark.
 
 \section{Conclusion}
 
