@@ -16,7 +16,7 @@ production_line = ProductionLine(env, logger)
 # Putting in 30 items, waiting for them to be done.
 
 for i in range(0, 30):
-    fas_instance = FASInstance(env, production_line)
+    fas_instance = FASInstance(env, production_line, logger)
     fas_instance.spawn()
 
 env.run()

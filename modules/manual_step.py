@@ -16,6 +16,8 @@ class ManualStep(simpy.Resource):
     def process(self):
         print(self.name + ": input")
         self.queue = self.queue + 1
+        if (self.queue >= 5):
+            self.logger.addMessage("QUEUE ALARM");
         with self.request() as req:
             yield req
             print(self.name + ": process")

@@ -287,31 +287,31 @@ Step & Description & Duration & Log messages \\
 \hline
 1 & Crane & 30 s & Going forward, stopping, going back, stopping \\
 \hline
-2 & Manual inspection & 37 s & OK pressed \\
+2 & Manual inspection & 37 s & OK pressed, queue alarm \\
 \hline
 3 & Conveyor & 30 s & To cell, stop, to next cell \\
 \hline
 4 & Bowl feeder gives components & 5 s & Given \\
 \hline
-5 & Add components & 21 s & OK pressed \\
+5 & Add components & 21 s & OK pressed, queue alarm \\
 \hline
 6 & Conveyor & 30 s & To cell, stop, to next cell \\
 \hline
 7 & Bowl feeder gives components & 10 s & Given \\
 \hline
-8 & Add components & 34 s & OK pressed \\
+8 & Add components & 34 s & OK pressed, queue alarm \\
 \hline
 9 & Conveyor & 30 s & To cell, stop, to next cell \\
 \hline
 10 & Crane with subassembly A & 10 s & Going forward, stopping, going back, stopping \\
 \hline
-11 & Combine with subassembly A & 34 s & OK pressed \\
+11 & Combine with subassembly A & 34 s & OK pressed, queue alarm \\
 \hline
 12 & Conveyor & 30 s & To cell, stop, to next cell \\
 \hline
 13 & Conveyor with subassembly B & 10 s & To cell, stop \\
 \hline
-14 & Combine with subassembly B & 35 s & OK pressed \\
+14 & Combine with subassembly B & 35 s & OK pressed, queue alarm \\
 \hline
 15 & Conveyor & 30 s & To cell, stop, to next cell \\
 \hline
@@ -332,31 +332,31 @@ Step & Description & Duration & Log messages \\
 \hline
 17 & Conveyor with cover & 10 s & To cell, stop \\
 \hline
-18 & Add cover and bolts & 76 s & OK pressed \\
+18 & Add cover and bolts & 76 s & OK pressed, queue alarm \\
 \hline
 19 & Conveyor & 30 s & To cell, stop, to next cell \\
 \hline
-20 & Tighten the bolts & 28 s & OK pressed \\
+20 & Tighten the bolts & 28 s & OK pressed, queue alarm \\
 \hline
 21 & Conveyor & 30 s & To cell, stop, to next cell \\
 \hline
 22 & Conveyor with subassembly C & 10 s & To cell, stop \\
 \hline
-23 & Combine with subassembly C & 60 s & OK pressed \\
+23 & Combine with subassembly C & 60 s & OK pressed, queue alarm \\
 \hline
 24 & Conveyor & 21 s & To cell, stop, to next cell \\
 \hline
-25 & Tighten the bolts & 16 s & OK pressed \\
+25 & Tighten the bolts & 16 s & OK pressed, queue alarm \\
 \hline
 26 & Conveyor & 21 s & To cell, stop, to next cell \\
 \hline
 27 & Bowl feeder gives components & 5 s & Given \\
 \hline
-28 & Add components & 11 s & OK pressed \\
+28 & Add components & 11 s & OK pressed, queue alarm \\
 \hline
 29 & Conveyor & 21 s & To cell, stop, to next cell \\
 \hline
-30 & Tighten the bolts & 32 s & OK pressed \\
+30 & Tighten the bolts & 32 s & OK pressed, queue alarm \\
 \hline
 31 & Conveyor & 21 s & To output gate \\
 \hline
@@ -486,6 +486,12 @@ different modelling approaches. These pre-defined simulations vary in complexity
 Each type of simulation can also be configured to fail in specific ways to test different failure detection approaches. All the simulations are based on the Flexible Assembly System
 defined in this article and the simulations are stochastic in respect to delays between steps.
 
+In addition to the events related to specific process traces, we will add an event for an alarm if the queue waiting for a manual process is larger than five items. Also, we will
+add a periodical ``tick'' event for every 10 seconds to allow for the learning system a realistic way of perceiving time, but also to include events that are unrelated to
+the processes being executed, to reflect real logs. One conveyor is reused for two process steps, the steps 6 and 9. This means that these conveyor events
+trigger twice for each product. This is to demonstrate a common situation where there might be multiple identical events of a specific type
+associated to a single process trace.
+
 \section{Mathematical Description}
 
 Mathematically, the FAS Simulator can be described as a set of independent sequences each describing a successful assembly of one product instance shuffled, or interleaved
@@ -506,7 +512,8 @@ Automatic deinterleaving the logs and deducing the process instances for the log
 for evaluating the allowed sequences.
 For example, if the log events contained the identifier of the product
 item under the assembly step, anomaly detection would be much easier but such detection algorithms would not generalize as well
-to new environments where such information is not available.
+to new environments where such information is not available. Additionally, any system that assumes specific structure in the logs, for example that each event corresponds to
+only one specific process instance, would likely fail in real world systems where these assumptions don't apply.
 
 \section{Practical Evaluation}
 
@@ -535,10 +542,13 @@ is available here\cite{PHONOZATION}. Delays bring new features into the model, a
 we can immediately note that certain events happen practically simultaneously (as multiple log lines are generated at the same event). Also, slower tempo tells us that less is
 going on in the assembly line, and this could in principle give us a baseline for decomposing the canon-like interleaving of separate process instances from the whole.
 If a human test subject can discern between the proper operation of the assembly line from random, or anomalous operation by the event log sounds,
-then a machine could in principle be able to learn to do so also from the raw logs.
+then a machine could in principle be able to learn to do so also from the raw logs. It should be noted that this is not simply an exercise of deinterlacing interlaced events, because
+the process traces do have interaction through limited process resources, which presents for example as saturations in bottlenecks.
 
 We know that material balance requires that each log event strictly associated to a later part of process requires the number of requisite steps before it can be executed, and
 therefore the associated log events must be present. Analogously this relates to the principles of stoichiometry and material balance used in chemistry and industrial processes.
+For such a simple process what we have used as an example, each event occurs once and only once for each process instance, so drawing a histogram over a time window of a logged
+composed of such process traces forms an equal distribution, discounting border effects.
 
 \begin{figure}[tb]
  \centering
@@ -594,15 +604,15 @@ and false negative errors. This result is in line with regular language automata
 Some initial experiments were run with the representative data using Long Short-Term Memory (LSTM) networks. This is to show feasibility for use of learning systems
 against this kind of data.
 
-An LSTM model with an input layer of 77, two consequtive LSTM layers of 43 and 41 nodes and an output layer of 35 symbols softmaxed,
+An LSTM model with an input layer of 77, an LSTM layers of 52 nodes and an output layer of 35 symbols softmaxed,
 predicting the next symbol in the sequence was executed against this test data. The LSTM uses RELU activation functions. This network made no use of the timestamps
 of the logged data.
 Training used a batch size of 14 and truncated back propagation through time of 10 steps. The learning rate used with ADAM optimizer was 0.0068. All these parameters
 were metaoptimized using random sampling, and running the system 30 minutes for each value of random-valued parameters. Another separately generated log was used
-to determine validation set loss for parameter optimization.
+to determine validation set loss for parameter optimization. Since there is not that much data to learn from, reflecting real circumstances, more LSTM layers lead to overlearning.
 
-For the complex example data, the network cannot extract structure, and simply predicts the overall statistical histogram of the symbols irrespective of preceding
-symbol sequence.
+For the complex example data, the network overlearns, and while the accuracy rises for the training data along with the iterations, the accuracy against validation data starts
+to diverge.
 
 However, training a similar model against a simpler test data with only single, two and three simultaneous process instances with the same network produces a reasonable
 prediction of the subsequent symbol which is capable of ruling out most of the possible subsequent symbols allowing working anomaly detection.
