@@ -533,7 +533,7 @@ of the graph are in perfect, deterministic order from the bottom to the top. How
 completely determine the next event. This indeterminate order of sequential events is shown in a zoomed portion of the graph in the Figure \ref{figure:zoomed_events}
 Some queue effects are also visible in the later parts of the sequences.
 
-For evaluating whether there is enough information in the sequence to determine some structure in the model, the sequence was visualized as colored pixels in Figure \ref{figure:color_vis2}.
+For evaluating whether there is enough information in the sequence to determine some structure in the model, the sequence was visualized as colored pixels in Figure \ref{figure:color_vis}.
 If human eye can make out some structure in the sequence, then in principle it is possible for the automated algorithms to do so also. To assist the eye, the pixel colors are chosen
 from an ordered color map, and the states are indexed in the order they are met in the log.
 
@@ -566,7 +566,7 @@ composed of such process traces forms an equal distribution, discounting border 
 
 \begin{figure}[tb]
  \centering
- \includegraphics[width=8 cm,keepaspectratio=true]{./color_vis2.png}
+ \includegraphics[width=8 cm,keepaspectratio=true]{./color_vis.eps}
  \caption{The event sequence as color pixels from left to right, top to bottom, padded in the end with zeros.}
  \label{figure:color_vis2}
 \end{figure}
@@ -586,20 +586,6 @@ Some success have been reported by Niels Landwehr using Mixture Hidden Markov Mo
 However, these methods require manual labelling of the training data and are therefore unsuitable for an unsupervised setting.
 
 \section{Results}
-
-A trivial DFA model from interpreting all the observed events as both transitions and states is depicted in the Figure \ref{figure:trivial_DFA}.
-This DFA accepts any sequence consisting of transitions between any two events observed in the training data. The trivial DFA cannot be minimized by Moore minimization,
-as there are no two states with exactly the same outwards transitions at least in the training sequence tested.
-It is evident that because of parallel processing of multiple items in the FAS System, almost any state transition is
-in practice possible even in fault-free sequences, but some didn't happen in the training data.
-The trivial DFA model is incapable of inferring higher level patterns from the sequences, and would simultaneously make a great number of false positive
-and false negative errors. This result is in line with regular language automatas being inadequate in modelling shuffled languages.
-\begin{figure}[tb]
- \centering
- \includegraphics[width=8 cm,keepaspectratio=true]{./dfa.eps}
- \caption{A trivial DFA interpreting the events as both the states and the transitions}
- \label{figure:trivial_DFA}
-\end{figure}
 
 Some initial experiments were run with the representative data using Long Short-Term Memory (LSTM) networks. This is to show feasibility for use of learning systems
 against this kind of data.
