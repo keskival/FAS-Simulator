@@ -1,5 +1,11 @@
 # returns St with event id and timestamp.
-sequence2;
+#sequence2;
+load("data.mat")
+t=[1:size(data)(1)]';
+[x,y] = find(data);
+S(x)=y;
+
+St=[S t];
 
 graphics_toolkit gnuplot
 figure('visible','off');
@@ -8,12 +14,13 @@ colormap('hot');
 tone_step = 1.0095;
 
 # The first time index: 0
-# The last time index: 7361074.7
+# The last time index: size(data)(1) + 1
 # Scaling to minutes:
 minutes = 5;
 sample_s = 0.4;
+last_time_index = size(data)(1)
 sound = zeros(44100*(minutes*60 + sample_s),1);
-timestep = (minutes*60)/7361075;
+timestep = (minutes*60)/last_time_index;
 
 for ind = 1:length(St)
   note = St(ind,1);

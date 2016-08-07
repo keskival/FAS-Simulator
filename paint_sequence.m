@@ -1,5 +1,7 @@
-
-sequence;
+# pkg install -forge image
+load("data.mat")
+[x,y] = find(data);
+S(x)=y;
 # returns S
 pkg load image;
 Colors = rand(36, 3);
