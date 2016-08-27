@@ -3,9 +3,10 @@
 load("data.mat")
 t=[1:size(data)(1)]';
 [x,y] = find(data);
-S(x)=y;
+S=[];
+S(x)=y-1;
 
-St=[S t];
+St=[S' t];
 
 graphics_toolkit gnuplot
 figure('visible','off');
@@ -14,13 +15,13 @@ colormap('hot');
 tone_step = 1.0095;
 
 # The first time index: 0
-# The last time index: size(data)(1) + 1
+# The last time index: size(data)(1)
 # Scaling to minutes:
-minutes = 5;
+minutes = 20;
 sample_s = 0.4;
 last_time_index = size(data)(1)
-sound = zeros(44100*(minutes*60 + sample_s),1);
-timestep = (minutes*60)/last_time_index;
+sound = zeros(44100*(minutes*60 + sample_s + 1),1);
+timestep = (minutes*60)/last_time_index
 
 for ind = 1:length(St)
   note = St(ind,1);
@@ -36,7 +37,8 @@ endfor
 sound = sound./max(abs(sound));
 wavwrite(sound, 44100, 'sequence.wav');
 
-grid = zeros(6);
+side = ceil(sqrt(size(data)(2)))
+grid = zeros(side);
 nextEvent = 1;
 # One video frame for each 1/10 s.
 for t = [0:4410:length(sound)]
@@ -44,10 +46,10 @@ for t = [0:4410:length(sound)]
   note = St(ind,1);
   time = St(ind,2);
   # While the next event timestamp is smaller than equal to this time.
-  while St(nextEvent,2)*timestep <= t/44100
+  while nextEvent <= last_time_index && St(nextEvent,2)*timestep <= t/44100
     event = St(nextEvent,1);
-    y = mod(event, 6) + 1;
-    x = floor(event / 6) + 1;
+    y = mod(event, side) + 1;
+    x = floor(event / side) + 1;
     grid(x,y) = 1.0;
     nextEvent++;
   endwhile

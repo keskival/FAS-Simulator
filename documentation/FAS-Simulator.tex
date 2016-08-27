@@ -388,7 +388,7 @@ linear effect on machine performance measured in delays and success rates in app
 Simulated wear and tear causes two types of delay profiles. First,
 a continuous wear and tear typically causes no measurable delays at first, but when the degradation accumulates the delay increases following
 a roughly exponential curve shown in the Figure \ref{figure:continuouswearandtear}. Second, for certain steps, such as taking bolts from the bowl feeder a human operator
-might fail to grab a bolt from time to time. Typically human operator tries again and succeeds. The frequency of the failure increases
+might fail to grab a bolt from time to time. Typically the human operator tries again until successful. The frequency of the failure increases
 slowly and roughly following an exponential curve until the failure rate becomes apparent and causes the operator to take corrective action,
 typically causing downtime. These failures cause a random delay if they happen. This characteristic delay profile is depicted in the Figure \ref{figure:retrydelays}.
 
@@ -448,15 +448,15 @@ To have a meaningful simulation of a system under faults we only need to simulat
 Failure & Description & Effect \\
 \hline
 \hline
-Failed manual step & & \\
+Failed manual step & The human operator tries again until successful & A poisson distribution of delay for the step 7 \\
 \hline
-Wear \& tear & & \\
+Wear \& tear & The completion time for the step degrades & The delay for the step 20 is exponential \\
 \hline
-Misconfiguration & & \\
+Misconfiguration & The process is misconfigured & Steps 19 and 20 are skipped, process continues otherwise normally \\
 \hline
-Accident & A human assembly worker becomes incapacitated for a medical reason & Combine with subassembly B step stops \\
+Accident & A human assembly worker becomes incapacitated for a medical reason & Step 14: Combine with subassembly B stops \\
 \hline
-Cyberattack & An attacker disables a crane by flooding it with commands  & The Crane with subassembly A is repeatedly moving to end position without transporting the subassembly A \\
+Cyberattack & An attacker disables a crane by flooding it with commands  & Step 10: The Crane with subassembly A is repeatedly moving to end position without transporting the subassembly A \\
 \hline
 \end{tabular}
 \end{table}
@@ -527,15 +527,17 @@ For the purposes of this article, we will only consider methods which are not tr
 becomes a challenge of learning the correct operation of the system and flagging any inconsistencies and anomalies.
 
 For evaluation purposes, we will use a generated fault-free event sequence with first one complete sequence for one item only, then for 20 items simultaneously going through the system,
-and finally 50 items being assembled in the system simultaneously in the same log file. This results in a log file with a sequence of 2627 ($ = 37 \cdot 31 $) events of 35 different
-event types. A depiction of the simulated event sequence is shown in the Figure \ref{figure:events}. The first item goes through the process alone, so the events on the left side
-of the graph are in perfect, deterministic order from the bottom to the top. However, for multiple parallel items being processed it becomes evident that the previous event doesn't in itself
-completely determine the next event. This indeterminate order of sequential events is shown in a zoomed portion of the graph in the Figure \ref{figure:zoomed_events}
-Some queue effects are also visible in the later parts of the sequences.
+and finally 50 items being assembled in the system simultaneously in the same log file. This results in a log file with a sequence of 4424 events of 36 different
+event types. A depiction of the simulated event sequence is shown in the Figure \ref{figure:events}. The tick event is prominent in the bottom.
+The first item goes through the process alone, so the events on the left side
+of the graph are in a deterministic order from the bottom to the top. However, for multiple parallel items being processed it becomes evident that the previous event doesn't in itself
+completely determine the next event.
+Some queue effects are also visible in the later parts of the sequences showing the queue alarm event at the top and resultant cumulative delay for the event index 22.
 
-For evaluating whether there is enough information in the sequence to determine some structure in the model, the sequence was visualized as colored pixels in Figure \ref{figure:color_vis}.
+For evaluating whether there is enough information in the sequence to determine some structure in the model, the sequence was visualized as grayscale pixels in Figure \ref{figure:color_vis}.
 If human eye can make out some structure in the sequence, then in principle it is possible for the automated algorithms to do so also. To assist the eye, the pixel colors are chosen
-from an ordered color map, and the states are indexed in the order they are met in the log. It is possible to discern the production batches from the image. For each batch there are
+from an ordered grayscale map, and the states are indexed in the order they are met in the log. It is possible to discern the three different length production batches from the image.
+For each batch there are
 a number of products assemblied which corresponds to the same number of certain production related events, although that is not immediately clear for human eye.
 
 Sonification is an audio display method where data is represented as non-verbal sounds. A sonification of the event log generated with timestamps and delays taken into account
@@ -568,8 +570,8 @@ composed of such process traces forms an equal distribution, discounting border 
 \begin{figure}[tb]
  \centering
  \includegraphics[width=8 cm,keepaspectratio=true]{./color_vis.eps}
- \caption{The event sequence as color pixels from left to right, top to bottom, padded in the end with zeros.}
- \label{figure:color_vis2}
+ \caption{The event sequence as grayscale pixels from left to right, top to bottom, padded in the end with zeros.}
+ \label{figure:color_vis}
 \end{figure}
 
 In process mining there are several approaches in automatically extracting such models such as Alpha algorithm and its 
