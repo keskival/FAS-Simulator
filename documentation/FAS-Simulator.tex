@@ -58,7 +58,7 @@ Version: \today
 \end{IEEEkeywords}
 
 \section{Introduction}
-This paper describes a method for simulating event-oriented data sources of a flexible assembly system including faults. Such simulator is required for creating representative corpuses
+This paper describes a method for simulating event-oriented data sources of a flexible assembly system including faults. Such a simulator is required for creating representative corpuses
 of data for teaching automated learning algorithms for predictive maintenance, condition monitoring and systemic fault detection.
 
 Flexible assembly system was described by Donath and Graves \cite{donath1988flexible} as a system consisting of a set of products each with a specified volume
@@ -77,14 +77,30 @@ flexible automation systems have widely different environmental and workload con
 Taking different site environments and workloads into account when planning preventive maintenance cycles is non-trivial. There is a clear need to adapt maintenance based on actual
 conditions in the operation rather than by simply scheduling maintenance periodically\cite{hashemian2011state}.
 It is also important to indicate potential faults early to improve the response time of corrective action.
-
 Going from preventive maintenance towards predictive maintenance optimizes and targets the maintenance related costs towards the activities that have best impact
-on improving the availability and operation of deployed flexible manufacturing systems.
-Predictive maintenance in flexible assembly systems benefits from automatic indicators for potential future faults.
+on improving the availability and operation of deployed flexible assembly systems.
+
+Predictive maintenance in flexible assembly systems benefits from automatic indicators for immediate and potential future faults.
+It is generally not possible to enumerate all the possible fault conditions and their sensory indicators of a flexible assembly system in an exhaustive fashion,
+as the less common errors are forgotten and some faults might cause unexpected results\cite{camarinha1996integration}.
+There is a need for autonomously learning systems which are able to deduce the correct operation of the Felxible Assembly System and report potential deviances. One way to monitor a process is to observe the symbolic
+logs generated as the process is being executed.
+
 Current predictive maintenance and condition monitoring systems concentrate on measuring device health for example by means of measuring temperature\cite{mobley2002introduction},
 vibration\cite{scheffer2004practical}, lube oil particle analysis\cite{hunt1993handbook} and electrical current signals
-\cite{thomson2001current}. There exists some research on anomaly detection for non-interleaved discrete sequences, summarized in this survey\cite{chandola2012anomaly}.
-Less published research exists in the context of interleaved discrete sequences, i.e. uncorrelated process traces, and about systemic failure conditions.
+\cite{thomson2001current}. Research on anomaly detection for non-interleaved discrete sequences is summarized in this survey\cite{chandola2012anomaly}.
+Interleaved discrete sequences, or uncorrelated process traces have been mainly researched in relation to specification mining for multi-threaded or asynchronous software processes.
+The solutions use domain-specific features to help in reconstructing the dependency graphs out of interleaved sequences. For example this solution works for message-oriented systems\cite{kumar2011mining},
+and this solution requires sets of separate and complete traces corresponding to executions of an application\cite{mining-program-workflow-from-interleaved-traces}. Most process mining and specification mining
+solutions aim to solve the challenging task of inferring a complete process model out of the logs, even if the interleaved logs themselves might exhibit some weaker form of features
+and characteristics useful for anomaly detection.
+
+Flexible assembly system process traces are not separable into complete and separate execution runs in the general case, because assembly process is typically continuous and
+forms a single interleaved log with an arbitrary limiting window.
+On the other hand, delays in processing steps are mostly independent of the whole system state, and could be hypothetically used to infer structure in the interleaved log.
+There are also events unrelated to the processes, like timer ticks and analogous events. The main process events often follow stoichiometric laws in a normal operation corresponding to materials
+not being created or destroyed within the process. Stoichiometric invariance is often clearly visible when drawing a histogram of event types in the logs showing that specific events corresponding to certain
+assembly steps are done specific numbers of times per product, leading to numbers of events for a specific event type strongly correlating with other event types.
 
 Evaluating novel automatic methods for fault prediction requires standard benchmarks to compare these methods against. Currently there are no standard benchmarks to test
 different symbolic log anomaly detection methods and compare their performance against each other. Such standard benchmarks exist in other fields of machine learning,
@@ -98,7 +114,7 @@ However, these are not directly suitable for benchmarking fault detection method
 
 \section{Problem Formulation}
 
-A standard benchmark should reflect a realistic task and it should have enough data to be useful.
+A standard benchmark should reflect a realistic task and it should have enough representative data to be useful.
 
 Real data regarding flexible assembly system faults is
 not generally available, because fault data is generally subject to business confidentiality in flexible assembly industry.
@@ -114,7 +130,9 @@ of the flexible assembly system along with workflows and end products are arbitr
 A simulation for benchmarking anomaly and fault detection methods should not be fully deterministic to reflect the real world dynamics. The simulation should also
 include realistic faults with possible early indicators such as variations in delays in the steps of the process. The focus of the simulator is on faults without pre-existing
 diagnostic fault codes, such as unexpected faults and degradation of the assembly modules and conveyors, and on systemic faults. Systemic faults in this paper
-mean faults and degradation of output where each of the component modules of the Flexible Assembly System are seemingly operating without faults.
+are defined to mean faults and degradation of output where each of the component modules of the flexible assembly system are seemingly operating without faults. Execution failures
+which are detected during execution of an action as a deviance of the state from the expected state are outside of the focus of this work, as these conditions are adequately detected and handled
+by existing supervision systems.
 
 \section{Modes of Failures in Flexible Assembly Systems}
 
@@ -229,7 +247,7 @@ are gated by the status of the resource.
 \end{figure}
 
 The simulation will not be fully deterministic and contains soft faults which do not affect operation in addition to hard faults which result in immediate downtime.
-Flexible Assembly System scheduling and production optimization is an active research field. Different scheduling models can be implemented into the simulation,
+Flexible assembly system scheduling and production optimization is an active research field. Different scheduling models can be implemented into the simulation,
 but the provided initial example is a simple sequence of mostly independent steps, as it roughly matches the studied Chrysler transmission assembly line.
 
 The simulator is implemented in Python using Simpy discrete event simulation library and it generates a JSON file which models the logs from the system.
@@ -477,14 +495,14 @@ The simulation is set up by first defining the all the modules in the assembly p
 is done simply by triggering the global process inputs as required, causing sequences of events being generated accordingly. For interleaved process traces we instantiate multiple
 parallel processes that share the resources in the simulated assembly plant.
 
-The events are logged in JSON with a timestamp and an event type, resembling logs in a real Flexible Assembly System. The logs are not exported to
+The events are logged in JSON with a timestamp and an event type, resembling logs in a real flexible assembly system. The logs are not exported to
 Mining eXtensible Markup Language (MXML) format, because MXML requires that separate process instances are identified. It is possible to make statistics of the internal simulator
 state, for example graphing the queues forming at different points of the assembly plant. However, for the purposes of learning system development, the generated log output is the most
 interesting resulting artifact.
 
 The simulator in principle allows defining different kinds of discrete event simulations. Several specific types of simulations are pre-defined for the purposes of benchmarking
 different modelling approaches. These pre-defined simulations vary in complexity and length from trivial one item at a time sequences to complex multiple items at once simulations.
-Each type of simulation can also be configured to fail in specific ways to test different failure detection approaches. All the simulations are based on the Flexible Assembly System
+Each type of simulation can also be configured to fail in specific ways to test different failure detection approaches. All the simulations are based on the flexible assembly system
 defined in this article and the simulations are stochastic in respect to delays between steps.
 
 In addition to the events related to specific process traces, we will add an event for an alarm if the queue waiting for a manual process is larger than five items. Also, we will
@@ -495,7 +513,7 @@ associated to a single process trace.
 
 \section{Mathematical Description}
 
-Mathematically, the FAS Simulator can be described as a set of independent sequences each describing a successful assembly of one product instance shuffled, or interleaved
+Mathematically, the FAS Simulator can be described as a set of largely independent sequences each describing a successful assembly of one product instance shuffled, or interleaved
 together.
 For simplicity we consider only sequences where the assembly line is run successfully from empty start state to empty end state without modelling delays and queues.
 A formal language that accepts such sequences is called shuffled language \cite{berglund2011recognizing}. These languages are context-sensitive, so modelling methods
@@ -518,8 +536,6 @@ only one specific process instance, would likely fail in real world systems wher
 
 \section{Practical Evaluation}
 
-The FAS Simulator is evaluated by testing several methods for inferring the hidden process behind the event sequences and existing methods of fault detection for
-the event sequences.
 The simulation is considered useful if it can be reasonably expected to mirror the real world contingencies and patterns, and if it is not completely trivial to
 learn or infer by existing methods. If the simulator creates event sequences that are challenging to learn by existing methods, then it is useful as a benchmark
 in relation to improving those methods and in creating new ones.
@@ -577,8 +593,8 @@ composed of such process traces forms an equal distribution, discounting border 
 
 In process mining there are several approaches in automatically extracting such models such as Alpha algorithm and its 
 variants, genetic process mining, heuristic process mining, multi phase mining, and region-based process mining. Alpha algorithm only work well for simple processes,
-and in general these algorithms work with log messages labelled with the process instance. These algorithms are not very robust against noise in the logs.
-Flexible Manufacturing Systems are reconfigured often for different workloads and manually reconfiguring the anomaly
+and in general these algorithms work with log messages labelled with the process instance. These algorithms cannot handle noise in the logs.
+Flexible assembly systems are reconfigured often for different workloads and manually reconfiguring the anomaly
 detection process model each time would be costly.
 
 In addition, the basic business process mining algorithms cannot discover controlled choices where previous process states
@@ -588,6 +604,8 @@ variants, such as $\alpha^{++}$ \cite{wen2007mining} can discover some simple ca
 
 Some success have been reported by Niels Landwehr using Mixture Hidden Markov Models \cite{landwehr2008modeling} in labelling interleaved activities from event logs.
 However, these methods require manual labelling of the training data and are therefore unsuitable for an unsupervised setting.
+A method used in parallel software workflow mining described here \cite{mining-program-workflow-from-interleaved-traces} requires the execution logs to be separated into
+a large number of complete runs, and would not work with a flexible assembly system in a continuous operation.
 
 \section{Results}
 
@@ -601,13 +619,13 @@ Training used a batch size of 14 and truncated back propagation through time of 
 were metaoptimized using random sampling, and running the system 30 minutes for each value of random-valued parameters. Another separately generated log was used
 to determine validation set loss for parameter optimization. Since there is not that much data to learn from, reflecting real circumstances, more LSTM layers lead to overlearning.
 
-For the complex example data, the network overlearns, and while the accuracy rises for the training data along with the iterations, the accuracy against validation data starts
-to diverge.
+For the complex example data with a large number of simultaneous process instances, the network overlearns, and while the accuracy rises for the training data along with the iterations,
+the accuracy against validation data starts to diverge.
 
 However, training a similar model against a simpler test data with only single, two and three simultaneous process instances with the same network produces a reasonable
 prediction of the subsequent symbol which is capable of ruling out most of the possible subsequent symbols allowing working anomaly detection.
 Developing a learning algorithm that scales well to more heavily interleaved process traces, and is able to quickly learn the process characteristics in an online,
-unsupervised fashion, is a research problem that benefits from this kind of benchmark.
+unsupervised fashion, is a research problem that benefits from this kind of benchmark simulation.
 
 \section{Conclusion}
 
@@ -618,13 +636,13 @@ for such devices. They also concentrate on continuous measurement data instead o
 The diagnostic data for flexible assembly systems is a closely guarded secret for business reasons, but it is possible to make reasonable models
 of faults based on other analogous sources.
 
-The flexible assembly system simulator, FAS Simulator, is published in GitHub \cite{FASSimulator} as open source. This kind of simulator would have
+The Flexible Assembly System Simulator, FAS Simulator, is published in GitHub \cite{FASSimulator} as open source. This kind of simulator would have
 little realism, and in fact little use unless it was continuously developed in dialogue with real flexible assembly systems. While the simulation
 approach adds an indirection between real data and developed methods, it is necessary to veil the business critical real fault and diagnostic
-data of the fast assembly systems and to make the different methods comparable. The simulator also provides means to incorporate new types of
+data of the flexible assembly systems but still make the different anomaly detection methods comparable. The simulator also provides means to incorporate new types of
 failures and test anomaly detection methods in a quick iteration.
 
-Additional research is needed to improve this benchmark simulation by using experiences from real flexible manufacturing systems and their modes of failure
+Additional research is needed to improve this benchmark simulation by using experiences from real flexible assembly systems and their modes of failure
 and respective future fault indicators. For example, continuous measurement values from temperature, acoustic and vibration sensors would be good targets
 to simulate.
 
