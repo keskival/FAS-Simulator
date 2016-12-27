@@ -1,7 +1,8 @@
 #!/usr/bin/python
 import random
+from numpy.random import normal
 
 def delay(duration, percentage_variation):
-    # TODO: Normal distribution would be more accurate.
-    random_multiplier = random.randint(-percentage_variation * 100, percentage_variation * 100) / 10000.0 + 1.0;
-    return int(duration * random_multiplier)
+    stdev = percentage_variation / 100.0 * duration
+    random_additive_noise = normal(0, stdev)
+    return max(0, int(duration + random_additive_noise))

@@ -300,8 +300,8 @@ and continues through several manual steps done in separate cells. The steps of 
 the Tables \ref{mainsteps1} and \ref{mainsteps2}.
 Each step contains a separate sequence of events and associated log messages defined in the tables. The log messages include the component which logged the event, but
 not the process instance.
-The mean durations for manual steps can vary in normal operation $\pm$ thirty percent. The mean durations for automatic steps can vary
-$\pm$ five percent.
+The durations vary in normal distribution. The durations for manual steps in normal operation have a standard deviation of thirty percent of the mean. The durations for automatic steps
+have a standard deviation of five percent of the mean.
 
 The production frequency of the transmission blocks depends on the slowest step as in this case there is only one cell for one step and no
 parallel work is possible within one cell. The slowest step takes about 76 seconds. In this hypothetical assembly plant, new transmission block
@@ -607,7 +607,7 @@ composed of such process traces forms an equal distribution, discounting window 
 
 In process mining there are several approaches in automatically extracting such models such as Alpha algorithm and its 
 variants, genetic process mining, heuristic process mining, multi phase mining, and region-based process mining. Alpha algorithm only work well for simple processes,
-and in general these algorithms work with log messages labelled with the process instance. These algorithms cannot handle noise in the logs.
+and in general these algorithms work with log messages labelled with the process instance. These algorithms are very sensitive to noise in the logs.
 Flexible assembly systems are reconfigured often for different workloads and manually reconfiguring the anomaly
 detection process model each time would be costly.
 
@@ -626,20 +626,22 @@ a large number of complete runs, and would not work with a flexible assembly sys
 Some initial experiments were run with the representative data using Long Short-Term Memory (LSTM) networks. This is to show feasibility for use of learning systems
 against this kind of data.
 
-An LSTM model with an input layer of 77, an LSTM layers of 52 nodes and an output layer of 35 symbols softmaxed,
+An LSTM model with an input layer of 77, an LSTM layer of 52 nodes and an output layer of 35 symbols softmaxed,
 predicting the next symbol in the sequence was executed against this test data. The LSTM uses RELU activation functions. This network made no use of the timestamps
 of the logged data.
 Training used a batch size of 14 and truncated back propagation through time of 10 steps. The learning rate used with ADAM optimizer was 0.0068. All these parameters
 were metaoptimized using random sampling, and running the system 30 minutes for each value of random-valued parameters. Another separately generated log was used
-to determine validation set loss for parameter optimization. Since there is not that much data to learn from, reflecting real circumstances, more LSTM layers lead to overlearning.
+as the validation set for hyperparameter optimization. Since there is not that much data to learn from, reflecting real circumstances, more LSTM layers lead to overlearning.
 
-For the complex example data with a large number of simultaneous process instances, the network overlearns, and while the accuracy rises for the training data along with the iterations,
-the accuracy against validation data starts to diverge.
+For the complex example data with a large number of simultaneous process instances under assembly, the network overlearns, and while the accuracy rises for the training data along with the iterations,
+the accuracy against validation data starts to diverge. A simpler network does not achieve a significantly better predictive power compared to simple guessing based on marginal symbol probabilities.
 
 However, training a similar model against a simpler test data with only single, two and three simultaneous process instances with the same network produces a reasonable
 prediction of the subsequent symbol which is capable of ruling out most of the possible subsequent symbols allowing working anomaly detection.
+It would seem that it is difficult for a system to learn the general process dynamics in a high volume, high entropy situation.
 Developing a learning algorithm that scales well to more heavily interleaved process traces, and is able to quickly learn the process characteristics in an online,
-unsupervised fashion, is a research problem that benefits from this kind of benchmark simulation.
+unsupervised fashion, is a research problem that benefits from this kind of benchmark simulation. It is suggested that one-shot learning or transfer learning could help the system learn a new process
+faster after being attuned to all kinds of general interleaved processes.
 
 \section{Conclusion}
 
