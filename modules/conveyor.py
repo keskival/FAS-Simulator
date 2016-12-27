@@ -16,7 +16,7 @@ class Conveyor(simpy.Resource):
             yield req
             print(self.name + ": input")
             self.logger.addMessage(self.name + " CONVEYOR GATE");
-            yield self.env.timeout(delay(self.duration, 5))
+            yield self.env.timeout(delay(self.duration, 1))
         print(self.name + ": to_next_step")
         return
 

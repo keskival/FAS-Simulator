@@ -300,8 +300,8 @@ and continues through several manual steps done in separate cells. The steps of 
 the Tables \ref{mainsteps1} and \ref{mainsteps2}.
 Each step contains a separate sequence of events and associated log messages defined in the tables. The log messages include the component which logged the event, but
 not the process instance.
-The durations vary in normal distribution. The durations for manual steps in normal operation have a standard deviation of thirty percent of the mean. The durations for automatic steps
-have a standard deviation of five percent of the mean.
+The durations vary in normal distribution. The durations for manual steps in normal operation have a standard deviation of five percent of the mean. The durations for automatic steps
+have a standard deviation of one percent of the mean. Durations are clipped to be non-negative.
 
 The production frequency of the transmission blocks depends on the slowest step as in this case there is only one cell for one step and no
 parallel work is possible within one cell. The slowest step takes about 76 seconds. In this hypothetical assembly plant, new transmission block
@@ -581,7 +581,7 @@ the process traces do have interaction through limited process resources, which 
 
 We know that material balance requires that each log event strictly associated to a later part of process requires the number of requisite steps before it can be executed, and
 therefore the associated log events must be present. Analogously this relates to the principles of stoichiometry and material balance used in chemistry and industrial processes.
-For such a simple process what we have used as an example, each event occurs once and only once for each process instance, so drawing a histogram over a time window of a logged
+For such a simple process what we have used as an example, most events occurs once and only once for each process instance, so drawing a histogram over a time window of a logged
 composed of such process traces forms an equal distribution, discounting window effects.
 
 \begin{figure}[tb]

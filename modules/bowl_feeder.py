@@ -16,7 +16,7 @@ class BowlFeeder(simpy.Resource):
             yield req
             print(self.name + ": give")
             self.state = "giving"
-            yield self.env.timeout(delay(self.duration, 5))
+            yield self.env.timeout(delay(self.duration, 1))
             print(self.name + ": given")
             self.logger.addMessage(self.name + " GIVEN");
         self.state = "waiting"

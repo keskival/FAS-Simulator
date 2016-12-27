@@ -21,13 +21,13 @@ class Crane(simpy.Resource):
             self.logger.addMessage(self.name + " FORWARD");
             self.queue = self.queue - 1
             self.state = "running"
-            yield self.env.timeout(delay(self.duration, 5))
+            yield self.env.timeout(delay(self.duration, 1))
             print(self.name + ": wait")
             self.state = "waiting"
             print(self.name + ": item_taken")
             print(self.name + ": go_back")
             self.logger.addMessage(self.name + " BACKWARD");
-            yield self.env.timeout(delay(self.duration, 5))
+            yield self.env.timeout(delay(self.duration, 1))
             print(self.name + ": stop")
             self.logger.addMessage(self.name + " STOP");
         return

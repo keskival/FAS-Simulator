@@ -23,7 +23,7 @@ class ManualStep(simpy.Resource):
             print(self.name + ": process")
             self.queue = self.queue - 1
             self.state = "running"
-            yield self.env.timeout(delay(self.duration, 30))
+            yield self.env.timeout(delay(self.duration, 5))
             print(self.name + ": ok")
             self.logger.addMessage(self.name + " OK");
         print(self.name + ": wait")
