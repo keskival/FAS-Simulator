@@ -58,13 +58,13 @@ Version: \today
 \end{IEEEkeywords}
 
 \section{Introduction}
-This paper describes a method for simulating event-oriented data sources of a flexible assembly system including faults. Such a simulator is required for creating representative corpuses
+This paper describes a method for simulating event-oriented data sources of a flexible assembly system (FAS) including faults. Such a simulator is required for creating representative corpuses
 of data for teaching automated learning algorithms for predictive maintenance, condition monitoring and systemic fault detection.
 
 Flexible assembly system was described by Donath and Graves \cite{donath1988flexible} as a collection of flexible assembly cells connected by automatic material-handling devices.
 In practise, a flexible assembly system contains parts and materials stored in an intermediate storage,
 a conveyor or crane system to move the parts, materials, intermediate assemblies and finished products between the cells, and the cells with work machines and necessary tooling
-to assemble and process intermediate assemblies and products. The cells might consist of for example manual assembly steps, and robotic assembly cells. In flexible manufacturing systems,
+to assemble and process intermediate assemblies and products. The cells might consist of for example manual assembly steps, and robotic assembly cells. In flexible manufacturing systems (FMS),
 the work cells might contain more complex machining and manufacturing tools like CNC lathes, or 3D printing. FAS and FMS are considered interchangeable for the purposes of this article, although
 they have different scheduling and configuration properties.
 Often the assembly sequence has multiple ways of being executed for a finished product leading to some redundancy and more efficient scheduling in terms of utilization.
@@ -220,7 +220,7 @@ Tool wear and tear for slowly degrading tools (e.g. screwdriver) & X & X & X \\
 \section{Flexible Assembly System Model}
 
 The simulation consists of a realistic discrete event model of a flexible assembly system with a class of faults optionally injected into the process.
-The initial simulation is very simple and does not incorporate complex scheduling decisions or optimization like many flexible assembly/manufacturing system simulations\cite{donath1988flexible}.
+The initial simulation is very simple and does not incorporate complex scheduling and routing decisions or optimization like many flexible assembly/manufacturing system simulations\cite{donath1988flexible}.
 However, it is a reasonable configuration of such a simple production system. More complex models can be implemented in the future.
 
 Introducing synthetic faults into process data is a common method for testing whether the fault detection model works \cite{able2016model}.
@@ -661,12 +661,6 @@ failures and test anomaly detection methods in a quick iteration.
 Additional research is needed to improve this benchmark simulation by using experiences from real flexible assembly systems and their modes of failure
 and respective future fault indicators. For example, continuous measurement values from temperature, acoustic and vibration sensors would be good targets
 to simulate.
-
-\section{TODO/Notes}
-
-Should we simulate a more complex assembly process with alternative assembly cells and complex scheduling also?
-
-TODO: The delays are normal distributed.
 
 \appendices
 
