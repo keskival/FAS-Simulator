@@ -61,11 +61,11 @@ Version: \today
 This paper describes a method for simulating event-oriented data sources of a flexible assembly system (FAS) including faults. Such a simulator is required for creating representative corpuses
 of data for teaching automated learning algorithms for predictive maintenance, condition monitoring and systemic fault detection.
 
-Flexible assembly system was described by Donath and Graves \cite{donath1988flexible} as a collection of flexible assembly cells connected by automatic material-handling devices.
+Flexible assembly system was described by Donath and Graves \cite{donath1988flexible} as a collection of flexible assembly cells comprising one or several work stations connected by automatic material-handling devices.
 In practise, a flexible assembly system contains parts and materials stored in an intermediate storage,
-a conveyor or crane system to move the parts, materials, intermediate assemblies and finished products between the cells, and the cells with work machines and necessary tooling
-to assemble and process intermediate assemblies and products. The cells might consist of for example manual assembly steps, and robotic assembly cells. In flexible manufacturing systems (FMS),
-the work cells might contain more complex machining and manufacturing tools like CNC lathes, or 3D printing. FAS and FMS are considered interchangeable for the purposes of this article, although
+a conveyor or crane system to move the parts, materials, intermediate assemblies and finished products between the stations, and the stations with work machines and necessary tooling
+to assemble, process or inspect intermediate assemblies and products. The stations might consist of for example manual assembly steps, and robotic assembly cells. In flexible manufacturing systems (FMS),
+the work stations might contain more complex machining and manufacturing tools like CNC lathes, or 3D printing. FAS and FMS are considered interchangeable for the purposes of this article, although
 they have different scheduling and configuration properties.
 Often the assembly sequence has multiple ways of being executed for a finished product leading to some redundancy and more efficient scheduling in terms of utilization.
 
@@ -86,7 +86,7 @@ on improving the availability and operation of deployed flexible assembly system
 Predictive maintenance in flexible assembly systems benefits from automatic indicators for immediate and potential future faults.
 It is generally not possible to enumerate all the possible fault conditions and their sensory indicators of a flexible assembly system in an exhaustive fashion,
 as the less common errors are forgotten and some faults might cause unexpected results\cite{camarinha1996integration}.
-There is a need for autonomously learning systems which are able to deduce the correct operation of the Felxible Assembly System and report potential deviances. One way to monitor a process is to observe the symbolic
+There is a need for autonomously learning systems which are able to deduce the correct operation of the flexible assembly system and report potential deviances. One way to monitor a process is to observe the symbolic
 logs generated as the process is being executed.
 
 Current predictive maintenance and condition monitoring systems concentrate on measuring device health for example by means of measuring temperature\cite{mobley2002introduction},
@@ -150,14 +150,14 @@ the whole system can exhibit modes of failure and degradation which are not dire
 Some of these might be caused by
 external factors, such as accidents and human errors, but also for example by timing issues in the whole process causing unexpected queues or traffic jams.
 
-Tool wear and tear depends on the workload. Typically tools that wear out fast, for example multiple times for one unit of work in a cell, receive much attention and such tools are generally
+Tool wear and tear depends on the workload. Typically tools that wear out fast, for example multiple times for one unit of work in a station, receive much attention and such tools are generally
 well maintained. Tools that have wear and tear but have longer life spans are more susceptible to being overlooked by operators and might have some indicators of degrading
 before a failure. Cranes, hatches and conveyors have relatively long life spans and are primarily maintained in periodic preventive maintenance. If we could get indicators
 for impending failure for these components, the periodical maintenance could be scheduled earlier to prevent downtime.
 
 In addition to these physical faults the flexible
 assembly system can suffer from human errors. Human operator can inadvertently misconfigure the flexible assembly system so that its operating mode changes unexpectedly,
-for example by disabling a cell which can lead to the system stopping without a proper failure. In addition to configuration
+for example by disabling a station which can lead to the system stopping without a proper failure. In addition to configuration
 errors, human operators might fail in manual assembly steps for example by pressing the button to mark the step
 as completed too quickly.
 The flexible assembly system might also get in incompatible materials, parts or replacement tools and fail when trying to use them.
@@ -200,7 +200,7 @@ Fault type & Unexpected faults & Potentially has an early indication & Useful ta
 \hline
 Auxilliary component wear and tear & X & X & X \\
 \hline
-Cell operation failures (feeder error, insertion error, grip error, fixture position errors) & & & \\
+Station operation failures (feeder error, insertion error, grip error, fixture position errors) & & & \\
 \hline
 Critical systemic failures (power, network, emergency stop) & X & & \\
 \hline
@@ -236,7 +236,7 @@ Equation \ref{interleaved_processes}.
 \end{equation}
 
 The interleaved process instances consist of sequences of $ m $ steps which are identical within a production batch in the simple assembly process being tested, shown in Equation \ref{identical_steps}.
-More complex assembly processes might have several alternatives for specific steps, representing multiple interchangeable cells where an unit of work can be scheduled.
+More complex assembly processes might have several alternatives for specific steps, representing multiple interchangeable stations where an unit of work can be scheduled.
 It is also possible for some processes that some assembly steps can be performed in an arbitrary order.
 The sets B and U above the arrows denote the booking/unbooking sets constraining this transition, encapsulating the scheduling dependencies between process instances.
 \begin{equation}
@@ -295,20 +295,20 @@ The overall framework sets up the simulation, that is the configuration of the p
 
 \subsection{Normal Operation of the Simulated System}
 The simulated hypothetical system assembles and tools a car transmission block loosely inspired by a Youtube video of Chrysler transmission assembly\cite{transmission}.
-The workflow consists of several manual assembly steps in separate cells and transporting the subassemblies between the cells by the means of
+The workflow consists of several manual assembly steps in separate stations and transporting the subassemblies between the stations by the means of
 cranes and conveyors. Combining separately assembled subassemblies is a common activity in flexible assembly systems\cite{el1989simulation}.
-Multiple transmission blocks are being assembled simultaneously in separate, independent cells.
+Multiple transmission blocks are being assembled simultaneously in separate, independent stations.
 
 The transmission component consists of four subassemblies. The main sequence starts from the frame of the transmission block
-and continues through several manual steps done in separate cells. The steps of the main sequence are given in
+and continues through several manual steps done in separate stations. The steps of the main sequence are given in
 the Tables \ref{mainsteps1} and \ref{mainsteps2}.
 Each step contains a separate sequence of events and associated log messages defined in the tables. The log messages include the component which logged the event, but
 not the process instance.
 The durations vary in normal distribution. The durations for manual steps in normal operation have a standard deviation of five percent of the mean. The durations for automatic steps
 have a standard deviation of one percent of the mean. Durations are clipped to be non-negative.
 
-The production frequency of the transmission blocks depends on the slowest step as in this case there is only one cell for one step and no
-parallel work is possible within one cell. The slowest step takes about 76 seconds. In this hypothetical assembly plant, new transmission block
+The production frequency of the transmission blocks depends on the slowest step as in this case there is only one station for one step and no
+parallel work is possible within one station. The slowest step takes about 76 seconds. In this hypothetical assembly plant, new transmission block
 frames are added every 100 seconds and the final transmission blocks are being produced roughly in the same interval. This means that there
 will be at maximum roughly seven transmission blocks in different stages being produced at the same time.
 
@@ -326,31 +326,31 @@ Step & Description & Duration & Log messages \\
 \hline
 2 & Manual inspection & 37 s & OK pressed, queue alarm \\
 \hline
-3 & Conveyor & 30 s & To cell, stop, to next cell \\
+3 & Conveyor & 30 s & To station, stop, to next station \\
 \hline
 4 & Bowl feeder gives components & 5 s & Given \\
 \hline
 5 & Add components & 21 s & OK pressed, queue alarm \\
 \hline
-6 & Conveyor & 30 s & To cell, stop, to next cell \\
+6 & Conveyor & 30 s & To station, stop, to next station \\
 \hline
 7 & Bowl feeder gives components & 10 s & Given \\
 \hline
 8 & Add components & 34 s & OK pressed, queue alarm \\
 \hline
-9 & Conveyor & 30 s & To cell, stop, to next cell \\
+9 & Conveyor & 30 s & To station, stop, to next station \\
 \hline
 10 & Crane with subassembly A & 10 s & Going forward, stopping, going back, stopping \\
 \hline
 11 & Combine with subassembly A & 34 s & OK pressed, queue alarm \\
 \hline
-12 & Conveyor & 30 s & To cell, stop, to next cell \\
+12 & Conveyor & 30 s & To station, stop, to next station \\
 \hline
-13 & Conveyor with subassembly B & 10 s & To cell, stop \\
+13 & Conveyor with subassembly B & 10 s & To station, stop \\
 \hline
 14 & Combine with subassembly B & 35 s & OK pressed, queue alarm \\
 \hline
-15 & Conveyor & 30 s & To cell, stop, to next cell \\
+15 & Conveyor & 30 s & To station, stop, to next station \\
 \hline
 16 & Bowl feeder gives components & 5 s & Given \\
 \hline
@@ -367,31 +367,31 @@ Step & Description & Duration & Log messages \\
 Step & Description & Duration & Log messages \\
 \hline
 \hline
-17 & Conveyor with cover & 10 s & To cell, stop \\
+17 & Conveyor with cover & 10 s & To station, stop \\
 \hline
 18 & Add cover and bolts & 76 s & OK pressed, queue alarm \\
 \hline
-19 & Conveyor & 30 s & To cell, stop, to next cell \\
+19 & Conveyor & 30 s & To station, stop, to next station \\
 \hline
 20 & Tighten the bolts & 28 s & OK pressed, queue alarm \\
 \hline
-21 & Conveyor & 30 s & To cell, stop, to next cell \\
+21 & Conveyor & 30 s & To station, stop, to next station \\
 \hline
-22 & Conveyor with subassembly C & 10 s & To cell, stop \\
+22 & Conveyor with subassembly C & 10 s & To station, stop \\
 \hline
 23 & Combine with subassembly C & 60 s & OK pressed, queue alarm \\
 \hline
-24 & Conveyor & 21 s & To cell, stop, to next cell \\
+24 & Conveyor & 21 s & To station, stop, to next station \\
 \hline
 25 & Tighten the bolts & 16 s & OK pressed, queue alarm \\
 \hline
-26 & Conveyor & 21 s & To cell, stop, to next cell \\
+26 & Conveyor & 21 s & To station, stop, to next station \\
 \hline
 27 & Bowl feeder gives components & 5 s & Given \\
 \hline
 28 & Add components & 11 s & OK pressed, queue alarm \\
 \hline
-29 & Conveyor & 21 s & To cell, stop, to next cell \\
+29 & Conveyor & 21 s & To station, stop, to next station \\
 \hline
 30 & Tighten the bolts & 32 s & OK pressed, queue alarm \\
 \hline
@@ -463,7 +463,7 @@ to affect uranium enrichment centrifuges in Iran’s Natanz nuclear facility in 
 This kind of sabotage is a good target for anomaly detection, because the effects and failures they cause are unexpected and it is possible that the primary control systems
 have been disabled so they are incapable of handling faults in the normal way. For this example simulation, we disable the Crane with subassembly A by flooding it with commands
 to repeatedly transport it to the other end position. The hypothetical attacker assumes this causes the system to jam up as the products are not being transported to the next
-assembly cells. The attacker also assumes that this does not trigger a fault code as the crane is technically functioning perfectly.
+assembly stations. The attacker also assumes that this does not trigger a fault code as the crane is technically functioning perfectly.
 
 While the directly visible fault modes are easier to model and characterise, complex flexible assembly systems also have warnings and trace messages
 which are signalled into logs, but are not signalled to operators in real time because most of the time these messages are not a cause for concern.
