@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 from modules.crane import Crane
 from modules.manual_step import ManualStep

@@ -1,4 +1,3 @@
-#!/usr/bin/python
 import simpy
 from modules.random_delay import delay
 
@@ -11,12 +10,17 @@ class Conveyor(simpy.Resource):
         self.logger = logger
         self.name = name
         self.env = env
+        self.faults = []
+    def add_fault(self, fault):
+        self.faults.append(fault)
     def process(self):
         with self.request() as req:
             yield req
             print(self.name + ": input")
             self.logger.addMessage(self.name + " CONVEYOR GATE");
             yield self.env.timeout(delay(self.duration, 1))
+            for fault in self.faults:
+                yield fault.spawn()
         print(self.name + ": to_next_step")
         return
 

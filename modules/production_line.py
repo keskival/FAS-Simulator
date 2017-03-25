@@ -1,4 +1,3 @@
-#!/usr/bin/python
 import simpy
 from modules.random_delay import delay
 

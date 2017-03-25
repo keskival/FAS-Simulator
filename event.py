@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 class Event:
     """ An event. """
     def __init__(self, timestamp, callback):

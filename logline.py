@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 class LogLine:
     """ A class that represent log lines. """
     def __init__(self, timestamp, msgtype, metadata):

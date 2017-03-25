@@ -31,14 +31,12 @@ for i in range(0, 20):
     fas_instance = FASInstance(env, production_line, logger)
     done = fas_instance.spawn()
 
-clock.spawn()
 env.run(done)
 
 for j in range(0, 50):
     fas_instance = FASInstance(env, production_line, logger)
     done = fas_instance.spawn()
 
-clock.spawn()
 env.run(done)
 
 print("Done.")

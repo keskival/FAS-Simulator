@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 from logline import LogLine
 
 class Logger:

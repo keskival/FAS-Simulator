@@ -1,4 +1,3 @@
-#!/usr/bin/python
 import random
 from numpy.random import normal
 
