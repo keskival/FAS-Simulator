@@ -443,8 +443,10 @@ typically causing downtime. These failures cause a random delay if they happen. 
  \label{figure:retrydelays}
 \end{figure}
 
-Misconfiguration can cause different kinds of results, but here we assume some work step is skipped
-so that it is not noticed and doesn't directly prevent the subsequent steps from being executed. 
+A misconfiguration can cause different kinds of results. It is possible for example to choose an incorrect version of a Numerical Control (NC) program for a machining cell. It is also possible to
+misconfigure the required steps for a final product. Here we assume that some work step is skipped
+so that it is not noticed and doesn't directly prevent the subsequent steps from being executed. As the assembly process works exactly as configured, a traditional fault detection system comparing
+the events to the configured process would miss this kind of a problem.
 
 When there are human operators or assembly line workers in the assembly process, there are always human errors and accidents. For the purposes of this simulation we
 assume a specific assembly worker has become incapacitated for a medical reason. This is a good target for anomaly detection, because sometimes there is no specific fault code
