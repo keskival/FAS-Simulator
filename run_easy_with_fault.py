@@ -14,6 +14,9 @@ logger = Logger(env)
 
 production_line = ProductionLine(env, logger)
 
+clock = Clock(logger, env)
+clock.spawn()
+
 # Adding a fault on a timeout
 def fault():
     yield env.timeout(10000)

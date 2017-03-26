@@ -13,6 +13,9 @@ logger = Logger(env)
 
 production_line = ProductionLine(env, logger)
 
+clock = Clock(logger, env)
+clock.spawn()
+
 # Doing a couple of global repeats
 
 for i in range(0,20):
