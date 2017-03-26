@@ -8,16 +8,14 @@ class WearAndTear(simpy.Resource):
         self.t = 0
         self.env = env
         self.module = module
-        self.name = "FAULT: WEAR_AND_TEAR"
 
     def process(self):
         with self.request() as req:
             yield req
             self.t = self.t + 1
-            print("WearAndTear")
+            print("FAULT: WEAR_AND_TEAR")
             delay_factor = (exp(self.t/5.0) - 1 ) / 30
             yield self.env.timeout(self.add_delay(self.module.duration, delay_factor), 1)
-        print(self.name + ": to_next_step")
         return
 
     def add_delay(self, delay, delay_factor):
