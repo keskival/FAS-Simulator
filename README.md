@@ -11,7 +11,7 @@ It contains several pre-configured scripts for different kinds of production run
 Example: Running a simple simulation with a simulated wear and tear fault:
 `./run_easy_with_fault.py`
 
-Running the simulations produces output to the STDOUT, but the actual output is written as JSON to `output.json`.
+Running the simulations produces output to the STDOUT, but the actual output is written as JSON to [output.json](https://github.com/keskival/FAS-Simulator/blob/master/output.json).
 
 The output contains a sequence of events with timestamps.
 
