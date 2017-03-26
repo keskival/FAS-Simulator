@@ -3,6 +3,7 @@
 import simpy
 from modules.production_line import ProductionLine
 from modules.fas_instance import FASInstance
+from modules.clock import Clock
 
 from logger import Logger
 
@@ -80,9 +81,9 @@ for i in range(0,20):
         env.step()
     
     fas_instance = FASInstance(env, production_line, logger)
-    fas_instance.spawn()
+    last_item = fas_instance.spawn()
     
-    env.run()
+    env.run(last_item)
 
 print("Done.")
 

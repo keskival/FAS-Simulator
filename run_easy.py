@@ -3,6 +3,7 @@
 import simpy
 from modules.production_line import ProductionLine
 from modules.fas_instance import FASInstance
+from modules.clock import Clock
 
 from logger import Logger
 
@@ -18,11 +19,13 @@ clock.spawn()
 
 # Putting in 30 items, waiting for them to be done.
 
+last_item = None
+
 for i in range(0, 30):
     fas_instance = FASInstance(env, production_line, logger)
-    fas_instance.spawn()
+    last_item = fas_instance.spawn()
 
-env.run()
+env.run(last_item)
 
 print("Done.")
 
