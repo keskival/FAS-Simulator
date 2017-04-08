@@ -1,10 +1,10 @@
 import simpy
-from modules.random_delay import delay
+from modules.process.random_delay import delay
 
-from modules.bowl_feeder import BowlFeeder
-from modules.conveyor import Conveyor
-from modules.crane import Crane
-from modules.manual_step import ManualStep
+from modules.components.bowl_feeder import BowlFeeder
+from modules.components.conveyor import Conveyor
+from modules.components.crane import Crane
+from modules.components.manual_step import ManualStep
 
 # Models one production line
 class ProductionLine:

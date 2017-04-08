@@ -1,5 +1,5 @@
 import simpy
-from modules.random_delay import delay
+from modules.process.random_delay import delay
 
 class Crane(simpy.Resource):
     """ This class represents the cranes. They transport one item at a time. """

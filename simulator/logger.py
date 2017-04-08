@@ -1,4 +1,4 @@
-from logline import LogLine
+from simulator.logline import LogLine
 
 class Logger:
     """ This class logs all the messages. """

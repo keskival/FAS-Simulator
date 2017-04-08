@@ -1,5 +1,5 @@
 import simpy
-from modules.random_delay import delay
+from modules.process.random_delay import delay
 
 # Models one assembly process instance
 class FASInstance:

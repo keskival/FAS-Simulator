@@ -14,12 +14,13 @@ class WearAndTear(simpy.Resource):
             yield req
             self.t = self.t + 1
             print("FAULT: WEAR_AND_TEAR")
+            # ((exp(t / 5.0) - 1) / 30 + 1)
+            # Note: The factor is zero-based so that it can be added as a separate delay.
             delay_factor = (exp(self.t/5.0) - 1 ) / 30
             yield self.env.timeout(self.add_delay(self.module.duration, delay_factor), 1)
         return
 
     def add_delay(self, delay, delay_factor):
-        # Note: The factor is zero-based so that it can be added as a separate delay.
         return delay * delay_factor
 
     def spawn(self):

@@ -1,5 +1,5 @@
 import simpy
-from modules.random_delay import delay
+from modules.process.random_delay import delay
 
 class Conveyor(simpy.Resource):
     """ This class represents the conveyors. The difference to cranes is that conveyors do not wait

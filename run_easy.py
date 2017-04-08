@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 
 import simpy
-from modules.production_line import ProductionLine
-from modules.fas_instance import FASInstance
-from modules.clock import Clock
+from modules.process.production_line import ProductionLine
+from modules.process.fas_instance import FASInstance
+from modules.components.clock import Clock
 
-from logger import Logger
+from simulator.logger import Logger
 
 # Initializing
 env = simpy.Environment()
@@ -29,6 +29,6 @@ env.run(last_item)
 
 print("Done.")
 
-f = open('output.json', 'w')
+f = open("data/output_easy.json", "w")
 f.write(logger.getLoglines())
 f.close()

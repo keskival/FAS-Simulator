@@ -1,5 +1,5 @@
 import simpy
-from modules.random_delay import delay
+from modules.process.random_delay import delay
 
 class BowlFeeder(simpy.Resource):
     """ This class represents the bowl feeders giving parts to the manual assembly steps. """
