@@ -38,6 +38,6 @@ env.run(last_item)
 
 print("Done.")
 
-f = open("output_easy_with_wear_and_tear_fault.json", "w")
+f = open("data/output_easy_with_wear_and_tear_fault.json", "w")
 f.write(logger.getLoglines())
 f.close()
