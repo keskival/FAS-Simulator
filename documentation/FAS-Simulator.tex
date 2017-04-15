@@ -564,19 +564,25 @@ in relation to improving those methods and in creating new ones.
 For the purposes of this article, we will only consider methods which are not trained based on known error conditions beforehand. Thus, the failure prediction challenge
 becomes a challenge of learning the correct operation of the system and flagging any inconsistencies and anomalies.
 
-For evaluation purposes, we will use a generated fault-free event sequence with first one complete sequence for one item only, then for 20 items simultaneously going through the system,
-and finally 50 items being assembled in the system simultaneously in the same log file. This results in a log file with a sequence of 4424 events of 36 different
+For evaluation purposes, we will use a generated fault-free event sequence with first one complete sequence for one item only, then for 30 items simultaneously going through
+the system simultaneously in the same log file. This results in a log file with a sequence of 1364 events of 36 different
 event types. A depiction of the simulated event sequence is shown in the Figure \ref{figure:events}. The tick event is prominent in the bottom.
 The first item goes through the process alone, so the events on the left side
 of the graph are in a deterministic order from the bottom to the top. However, for multiple parallel items being processed it becomes evident that the previous event doesn't in itself
 completely determine the next event.
 Some queue effects are also visible in the later parts of the sequences showing the queue alarm event at the top and resultant cumulative delay for the event index 22.
 
-For evaluating whether there is enough information in the sequence to determine some structure in the model, the sequence was visualized as grayscale pixels in Figure \ref{figure:color_vis}.
+For evaluating whether there is enough information in the sequence to determine some structure in the model, the sequence was visualized as grayscale pixels in Figure \ref{figure:output_easy}.
 If human eye can make out some structure in the sequence, then in principle it is possible for the automated algorithms to do so also. To assist the eye, the pixel colors are chosen
 from an ordered grayscale map, and the states are indexed in the order they are met in the log. It is possible to discern the three different length production batches from the image.
 For each batch there are
-a number of products assemblied which corresponds to the same number of certain production related events, although that is not immediately clear for human eye.
+a number of products assembled which corresponds to the same number of certain production related events, although that is not immediately clear for human eye. For comparison, a similar figure was
+created for situation where a simulated wear and tear fault happens in one of the conveyors, slowing its operation down slightly. Comparing the two simulations visually it is evident that the second process
+is slower in the end of the batch, featuring tick events in longer sequences.
+
+It should be noted that while this kind of wear and tear fault would also be evident from measuring the process throughput, process throughput is a function of many other variables as well,
+so in itself it is not an adequate measure of faults. A general anomaly detection system only observing event logs does not necessarily have a complete process model, but
+can still observe these kinds of deviations from expected kind of activity.
 
 Sonification is an audio display method where data is represented as non-verbal sounds. A sonification of the event log generated with timestamps and delays taken into account
 is available here\cite{PHONOZATION}. Delays bring new features into the model, and
@@ -607,9 +613,16 @@ composed of such process traces forms an equal distribution, discounting window 
 
 \begin{figure}[tb]
  \centering
- \includegraphics[width=8 cm,keepaspectratio=true]{./color_vis.eps}
+ \includegraphics[width=8 cm,keepaspectratio=true]{./output_easy.eps}
  \caption{The event sequence as grayscale pixels from left to right, top to bottom, padded in the end with zeros.}
- \label{figure:color_vis}
+ \label{figure:output_easy}
+\end{figure}
+
+\begin{figure}[tb]
+ \centering
+ \includegraphics[width=8 cm,keepaspectratio=true]{./output_easy_with_wear_and_tear_fault.eps}
+ \caption{Same as previous, but with a simulated wear and tear fault in step 15 conveyor.}
+ \label{figure:output_easy_wear_and_tear}
 \end{figure}
 
 In process mining there are several approaches in automatically extracting such models such as Alpha algorithm and its 

@@ -18,12 +18,12 @@ production_line = ProductionLine(env, logger)
 clock = Clock(logger, env)
 clock.spawn()
 
-# Adding a fault on a timeout
+# Adding a fault immediately to the CONVEYOR5
 def fault():
-    yield env.timeout(10000)
+    yield env.timeout(0)
     print("FAULT")
-    production_line.conveyor_input_subassembly_b.add_fault(
-        WearAndTear(env, production_line.conveyor_input_subassembly_b));
+    production_line.conveyor5.add_fault(
+        WearAndTear(env, production_line.conveyor5));
 env.process(fault())
 
 # Putting in 30 items, waiting for them to be done.

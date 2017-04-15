@@ -8,6 +8,8 @@ documented in the [documentation/FAS-Simulator.pdf](https://github.com/keskival/
 
 It contains several pre-configured scripts for different kinds of production runs, named: `run*.py`
 
+See Python dependencies from `dependencies.txt`. For plotting things you need Octave and epstool.
+
 Example: Running a simple simulation with a simulated wear and tear fault:
 `./run_easy_with_wear_and_tear_fault.py`
 
