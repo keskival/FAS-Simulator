@@ -128,7 +128,7 @@
 
 \begin{itemize}
 \item If we had a learning system that can learn these kinds of processes from observing the logs, it could alert us if it sees something unexpected.
-\item How can we support the design a learning system that is adept at learning process models from symbolic logs?
+\item How can we support the design of a learning system that is adept at learning process models from symbolic logs?
 \end{itemize}
 
 \end{block}
@@ -143,7 +143,7 @@
 \begin{itemize}
  \item A Discrete Event Simulator (DES) is a system which simulates a system in an event-oriented fashion.
  \item The system consists of component processes which wait and send events, and interact.
- \item The result is a sequence of events and timestamps that happened.
+ \item The simulation output is a sequence of events and timestamps.
 \end{itemize}
 
 
@@ -219,7 +219,7 @@ Wouldn't it be great if we could create a machine learning system that can obser
 
 There are some existing methods for that, but those are very limited. Current methods can only extract an explicit process model
 from logs when the process instance is identified for each event. The extracted process model is formal and definite and does not capture
-an intuitive understanding of the process, only allowed and not allowed sequences.
+an intuitive understanding of the process. The formal model only tells us which sequences are allowed and which are not allowed.
 
 Modern machine learning methods can capture intuitive understanding and approximate facts of such processes. For example, a system can observe that the new vibration sensor added is related to the process
 even if the vibration events are not matched one-to-one to a specific product.
