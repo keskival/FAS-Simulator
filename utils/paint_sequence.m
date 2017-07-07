@@ -22,7 +22,9 @@ S(x)=y;
 # returns S
 pkg load image;
 #side = ceil(sqrt(size(S)(2)))
-S_square = reshape(postpad(S, side^2), side, side)';
+width = side
+height = ceil(length(S)/width)
+S_square = reshape(postpad(S, width*height), width, height)';
 imagesc(S_square);
 colormap("gray")
 

@@ -14,10 +14,10 @@ class RetryDelay(simpy.Resource):
         with self.request() as req:
             yield req
             self.t = self.t + 1
-            print("FAULT: RETRY_DELAY")
             # (poissrnd((exp(t/5)-1)/4) * 0.2 + 1)
             # Note: The factor is zero-based so that it can be added as a separate delay.
-            delay_factor = np.random.poisson((exp(t/5)-1)/4) * 0.2)
+            delay_factor = np.random.poisson((exp(self.t/5)-1)/4) * 0.2
+            print("FAULT: RETRY_DELAY: ", delay_factor)
             yield self.env.timeout(self.add_delay(self.module.duration, delay_factor), 1)
         return
 

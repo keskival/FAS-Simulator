@@ -576,9 +576,12 @@ For evaluating whether there is enough information in the sequence to determine 
 If human eye can make out some structure in the sequence, then in principle it is possible for the automated algorithms to do so also. To assist the eye, the pixel colors are chosen
 from an ordered grayscale map, and the states are indexed in the order they are met in the log. It is possible to discern the three different length production batches from the image.
 For each batch there are
-a number of products assembled which corresponds to the same number of certain production related events, although that is not immediately clear for human eye. For comparison, a similar figure was
+a number of products assembled which corresponds to the same number of certain production related events, although that is not immediately clear for human eye.
+For comparison, Figure \ref{figure:output_easy_wear_and_tear} was
 created for situation where a simulated wear and tear fault happens in one of the conveyors, slowing its operation down slightly. Comparing the two simulations visually it is evident that the second process
 is slower in the end of the batch, featuring tick events in longer sequences.
+Similarly a retry delay fault with the bowl feeder can be seen in the Figure \ref{figure:output_easy_retry_delay}. As the retry delay affects a process step that is relatively fast, and does not 
+represent a bottleneck in the process, it does not have a significant impact to the process.
 
 It should be noted that while this kind of wear and tear fault would also be evident from measuring the process throughput, process throughput is a function of many other variables as well,
 so in itself it is not an adequate measure of faults. A general anomaly detection system only observing event logs does not necessarily have a complete process model, but
@@ -623,6 +626,13 @@ composed of such process traces forms an equal distribution, discounting window 
  \includegraphics[width=8 cm,keepaspectratio=true]{./output_easy_with_wear_and_tear_fault.eps}
  \caption{Same as previous, but with a simulated wear and tear fault in step 15 conveyor.}
  \label{figure:output_easy_wear_and_tear}
+\end{figure}
+
+\begin{figure}[tb]
+ \centering
+ \includegraphics[width=8 cm,keepaspectratio=true]{./output_easy_with_retry_delay_fault.eps}
+ \caption{Same as Figure \ref{figure:output_easy}, but with a simulated retry delay fault in step 7 bowl feeder.}
+ \label{figure:output_easy_retry_delay}
 \end{figure}
 
 In process mining there are several approaches in automatically extracting such models such as Alpha algorithm and its 
