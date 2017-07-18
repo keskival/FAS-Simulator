@@ -343,10 +343,94 @@ Product tested
 
 \vspace{3cm}
 
+\begin{alertblock}{Discrete Event Simulator}
+
+\begin{itemize}
+ \item A Discrete Event Simulator (DES) is a system which simulates a system in an event-oriented fashion.
+ \item The system consists of component processes which wait and send events, and interact.
+ \item The simulation output is a sequence of events with timestamps.
+ \item Different kinds of faults that are currently difficult to detect can be incorporated to the simulation.
+ \item We can generate a lot of logs to get statistically significant measures of the performance of different methods.
+\end{itemize}
+
+\end{alertblock}
+
+\vspace{3cm}
+
+\begin{block}{Simulator}
+
+\begin{tikzpicture}
+\begin{class}[text width=8cm]{FASInstance}{0,25}
+\operation{+  spawn()}
+\end{class}
+\begin{class}[text width=8cm]{ProductionLine}{0,20}
+\end{class}
+\begin{class}[text width=6cm]{BowlFeeder}{-15,15}
+\operation{+  spawn()}
+\end{class}
+\begin{class}[text width=6cm]{Conveyor}{-7,15}
+\operation{+  spawn()}
+\end{class}
+\begin{class}[text width=6cm]{Crane}{0,15}
+\operation{+  spawn()}
+\end{class}
+\begin{class}[text width=6cm]{Clock}{7,15}
+\operation{+  spawn()}
+\end{class}
+\begin{class}[text width=6cm]{ManualStep}{15,15}
+\operation{+  spawn()}
+\end{class}
+\begin{class}[text width=7cm]{WearAndTear}{-15,10}
+\operation{+  spawn()}
+\end{class}
+\begin{class}[text width=7cm]{Cyberattack}{-5,10}
+\operation{+  spawn()}
+\end{class}
+\begin{class}[text width=7cm]{RetryDelay}{5,10}
+\operation{+  spawn()}
+\end{class}
+\begin{class}[text width=7cm]{Accident}{15,10}
+\operation{+  spawn()}
+\end{class}
+\composition{FASInstance}{}{}{ProductionLine}
+\composition{ProductionLine}{0..*}{}{BowlFeeder}
+\composition{ProductionLine}{0..*}{}{Clock}{}
+\composition{ProductionLine}{0..*}{}{BowlFeeder}
+\composition{ProductionLine}{0..*}{}{Conveyor}
+\composition{ProductionLine}{0..*}{}{Crane}
+\composition{ProductionLine}{0..*}{}{ManualStep}
+\composition{Conveyor}{0..1}{}{WearAndTear}
+\composition{ManualStep}{0..1}{}{RetryDelay}
+\composition{ManualStep}{0..1}{}{Accident}
+\composition{Crane}{0..1}{}{Cyberattack}
+\end{tikzpicture}  
+\end{block}
+
+\vspace{10cm}
+
+\begin{block}{From Simulators to Learning Systems}
+All kinds of industrial and logistic processes create event logs. The events in these logs are created by different devices, and often we do not know
+the explicit process model of the processes that create these events.
+
+Wouldn't it be great if we could create a machine learning system that can observe these kinds of logs, and deduce the model of the process?
+
+There are some existing methods for that, but those are very limited. Current methods can only extract an explicit process model
+from logs when the process instance is identified for each event. The extracted process model is formal and definite and does not capture
+an intuitive understanding of the process. The formal model only tells us which sequences are allowed and which are not allowed.
+
+Modern machine learning methods can capture intuitive understanding and approximate facts of such processes. For example, a system can observe that the new vibration sensor added is related to the process
+even if the vibration events are not matched one-to-one to a specific product.
+\end{block}
+
+\end{column}
+\begin{column}{\sepwid}\end{column} % Empty spacer column
+
+\begin{column}{\onecolwid}
+
 \begin{alertblock}{Computer's View to the Log}
 
 \begin{itemize}
-\item As the computer does not know what events correspond to what products, the computer only sees the types of each event without knowing their meaning, like this:
+\item As the computer does not know what events correspond to what products, the computer only sees the type of each event without knowing their meaning, like this:
 \end{itemize}
 
 \begin{center}
@@ -445,90 +529,14 @@ Product tested
 }
 \end{center}
 
-\end{alertblock}
-
-\vspace{10cm}
-
-\begin{block}{From Simulators to Learning Systems}
-All kinds of industrial and logistic processes create event logs. The events in these logs are created by different devices, and often we do not know
-the explicit process model of the processes that create these events.
-
-Wouldn't it be great if we could create a machine learning system that can observe these kinds of logs, and deduce the model of the process?
-
-There are some existing methods for that, but those are very limited. Current methods can only extract an explicit process model
-from logs when the process instance is identified for each event. The extracted process model is formal and definite and does not capture
-an intuitive understanding of the process. The formal model only tells us which sequences are allowed and which are not allowed.
-
-Modern machine learning methods can capture intuitive understanding and approximate facts of such processes. For example, a system can observe that the new vibration sensor added is related to the process
-even if the vibration events are not matched one-to-one to a specific product.
-\end{block}
-
-\end{column}
-\begin{column}{\sepwid}\end{column} % Empty spacer column
-
-\begin{column}{\onecolwid}
-
-\begin{alertblock}{Discrete Event Simulator}
-
 \begin{itemize}
- \item A Discrete Event Simulator (DES) is a system which simulates a system in an event-oriented fashion.
- \item The system consists of component processes which wait and send events, and interact.
- \item The simulation output is a sequence of events and timestamps.
+\item Each color signifies a different event type.
+\item It is in principle possible for a computer to discover features of such processes so that deviations can be automatically detected once the normal process has been learned.
+\item The main challenges are related to randomness inherent in the process and random interlacing of the events in parallel processes.
+\item A formal process model is not required to detect deviations. It ís enough to discover enough features that define the general process characteristics.
 \end{itemize}
 
-
 \end{alertblock}
-
-\vspace{3cm}
-
-\begin{block}{Simulator}
-
-\begin{tikzpicture}
-\begin{class}[text width=8cm]{FASInstance}{0,25}
-\operation{+  spawn()}
-\end{class}
-\begin{class}[text width=8cm]{ProductionLine}{0,20}
-\end{class}
-\begin{class}[text width=6cm]{BowlFeeder}{-15,15}
-\operation{+  spawn()}
-\end{class}
-\begin{class}[text width=6cm]{Conveyor}{-7,15}
-\operation{+  spawn()}
-\end{class}
-\begin{class}[text width=6cm]{Crane}{0,15}
-\operation{+  spawn()}
-\end{class}
-\begin{class}[text width=6cm]{Clock}{7,15}
-\operation{+  spawn()}
-\end{class}
-\begin{class}[text width=6cm]{ManualStep}{15,15}
-\operation{+  spawn()}
-\end{class}
-\begin{class}[text width=7cm]{WearAndTear}{-15,10}
-\operation{+  spawn()}
-\end{class}
-\begin{class}[text width=7cm]{Cyberattack}{-5,10}
-\operation{+  spawn()}
-\end{class}
-\begin{class}[text width=7cm]{RetryDelay}{5,10}
-\operation{+  spawn()}
-\end{class}
-\begin{class}[text width=7cm]{Accident}{15,10}
-\operation{+  spawn()}
-\end{class}
-\composition{FASInstance}{}{}{ProductionLine}
-\composition{ProductionLine}{0..*}{}{BowlFeeder}
-\composition{ProductionLine}{0..*}{}{Clock}{}
-\composition{ProductionLine}{0..*}{}{BowlFeeder}
-\composition{ProductionLine}{0..*}{}{Conveyor}
-\composition{ProductionLine}{0..*}{}{Crane}
-\composition{ProductionLine}{0..*}{}{ManualStep}
-\composition{Conveyor}{0..1}{}{WearAndTear}
-\composition{ManualStep}{0..1}{}{RetryDelay}
-\composition{ManualStep}{0..1}{}{Accident}
-\composition{Crane}{0..1}{}{Cyberattack}
-\end{tikzpicture}  
-\end{block}
 
 
 \end{column}
