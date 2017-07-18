@@ -1,5 +1,5 @@
-
-\documentclass[final]{beamer}
+\documentclass[final,xcolor={usenames,x11names}]{beamer}
+\usepackage[usenames,x11names]{xcolor,colortbl}
 \usepackage[utf8]{inputenc}
 \usepackage{cite}
 %\usepackage[cmex10]{amsmath}
@@ -12,8 +12,10 @@
 \usepackage{mathtools}
 \hyphenation{op-tical net-works semi-conduc-tor method methods}
 \usepackage{float}
-\usepackage{beamerposter}
+\usepackage[scale=0.8]{beamerposter}
 \usetheme{confposter}
+
+\renewcommand*\rmdefault{ppl}
 
 %\ifCLASSOPTIONcompsoc
 %  \usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
@@ -50,11 +52,12 @@
 \newlength{\threecolwid}
 \setlength{\paperwidth}{48in} % A0 width: 46.8in
 \setlength{\paperheight}{36in} % A0 height: 33.1in
-\setlength{\sepwid}{0.024\paperwidth} % Separation width (white space) between columns
-\setlength{\onecolwid}{0.22\paperwidth} % Width of one column
-\setlength{\twocolwid}{0.464\paperwidth} % Width of two columns
-\setlength{\threecolwid}{0.708\paperwidth} % Width of three columns
+\setlength{\sepwid}{0.01\paperwidth} % Separation width (white space) between columns
+\setlength{\onecolwid}{0.30\paperwidth} % Width of one column
+\setlength{\twocolwid}{0.6\paperwidth} % Width of two columns
+\setlength{\threecolwid}{0.9\paperwidth} % Width of three columns
 \setlength{\topmargin}{-0.5in} % Reduce the top margin size
+\setlength{\arrayrulewidth}{2pt}
 
 %opening
 \title{FAS Simulator – Executive Summary}
@@ -93,27 +96,232 @@
 \item The process creates a log file.
 \end{itemize}
 
-{\centering
-\includegraphics[width=4 cm,keepaspectratio=true]{./log1.png}\par
+\begin{center}
+{
+\ttfamily
+\begin{tabular}{|c|}
+  \hline
+  \cellcolor{PaleTurquoise1}
+Product moved to Workplace 1
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1}
+Part A attached to Product
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1}
+Product moved to Workplace 2
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1}
+Part B attached to Product
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1}
+Product moved to Workplace 3
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1}
+Product tested
+  \\
+  \hline
+\end{tabular}
 }
+\end{center}
 
 \begin{itemize}
 \item Multiple products are going through the factory at the same time.
 \item The log becomes interlaced.
 \end{itemize}
 
-{\centering
-\includegraphics[width=4 cm,keepaspectratio=true]{./log2.png}\par
+\begin{center}
+{
+\ttfamily
+\begin{tabular}{|c|}
+  \hline
+  \cellcolor{PaleTurquoise1}
+Product moved to Workplace 1
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1}
+Part A attached to Product
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1}
+Product moved to Workplace 2
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1>wheel,1,5}
+Product moved to Workplace 1
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1>wheel,1,5}
+Part A attached to Product
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1}
+Part B attached to Product
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1}
+Product moved to Workplace 3
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1>wheel,1,5}
+Product moved to Workplace 2
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1>wheel,1,5}
+Part B attached to Product
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1}
+Product tested
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1>wheel,1,5}
+Product moved to Workplace 3
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1>wheel,1,5}
+Product tested
+  \\
+  \hline
+\end{tabular}
 }
+\end{center}
 
 \begin{itemize}
 \item The factory owner adds an internet of things vibration sensors to the equipment, to get information when the equipment is started and stopped.
+Additionally, there is a periodic clock-type event with periodic ticks unrelated to assembly.
 \item These events are mixed into the logs along with the process events.
 \end{itemize}
 
-{\centering
-\includegraphics[width=4 cm,keepaspectratio=true]{./log3.png}\par
+\begin{center}
+{
+\ttfamily
+\begin{tabular}{|c|}
+  \hline
+  \cellcolor{PaleTurquoise1}
+Product moved to Workplace 1
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1>wheel,2,5}
+Equipment 1 started
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1>wheel,4,5}
+Tick
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1>wheel,2,5}
+Equipment 1 stopped
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1}
+Part A attached to Product
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1>wheel,4,5}
+Tick
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1}
+Product moved to Workplace 2
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1>wheel,1,5}
+Product moved to Workplace 1
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1>wheel,4,5}
+Tick
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1>wheel,2,5}
+Equipment 1 started
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1>wheel,2,5}
+Equipment 1 stopped
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1>wheel,4,5}
+Tick
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1>wheel,1,5}
+Part A attached to Product
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1>wheel,2,5}
+Equipment 2 started
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1>wheel,4,5}
+Tick
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1>wheel,2,5}
+Equipment 2 stopped
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1}
+Part B attached to Product
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1}
+Product moved to Workplace 3
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1>wheel,4,5}
+Tick
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1>wheel,1,5}
+Product moved to Workplace 2
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1>wheel,2,5}
+Equipment 2 started
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1>wheel,4,5}
+Tick
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1>wheel,2,5}
+Equipment 2 stopped
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1>wheel,1,5}
+Part B attached to Product
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1>wheel,4,5}
+Tick
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1>wheel,4,5}
+Tick
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1}
+Product tested
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1>wheel,1,5}
+Product moved to Workplace 3
+  \\
+  \hline
+  \cellcolor{PaleTurquoise1>wheel,1,5}
+Product tested
+  \\
+  \hline
+\end{tabular}
 }
+\end{center}
+
 \end{alertblock}
 \end{column}
 
@@ -133,6 +341,128 @@
 
 \end{block}
 
+\vspace{3cm}
+
+\begin{alertblock}{Computer's View to the Log}
+
+\begin{itemize}
+\item As the computer does not know what events correspond to what products, the computer only sees the types of each event without knowing their meaning, like this:
+\end{itemize}
+
+\begin{center}
+{
+\ttfamily
+\begin{tabular}{|c|}
+  \hline
+  \cellcolor{PaleTurquoise2}\hspace{3cm}
+  \\
+  \hline
+  \cellcolor{PaleTurquoise2>wheel,1,11}\hspace{3cm}
+  \\
+  \hline
+  \cellcolor{PaleTurquoise2>wheel,2,11}\hspace{3cm}
+  \\
+  \hline
+  \cellcolor{PaleTurquoise2>wheel,3,11}\hspace{3cm}
+  \\
+  \hline
+  \cellcolor{PaleTurquoise2>wheel,4,11}\hspace{3cm}
+  \\
+  \hline
+  \cellcolor{PaleTurquoise2>wheel,2,11}\hspace{3cm}
+  \\
+  \hline
+  \cellcolor{PaleTurquoise2>wheel,5,11}\hspace{3cm}
+  \\
+  \hline
+  \cellcolor{PaleTurquoise2}\hspace{3cm}
+  \\
+  \hline
+  \cellcolor{PaleTurquoise2>wheel,2,11}\hspace{3cm}
+  \\
+  \hline
+  \cellcolor{PaleTurquoise2>wheel,1,11}\hspace{3cm}
+  \\
+  \hline
+  \cellcolor{PaleTurquoise2>wheel,3,11}\hspace{3cm}
+  \\
+  \hline
+  \cellcolor{PaleTurquoise2>wheel,2,11}\hspace{3cm}
+  \\
+  \hline
+  \cellcolor{PaleTurquoise2>wheel,4,11}\hspace{3cm}
+  \\
+  \hline
+  \cellcolor{PaleTurquoise2>wheel,6,11}\hspace{3cm}
+  \\
+  \hline
+  \cellcolor{PaleTurquoise2>wheel,2,11}\hspace{3cm}
+  \\
+  \hline
+  \cellcolor{PaleTurquoise2>wheel,7,11}\hspace{3cm}
+  \\
+  \hline
+  \cellcolor{PaleTurquoise2>wheel,8,11}\hspace{3cm}
+  \\
+  \hline
+  \cellcolor{PaleTurquoise2>wheel,9,11}\hspace{3cm}
+  \\
+  \hline
+  \cellcolor{PaleTurquoise2>wheel,2,11}\hspace{3cm}
+  \\
+  \hline
+  \cellcolor{PaleTurquoise2>wheel,5,11}\hspace{3cm}
+  \\
+  \hline
+  \cellcolor{PaleTurquoise2>wheel,6,11}\hspace{3cm}
+  \\
+  \hline
+  \cellcolor{PaleTurquoise2>wheel,2,11}\hspace{3cm}
+  \\
+  \hline
+  \cellcolor{PaleTurquoise2>wheel,7,11}\hspace{3cm}
+  \\
+  \hline
+  \cellcolor{PaleTurquoise2>wheel,8,11}\hspace{3cm}
+  \\
+  \hline
+  \cellcolor{PaleTurquoise2>wheel,2,11}\hspace{3cm}
+  \\
+  \hline
+  \cellcolor{PaleTurquoise2>wheel,2,11}\hspace{3cm}
+  \\
+  \hline
+  \cellcolor{PaleTurquoise2>wheel,10,11}\hspace{3cm}
+  \\
+  \hline
+  \cellcolor{PaleTurquoise2>wheel,9,11}\hspace{3cm}
+  \\
+  \hline
+  \cellcolor{PaleTurquoise2>wheel,10,11}\hspace{3cm}
+  \\
+  \hline
+\end{tabular}
+}
+\end{center}
+
+\end{alertblock}
+
+\vspace{10cm}
+
+\begin{block}{From Simulators to Learning Systems}
+All kinds of industrial and logistic processes create event logs. The events in these logs are created by different devices, and often we do not know
+the explicit process model of the processes that create these events.
+
+Wouldn't it be great if we could create a machine learning system that can observe these kinds of logs, and deduce the model of the process?
+
+There are some existing methods for that, but those are very limited. Current methods can only extract an explicit process model
+from logs when the process instance is identified for each event. The extracted process model is formal and definite and does not capture
+an intuitive understanding of the process. The formal model only tells us which sequences are allowed and which are not allowed.
+
+Modern machine learning methods can capture intuitive understanding and approximate facts of such processes. For example, a system can observe that the new vibration sensor added is related to the process
+even if the vibration events are not matched one-to-one to a specific product.
+\end{block}
+
 \end{column}
 \begin{column}{\sepwid}\end{column} % Empty spacer column
 
@@ -148,6 +478,8 @@
 
 
 \end{alertblock}
+
+\vspace{3cm}
 
 \begin{block}{Simulator}
 
@@ -205,39 +537,6 @@
 
 \end{columns}
 
-\begin{columns}[t]
-
-\begin{column}{\sepwid}\end{column} % Empty spacer column
-
-\begin{column}{\threecolwid}
-
-\begin{block}{From Simulators to Learning Systems}
-All kinds of industrial and logistic processes create event logs. The events in these logs are created by different devices, and often we do not know
-the explicit process model of the processes that create these events.
-
-Wouldn't it be great if we could create a machine learning system that can observe these kinds of logs, and deduce the model of the process?
-
-There are some existing methods for that, but those are very limited. Current methods can only extract an explicit process model
-from logs when the process instance is identified for each event. The extracted process model is formal and definite and does not capture
-an intuitive understanding of the process. The formal model only tells us which sequences are allowed and which are not allowed.
-
-Modern machine learning methods can capture intuitive understanding and approximate facts of such processes. For example, a system can observe that the new vibration sensor added is related to the process
-even if the vibration events are not matched one-to-one to a specific product.
-\end{block}
-
-
-
-\end{column}
-
-
-\begin{column}{\sepwid}\end{column} % Empty spacer column
-
-\end{columns}
 \end{frame}
-
-%\appendices
-
-%%\bibliographystyle{IEEEtran}
-%\bibliography{ExecutiveSummary}
 
 \end{document}
