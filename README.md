@@ -6,6 +6,8 @@ Licence: WTFPL
 This project includes a SimPy discrete event simulator simulating a plausible Flexible Assembly System
 documented in the [documentation/FAS-Simulator.pdf](https://github.com/keskival/FAS-Simulator/raw/master/documentation/FAS-Simulator.pdf).
 
+See Executive summary poster in: [documentation/ExecutiveSummary.pdf](https://github.com/keskival/FAS-Simulator/raw/master/documentation/ExecutiveSummary.pdf).
+
 It contains several pre-configured scripts for different kinds of production runs, named: `run*.py`
 
 See Python dependencies from `dependencies.txt`. For plotting things you need Octave and epstool.
