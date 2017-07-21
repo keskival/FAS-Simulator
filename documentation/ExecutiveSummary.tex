@@ -47,12 +47,14 @@
 \floatname{program}{Program}
 
 \newlength{\sepwid}
+\newlength{\halfcolwid}
 \newlength{\onecolwid}
 \newlength{\twocolwid}
 \newlength{\threecolwid}
 \setlength{\paperwidth}{48in} % A0 width: 46.8in
 \setlength{\paperheight}{36in} % A0 height: 33.1in
 \setlength{\sepwid}{0.01\paperwidth} % Separation width (white space) between columns
+\setlength{\halfcolwid}{0.15\paperwidth}
 \setlength{\onecolwid}{0.30\paperwidth} % Width of one column
 \setlength{\twocolwid}{0.6\paperwidth} % Width of two columns
 \setlength{\threecolwid}{0.9\paperwidth} % Width of three columns
@@ -72,7 +74,7 @@
 
 \begin{column}{\sepwid}\end{column} % Empty spacer column
 
-\begin{column}{\onecolwid}
+\begin{column}{\halfcolwid}
 
 \begin{alertblock}{Topic}
 
@@ -93,7 +95,7 @@
 }
 
 \begin{itemize}
-\item The process creates a log file.
+\item The \colorbox{PaleTurquoise1}{process} creates a log file.
 \end{itemize}
 
 \begin{center}
@@ -131,7 +133,7 @@ Product tested
 
 \begin{itemize}
 \item Multiple products are going through the factory at the same time.
-\item The log becomes interlaced.
+\item The log becomes interlaced with \colorbox{PaleTurquoise1}{process instance 1} and \colorbox{PaleTurquoise1>wheel,1,5}{process instance 2}.
 \end{itemize}
 
 \begin{center}
@@ -192,9 +194,9 @@ Product tested
 \end{center}
 
 \begin{itemize}
-\item The factory owner adds an internet of things vibration sensors to the equipment, to get information when the equipment is started and stopped.
-Additionally, there is a periodic clock-type event with periodic ticks unrelated to assembly.
-\item These events are mixed into the logs along with the process events.
+\item The factory owner adds an internet of things \colorbox{PaleTurquoise1>wheel,2,5}{vibration sensors} to the equipment, to get information when the equipment is started and stopped.
+Additionally, there is a periodic clock with \colorbox{PaleTurquoise1>wheel,4,5}{tick} events unrelated to the main assembly process.
+\item These events are mixed into the logs along with the process events. *)
 \end{itemize}
 
 \begin{center}
@@ -341,21 +343,23 @@ Product tested
 
 \end{block}
 
-\vspace{3cm}
+\vspace{6cm}
 
 \begin{alertblock}{Discrete Event Simulator}
 
 \begin{itemize}
- \item A Discrete Event Simulator (DES) is a system which simulates a system in an event-oriented fashion.
- \item The system consists of component processes which wait and send events, and interact.
+ \item A Discrete Event Simulator (DES) is a software program which simulates a system in an event-oriented fashion.
+ \item The system consists of component processes which wait and send events, and interact with each other.
  \item The simulation output is a sequence of events with timestamps.
  \item Different kinds of faults that are currently difficult to detect can be incorporated to the simulation.
  \item We can generate a lot of logs to get statistically significant measures of the performance of different methods.
+ \item FAS Simulator simulates a plausibly realistic flexible assembly system with an assembly process and several different kinds of systemic faults that are not trivially captured by standard diagnostic codes.
+ \item This simulator can be used as a benchmark for evaluating different learning systems.
 \end{itemize}
 
 \end{alertblock}
 
-\vspace{3cm}
+\vspace{2cm}
 
 \begin{block}{Simulator}
 
@@ -406,28 +410,37 @@ Product tested
 \end{tikzpicture}  
 \end{block}
 
-\vspace{10cm}
+\vspace{6cm}
 
 \begin{block}{From Simulators to Learning Systems}
 All kinds of industrial and logistic processes create event logs. The events in these logs are created by different devices, and often we do not know
 the explicit process model of the processes that create these events.
 
-Wouldn't it be great if we could create a machine learning system that can observe these kinds of logs, and deduce the model of the process?
+Wouldn't it be great if we could create a machine learning system that can observe these kinds of logs, and deduce a model of the process?
 
-There are some existing methods for that, but those are very limited. Current methods can only extract an explicit process model
-from logs when the process instance is identified for each event. The extracted process model is formal and definite and does not capture
-an intuitive understanding of the process. The formal model only tells us which sequences are allowed and which are not allowed.
+There are some existing methods for process mining, but those are too limited. Current process mining methods can only extract an explicit process model
+from logs when the process instance is identified for each event. This identification does not exist in the general case.
 
-Modern machine learning methods can capture intuitive understanding and approximate facts of such processes. For example, a system can observe that the new vibration sensor added is related to the process
-even if the vibration events are not matched one-to-one to a specific product.
+The extracted process mined model is formal and definite but does not capture
+an intuitive understanding of the process. The formal process model only tells us which sequences are valid traces through the process model and which violate the model.
+
+An explicit process model is not strictly required to detect process deviations.
+
+Modern machine learning methods can capture an intuitive understanding and higher level features of such processes. For example, a system can observe that the new vibration sensor added is related to the process
+even if the vibration events are not matched one-to-one to a specific product. A learning system can also learn the normal number of timer ticks between two observed events.
+
+Short process traces are a challenge for automatic learning methods. This kind of a simulation benchmark will work as a platform for developing interleave symmetry
+exploiting methods and potentially applying bayesian methods, one shot learning and transfer learning with immediate real world applications.
 \end{block}
 
 \end{column}
 \begin{column}{\sepwid}\end{column} % Empty spacer column
 
-\begin{column}{\onecolwid}
+\begin{column}{\halfcolwid}
 
-\begin{alertblock}{Computer's View to the Log}
+\vspace{12cm}
+
+\begin{alertblock}{*) Computer's View to the Log}
 
 \begin{itemize}
 \item As the computer does not know what events correspond to what products, the computer only sees the type of each event without knowing their meaning, like this:
@@ -532,8 +545,7 @@ even if the vibration events are not matched one-to-one to a specific product.
 \begin{itemize}
 \item Each color signifies a different event type.
 \item It is in principle possible for a computer to discover features of such processes so that deviations can be automatically detected once the normal process has been learned.
-\item The main challenges are related to randomness inherent in the process and random interlacing of the events in parallel processes.
-\item A formal process model is not required to detect deviations. It ís enough to discover enough features that define the general process characteristics.
+\item The main challenges are related to randomness inherent in the process and random interlacing of the events generated by parallel processes.
 \end{itemize}
 
 \end{alertblock}

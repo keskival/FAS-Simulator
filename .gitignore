@@ -2,5 +2,13 @@ documentation/*.aux
 documentation/*.bbl
 documentation/*.blg
 documentation/*.log
+documentation/*.nav
+documentation/*.out
+documentation/*.snm
+documentation/*.toc
 documentation/*.backup
 *.pyc
+output
+..bfg-report/
+.project
+.pydevproject
