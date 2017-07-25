@@ -8,7 +8,7 @@
 \usepackage{mathtools}
 \hyphenation{op-tical net-works semi-conduc-tor method methods}
 \usepackage{float}
-
+\usepackage{subcaption}
 
 % declare the path(s) where your graphic files are
 % \graphicspath{{../pdf/}{../jpeg/}}
@@ -284,17 +284,16 @@ slowly and roughly following an exponential curve until the failure rate becomes
 typically causing downtime. These failures cause a random delay if they happen. This characteristic delay profile is depicted in the Figure \ref{figure:retrydelays}.
 
 \begin{figure}[tb]
- \centering
- \includegraphics[width=8 cm,keepaspectratio=true]{./failure_profile.eps}
+\begin{subfigure}[h]{0.5\linewidth}
+ \includegraphics[width=7 cm,keepaspectratio=true]{./failure_profile.eps}
  \caption{A delay profile of continuous wear and tear}
  \label{figure:continuouswearandtear}
-\end{figure}
-
-\begin{figure}[tb]
- \centering
- \includegraphics[width=8 cm,keepaspectratio=true]{./retry_profile.eps}
+\end{subfigure}
+\begin{subfigure}[h]{0.5\linewidth}
+ \includegraphics[width=7 cm,keepaspectratio=true]{./retry_profile.eps}
  \caption{A characteristic delay profile of human operator retry delays}
  \label{figure:retrydelays}
+\end{subfigure}
 \end{figure}
 
 A misconfiguration can cause different kinds of results. It is possible for example to choose an incorrect version of a Numerical Control (NC) program for a machining cell. It is also possible to
@@ -455,38 +454,35 @@ For such a simple process what we have used as an example, most events occurs on
 composed of such process traces forms an equal distribution, discounting window effects.
 
 \begin{figure}[tb]
- \centering
- \includegraphics[width=8 cm,keepaspectratio=true]{./representative_log.eps}
+\begin{subfigure}[h]{0.5\linewidth}
+ \includegraphics[width=7 cm,keepaspectratio=true]{./representative_log.eps}
  \caption{A representative log of event types graphed against time index}
  \label{figure:events}
-\end{figure}
-
-\begin{figure}[tb]
- \centering
- \includegraphics[width=8 cm,keepaspectratio=true]{./detail.eps}
+\end{subfigure}
+\begin{subfigure}[h]{0.5\linewidth}
+ \includegraphics[width=7 cm,keepaspectratio=true]{./detail.eps}
  \caption{A detail of the graphed log of events. The lines connect the events in sequence, showing the indeterministic order}
  \label{figure:zoomed_events}
+\end{subfigure}
 \end{figure}
 
 \begin{figure}[tb]
- \centering
+\begin{subfigure}[h]{0.4\linewidth}
+ 
  \includegraphics[width=8 cm,keepaspectratio=true]{./output_easy.eps}
  \caption{The event sequence as grayscale pixels from left to right, top to bottom, padded in the end with zeros.}
  \label{figure:output_easy}
-\end{figure}
-
-\begin{figure}[tb]
- \centering
+\end{subfigure}
+\begin{subfigure}[h]{0.4\linewidth}
  \includegraphics[width=8 cm,keepaspectratio=true]{./output_easy_with_wear_and_tear_fault.eps}
  \caption{Same as previous, but with a simulated wear and tear fault in step 15 conveyor.}
  \label{figure:output_easy_wear_and_tear}
-\end{figure}
-
-\begin{figure}[tb]
- \centering
+\end{subfigure}
+\begin{subfigure}[h]{0.4\linewidth}
  \includegraphics[width=8 cm,keepaspectratio=true]{./output_easy_with_retry_delay_fault.eps}
  \caption{Same as Figure \ref{figure:output_easy}, but with a simulated retry delay fault in step 7 bowl feeder.}
  \label{figure:output_easy_retry_delay}
+\end{subfigure}
 \end{figure}
 
 In process mining there are several approaches in automatically extracting such models such as Alpha algorithm and its 
