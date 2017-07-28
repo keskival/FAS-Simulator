@@ -43,22 +43,21 @@ they have different scheduling and configuration properties.
 Often the assembly sequence has multiple ways of being executed for a finished product leading to some redundancy and more efficient scheduling in terms of utilization.
 
 As opposed to more specialized industrial production systems, flexible assembly systems are designed for smaller batches and greater flexibility so that the set of end products can vary more widely.
-For example, flexible assembly systems can be reconfigured more conveniently following the evolution of new versions of the end products. Flexibly assembly systems also allow for a wider range
+Flexible assembly systems can be reconfigured more conveniently following the evolution of new versions of the end products. Flexibly assembly systems also allow for a wider range
 of customization between the different end product instances of the same product. The nature of fast evolution of configurations and workflows, and varying operating conditions make
 planning maintenance more challenging.
 
 System downtime is a significant cost for flexible assembly systems. System downtime is reduced by preventive maintenance typically scheduled periodically.
 Recently Internet of Things and opening of the networked industrial system APIs have created new possibilities for predictive maintenance and systemic fault detection. Different sites with similar
 flexible automation systems have widely different environmental and workload conditions which has an impact on the wear and tear of the flexible automation system components.
-Taking different site environments and workloads into account when planning preventive maintenance cycles is non-trivial. There is a clear need to adapt maintenance based on actual
-conditions in the operation rather than by simply scheduling maintenance periodically\cite{hashemian2011state}.
-It is also important to indicate potential faults early to improve the response time of corrective action.
+There is a clear need to adapt maintenance based on actual conditions in the operation rather than by simply scheduling maintenance periodically\cite{hashemian2011state}.
+
 Going from preventive maintenance towards predictive maintenance optimizes and targets the maintenance related costs towards the activities that have best impact
 on improving the availability and operation of deployed flexible assembly systems.
 
 Predictive maintenance in flexible assembly systems benefits from automatic indicators for immediate and potential future faults.
 It is generally not possible to enumerate all the possible fault conditions and their sensory indicators of a flexible assembly system in an exhaustive fashion,
-as the rare errors are forgotten and some faults might present in an unexpected manner\cite{camarinha1996integration}.
+as the rare errors are neglected and faults can present in an unexpected manner\cite{camarinha1996integration}.
 There is a need for autonomously learning systems which are able to deduce the correct operation of the flexible assembly system and report potential deviances. One way to monitor a process is to observe the symbolic
 logs generated as the process is being executed.
 
@@ -71,14 +70,6 @@ works for message-oriented systems,
 and this solution requires sets of separate and complete traces corresponding to executions of an application\cite{mining-program-workflow-from-interleaved-traces}. Most process mining and specification mining
 solutions aim to solve the challenging task of inferring a complete process model out of the logs, even if the interleaved logs themselves might exhibit some weaker form of features
 and characteristics already useful for anomaly detection.
-
-Flexible assembly system process traces are not separable into complete and separate execution runs in the general case, because assembly process is typically continuous and
-forms a single interleaved log.
-On the other hand, delays in processing steps are mostly independent of the whole system state, and could be hypothetically used to infer structure in the interleaved log.
-There are also events unrelated to the processes, for example timer ticks. The main process events often follow stoichiometric laws in a normal operation corresponding to materials
-not being created or destroyed within the process. Stoichiometric invariance is often clearly visible when drawing a histogram of event type counts in the logs showing that specific events corresponding to certain
-assembly steps are done specific numbers of times per product, leading to counts of events for a specific event type strongly correlating with counts of other event types. If there are alternative routes of products
-through the assembly process, the correlation is more specifically between sums of counts of alternative event type which might not be as easily visible.
 
 Evaluating novel automatic methods for fault prediction requires standard benchmarks to compare these methods against. Currently there are no standard benchmarks to test
 different symbolic log anomaly detection methods and compare their performance against each other. Such standard benchmarks exist in other fields of machine learning,
@@ -112,6 +103,16 @@ are defined to mean faults and degradation of output where each of the component
 which are detected during execution of an action as a deviance of the state from the expected state are outside of the focus of this work, as these conditions are adequately detected and handled
 by existing supervision systems.
 
+Ultimately, the learning system should model the correct operation of the system and detect deviances, rather than to learn specific failure modes which might never repeat after presenting once.
+
+Flexible assembly system process traces are not separable into complete and separate execution runs in the general case, because assembly process is typically continuous and
+forms a single interleaved log.
+On the other hand, delays in processing steps are mostly independent of the whole system state, and could be hypothetically used to infer structure in the interleaved log.
+There are also events unrelated to the processes, for example timer ticks. The main process events often follow stoichiometric laws in a normal operation corresponding to materials
+not being created or destroyed within the process. Stoichiometric invariance is often clearly visible when drawing a histogram of event type counts in the logs showing that specific events corresponding to certain
+assembly steps are done specific numbers of times per product, leading to counts of events for a specific event type strongly correlating with counts of other event types. If there are alternative routes of products
+through the assembly process, the correlation is more specifically between sums of counts of alternative event type which might not be as easily visible.
+
 \section{Modes of Failures in Flexible Assembly Systems}
 
 Flexible assembly system failures are typically component failures where a failure of a single module or a component will lead to the part of the system becoming inoperational.
@@ -133,7 +134,7 @@ In addition to these physical faults the flexible
 assembly system can suffer from human errors. Human operator can inadvertently misconfigure the flexible assembly system so that its operating mode changes unexpectedly,
 for example by disabling a station which can lead to the system stopping without a proper failure. In addition to configuration
 errors, human operators might fail in manual assembly steps for example by pressing the button to mark the step
-as completed too quickly.
+as completed before the step was completed.
 The flexible assembly system might also get in incompatible materials, parts or replacement tools and fail when trying to use them.
 
 There has lately been an increase of computer crime against industrial networks as the devices and systems become more connected.
@@ -143,9 +144,7 @@ directly visible in the logs as anomalous activity.
 
 Modelling the failure events can be based on Process Failure Mode and Effects Analysis (FMEA, PFMEA) \cite{teng1996failure} methodology which produces lists of
 failure modes of components
-in an assembly and machining process, and the respective effects of failures. For the purposes of learning systems it is not required that these failure modes and their frequencies
-are perfectly realistic. However, the simulated failure modes should be expected to reasonably reflect the potentially detectable and anomalous failure modes of the process.
-Ultimately, the learning system should model the correct operation of the system and detect deviances, rather than to learn specific failure modes which might never repeat after presenting once.
+in an assembly and machining process, and the respective effects of failures.
 
 For the purposes of describing the fault types we divide system components into slowly and
 quickly degrading tools and auxilliary components. Tools are the components such as drill bits which are directly used to assemble or
@@ -195,7 +194,7 @@ Tool wear and tear for slowly degrading tools (e.g. screwdriver) & X & X & X \\
 
 The simulation consists of a realistic discrete event model of a flexible assembly system with a class of faults optionally injected into the process.
 The initial simulation is very simple and linear, and does not incorporate complex scheduling and routing decisions or optimization like many flexible assembly/manufacturing system simulations\cite{donath1988flexible}.
-However, it is a reasonable configuration of such a simple production system.
+However, it is a reasonable configuration of such a production system.
 
 Introducing synthetic faults into process data is a common method for testing whether the fault detection model works \cite{able2016model}.
 Discrete Event Systems can be conveniently
@@ -235,11 +234,11 @@ but the provided initial example is a simple sequence of mostly independent step
 The simulator is implemented in Python using Simpy discrete event simulation framework and it generates a JSON file which models the logs from the system.
 The log messages consist of a timestamp and an event type.
 
-The simulation framework consists of a scheduler that takes the next event from the event queue and applies it to the respective module. The simulated modules
+The discrete event simulation framework consists of a scheduler that takes the next event from the event queue and applies it to the respective module. The simulated modules
 execute when events are applied to them, and generate new events and immediate log entries with timestamps.
 The simulated modules have optional failure modes that affect the simulated operation of the component. Failure modes are configured to the simulated modules
-by scheduling failure activation as separate non-logged events.
-The main execution sets up the configuration of the processes, and bootstraps the events and optional failures.
+by scheduling failure activation as separate unlogged events.
+The main executable sets up the configuration of the processes, and bootstraps the events and optional failures.
 
 The simulated hypothetical system assembles and tools a car transmission block loosely inspired by a Youtube video of Chrysler transmission assembly\cite{transmission}.
 The linear workflow consists of several manual assembly steps in separate stations and transporting the subassemblies between the stations by the means of
@@ -285,12 +284,12 @@ typically causing downtime. These failures cause a random delay if they happen. 
 
 \begin{figure}[tb]
 \begin{subfigure}[h]{0.5\linewidth}
- \includegraphics[width=7 cm,keepaspectratio=true]{./failure_profile.eps}
+ \resizebox{0.95\linewidth}{!}{\input{./failure_profile.tex}}
  \caption{A delay profile of continuous wear and tear}
  \label{figure:continuouswearandtear}
 \end{subfigure}
 \begin{subfigure}[h]{0.5\linewidth}
- \includegraphics[width=7 cm,keepaspectratio=true]{./retry_profile.eps}
+ \resizebox{0.95\linewidth}{!}{\input{./retry_profile.tex}}
  \caption{A characteristic delay profile of human operator retry delays}
  \label{figure:retrydelays}
 \end{subfigure}
@@ -390,23 +389,13 @@ Mathematically, the logs generated by the FAS Simulator can be described as a se
 together.
 For simplicity we consider only sequences where the assembly line is run successfully from empty start state to empty end state without modelling delays and queues, even if those are modelled in the underlying
 simulation.
-A formal language that accepts such sequences is called shuffled language \cite{berglund2011recognizing}. These languages are context-sensitive, so modelling methods
+A formal language that accepts such sequences is called a shuffled language \cite{berglund2011recognizing}. These languages are context-sensitive, so modelling methods
 relating to regular and context-free languages are inadequate. For example Langer et al. \cite{langer2011self} showed that Angluin learner was able to learn small
 toy examples very well, but didn't work very well for a real world example of a stream of events recorded from a CAN bus of the powertrain network of an electric vehicle.
 
-FAS processes are often modelled as colored Petri nets \cite{saitou2002robust}, which require that the process instances are known for log messages
-In practice, the process instances for log messages can only be known in the process
-if the process is at least implicitly known in advance. For the general case we do not know which events correspond to which process instances, and some systemic events
-in fact might affect multiple process instances at once. As in this
-case process instances are not known, and all events are interleaved together for each process instance running concurrently, the most appropriate formal
-model in the analysis time would be a Petri Net.
-
-Automatic deinterleaving the logs and deducing the process instances for the log messages would simplify the model generators and models required
-for evaluating the allowed sequences.
-For example, if the log events contained the identifier of the product
-item under the assembly step, anomaly detection would be much easier but such detection algorithms would not generalize as well
-to new environments where such information is not available. Additionally, any system that assumes specific structure in the logs, for example that each event corresponds to
-only one specific process instance, would likely fail in real world systems where these assumptions don't apply.
+FAS processes are often modelled as colored Petri nets \cite{saitou2002robust}, where a colored token corresponds to each process instance, moving between process states at observed events.
+In the scope of this research the process instances are not known, and all events are interleaved together for each process instance running concurrently. In the absence of distinction between process instances
+and by extension the Petri net tokens, the most appropriate formal model in the analysis time would be a Petri Net.
 
 \section{Practical Evaluation}
 
@@ -419,17 +408,13 @@ becomes a challenge of learning the correct operation of the system and flagging
 
 For evaluation purposes, we will use a generated fault-free event sequence with first one complete sequence for one item only, then for 30 items simultaneously going through
 the system simultaneously in the same log file. This results in a log file with a sequence of 1364 events of 36 different
-event types. A depiction of the simulated event sequence is shown in the Figure \ref{figure:events}. The tick event is prominent in the bottom.
-The first item goes through the process alone, so the events on the left side
-of the graph are in a deterministic order from the bottom to the top. However, for multiple parallel items being processed it becomes evident that the previous event doesn't in itself
-completely determine the next event.
-Some queue effects are also visible in the later parts of the sequences showing the queue alarm event at the top and resultant cumulative delay for the event index 22.
+event types.
 
 For evaluating whether there is enough information in the sequence to determine some structure in the model, the sequence was visualized as grayscale pixels in Figure \ref{figure:output_easy}.
-If human eye can make out some structure in the sequence, then in principle it is possible for the automated algorithms to do so also. To assist the eye, the pixel colors are chosen
+The pixel colors are chosen
 from an ordered grayscale map, and the states are indexed in the order they are met in the log. It is possible to discern the three different length production batches from the image.
 For each batch there are
-a number of products assembled which corresponds to the same number of certain production related events, although that is not immediately clear for human eye.
+a number of products assembled which corresponds to the same number of certain production related events.
 For comparison, Figure \ref{figure:output_easy_wear_and_tear} was
 created for situation where a simulated wear and tear fault happens in one of the conveyors, slowing its operation down slightly. Comparing the two simulations visually it is evident that the second process
 is slower in the end of the batch, featuring tick events in longer sequences.
@@ -440,46 +425,24 @@ It should be noted that while this kind of wear and tear fault would also be evi
 so in itself it is not an adequate measure of faults. A general anomaly detection system only observing event logs does not necessarily have a complete process model, but
 can still observe these kinds of deviations from expected kind of activity.
 
-Sonification is an audio display method where data is represented as non-verbal sounds. A sonification of the event log generated with timestamps and delays taken into account
-is available here\cite{PHONOZATION}. Delays bring new features into the model, and
-we can immediately note that certain events happen practically simultaneously (as multiple log lines are generated at the same event). Also, slower tempo tells us that less is
-going on in the assembly line, and this could in principle give us a baseline for decomposing the canon-like interleaving of separate process instances from the whole.
-If a human test subject can discern between the proper operation of the assembly line from random, or anomalous operation by the event log sounds,
-then a machine could in principle be able to learn to do so also from the raw logs. It should be noted that this is not simply an exercise of deinterlacing interlaced events, because
-the process traces do have interaction through limited process resources, which presents for example as saturations in bottlenecks.
-
 We know that material balance requires that each log event strictly associated to a later part of process requires the number of requisite steps before it can be executed, and
 therefore the associated log events must be present. Analogously this relates to the principles of stoichiometry and material balance used in chemistry and industrial processes.
 For such a simple process what we have used as an example, most events occurs once and only once for each process instance, so drawing a histogram over a time window of a logged
 composed of such process traces forms an equal distribution, discounting window effects.
 
 \begin{figure}[tb]
-\begin{subfigure}[h]{0.5\linewidth}
- \includegraphics[width=7 cm,keepaspectratio=true]{./representative_log.eps}
- \caption{A representative log of event types graphed against time index}
- \label{figure:events}
-\end{subfigure}
-\begin{subfigure}[h]{0.5\linewidth}
- \includegraphics[width=7 cm,keepaspectratio=true]{./detail.eps}
- \caption{A detail of the graphed log of events. The lines connect the events in sequence, showing the indeterministic order}
- \label{figure:zoomed_events}
-\end{subfigure}
-\end{figure}
-
-\begin{figure}[tb]
 \begin{subfigure}[h]{0.4\linewidth}
- 
- \includegraphics[width=8 cm,keepaspectratio=true]{./output_easy.eps}
+ \resizebox{0.95\linewidth}{!}{\input{./output_easy.tex}}
  \caption{The event sequence as grayscale pixels from left to right, top to bottom, padded in the end with zeros.}
  \label{figure:output_easy}
 \end{subfigure}
 \begin{subfigure}[h]{0.4\linewidth}
- \includegraphics[width=8 cm,keepaspectratio=true]{./output_easy_with_wear_and_tear_fault.eps}
+ \resizebox{0.95\linewidth}{!}{\input{./output_easy_with_wear_and_tear_fault.tex}}
  \caption{Same as previous, but with a simulated wear and tear fault in step 15 conveyor.}
  \label{figure:output_easy_wear_and_tear}
 \end{subfigure}
 \begin{subfigure}[h]{0.4\linewidth}
- \includegraphics[width=8 cm,keepaspectratio=true]{./output_easy_with_retry_delay_fault.eps}
+ \resizebox{0.95\linewidth}{!}{\input{./output_easy_with_retry_delay_fault.tex}}
  \caption{Same as Figure \ref{figure:output_easy}, but with a simulated retry delay fault in step 7 bowl feeder.}
  \label{figure:output_easy_retry_delay}
 \end{subfigure}
@@ -496,8 +459,8 @@ a large number of complete runs, and would not work with a flexible assembly sys
 \section{Conclusion}
 
 This study presents a benchmark model for validating anomaly detection methods for flexible assembly systems using log structured data.
-Existing systems for predictive maintenance concentrate on measuring health of a separate devices based on typical degradation characteristics
-for such devices. They also concentrate on continuous measurement data instead of log entries.
+Existing systems for predictive maintenance concentrate on measuring health of separate devices based on typical degradation characteristics
+for such devices. They also concentrate on continuous measurement data instead of symbolic log entries.
 
 The diagnostic data for flexible assembly systems is a closely guarded secret for business reasons, but it is possible to make reasonable models
 of faults based on other analogous sources.
