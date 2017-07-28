@@ -25,11 +25,11 @@ pkg load image;
 width = side
 height = ceil(length(S)/width)
 S_square = reshape(postpad(S, width*height), width, height)';
+#Colors = rand(37, 3);
+Colors = copper(37); # 36 event types + padding.
+Colors(1,:) = [0.5 0.5 0.5]; # Gray padding for the index 0 not used in the data.
 imagesc(S_square);
-colormap("gray")
+colormap(Colors);
 
-print ("-deps", strcat(input_file, ".eps"))
-
-#Colors = rand(36, 3);
-#colormap(Colors);
-
+output_file = char(strsplit(input_file, "/")(end))
+print ("-dtex", strcat(output_file, ".eps"))
