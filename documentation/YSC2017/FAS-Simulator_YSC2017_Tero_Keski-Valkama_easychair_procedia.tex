@@ -8,7 +8,8 @@
 \usepackage{mathtools}
 \hyphenation{op-tical net-works semi-conduc-tor method methods}
 \usepackage{float}
-\usepackage{subcaption}
+\usepackage[font=scriptsize]{subcaption}
+\usepackage[font=scriptsize]{caption}
 
 % declare the path(s) where your graphic files are
 % \graphicspath{{../pdf/}{../jpeg/}}
@@ -162,6 +163,7 @@ in collected event-based logs. Early indication in this context means that the e
 The table \ref{faults} summarizes the classes of faults.
 
 \begin{table}[!t]
+\tiny
 \renewcommand{\arraystretch}{1.3}
 \caption{Table of recognized fault types in flexible assembly systems}
 \label{faults}
@@ -283,16 +285,19 @@ slowly and roughly following an exponential curve until the failure rate becomes
 typically causing downtime. These failures cause a random delay if they happen. This characteristic delay profile is depicted in the Figure \ref{figure:retrydelays}.
 
 \begin{figure}[tb]
+\tiny
 \begin{subfigure}[h]{0.5\linewidth}
- \resizebox{0.95\linewidth}{!}{\input{./failure_profile.tex}}
- \caption{A delay profile of continuous wear and tear}
+ \resizebox{\linewidth}{!}{\input{./failure_profile.tex}}
+ \caption{A delay profile of continuous wear and tear\newline}
  \label{figure:continuouswearandtear}
 \end{subfigure}
 \begin{subfigure}[h]{0.5\linewidth}
- \resizebox{0.95\linewidth}{!}{\input{./retry_profile.tex}}
+ \resizebox{\linewidth}{!}{\input{./retry_profile.tex}}
  \caption{A characteristic delay profile of human operator retry delays}
  \label{figure:retrydelays}
 \end{subfigure}
+ \caption{Delay profiles of faults.}
+ \label{figure:delayprofiles}
 \end{figure}
 
 A misconfiguration can cause different kinds of results. It is possible for example to choose an incorrect version of a Numerical Control (NC) program for a machining cell. It is also possible to
@@ -330,6 +335,7 @@ The simulated failures and their effects are listed in the table \ref{failures}.
 To have a meaningful simulation of a system under faults we only need to simulate some representative fault conditions.
 
 \begin{table}[!t]
+\tiny
 \renewcommand{\arraystretch}{1.3}
 \caption{Table of the simulated failures}
 \label{failures}
@@ -431,21 +437,23 @@ For such a simple process what we have used as an example, most events occurs on
 composed of such process traces forms an equal distribution, discounting window effects.
 
 \begin{figure}[tb]
-\begin{subfigure}[h]{0.4\linewidth}
- \resizebox{0.95\linewidth}{!}{\input{./output_easy.tex}}
- \caption{The event sequence as grayscale pixels from left to right, top to bottom, padded in the end with zeros.}
+\begin{subfigure}[h]{0.32\linewidth}
+ \resizebox{\linewidth}{!}{\input{./output_easy.tex}}
+ \caption{A normal run without faults.\newline\newline}
  \label{figure:output_easy}
 \end{subfigure}
-\begin{subfigure}[h]{0.4\linewidth}
- \resizebox{0.95\linewidth}{!}{\input{./output_easy_with_wear_and_tear_fault.tex}}
- \caption{Same as previous, but with a simulated wear and tear fault in step 15 conveyor.}
+\begin{subfigure}[h]{0.32\linewidth}
+ \resizebox{\linewidth}{!}{\input{./output_easy_with_wear_and_tear_fault.tex}}
+ \caption{The same as previous, but with a simulated wear and tear fault in step 15 conveyor.}
  \label{figure:output_easy_wear_and_tear}
 \end{subfigure}
-\begin{subfigure}[h]{0.4\linewidth}
- \resizebox{0.95\linewidth}{!}{\input{./output_easy_with_retry_delay_fault.tex}}
- \caption{Same as Figure \ref{figure:output_easy}, but with a simulated retry delay fault in step 7 bowl feeder.}
+\begin{subfigure}[h]{0.32\linewidth}
+ \resizebox{\linewidth}{!}{\input{./output_easy_with_retry_delay_fault.tex}}
+ \caption{The same as Figure \ref{figure:output_easy}, but with a simulated retry delay fault in step 7 bowl feeder.}
  \label{figure:output_easy_retry_delay}
 \end{subfigure}
+ \caption{The event sequence as grayscale pixels from left to right, top to bottom, padded in the end with gray.}
+ \label{figure:output_images}
 \end{figure}
 
 In process mining there are several approaches in automatically extracting such models such as Alpha algorithm and its 
