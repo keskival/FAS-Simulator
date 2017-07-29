@@ -3,34 +3,24 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: FAS-Simulator_YSC2017_Tero_Keski-Valkama_easychair_procedia.aux
 The style file: plain.bst
 Database file #1: FAS-Simulator_YSC2017_Tero_Keski-Valkama_easychair_procedia.bib
-I was expecting a `,' or a `}'---line 16 of file FAS-Simulator_YSC2017_Tero_Keski-Valkama_easychair_procedia.bib
+I was expecting a `,' or a `}'---line 25 of file FAS-Simulator_YSC2017_Tero_Keski-Valkama_easychair_procedia.bib
  :   
- :   year = 2016
+ :   note    = {\url{https://github.com/MetropolitanTransportationCommission/fast-trips}, last viewed July, 2017},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 23 of file FAS-Simulator_YSC2017_Tero_Keski-Valkama_easychair_procedia.bib
+I was expecting a `,' or a `}'---line 34 of file FAS-Simulator_YSC2017_Tero_Keski-Valkama_easychair_procedia.bib
  :   
- :   year = 2016
+ :   note    = {\url{https://github.com/keskival/FAS-Simulator}, last viewed July, 2017},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 31 of file FAS-Simulator_YSC2017_Tero_Keski-Valkama_easychair_procedia.bib
+I was expecting a `,' or a `}'---line 50 of file FAS-Simulator_YSC2017_Tero_Keski-Valkama_easychair_procedia.bib
  :   
- :   year = 2016
+ :   note    = {\url{https://www.linkedin.com/pulse/cybercom-team-won-industryhack-hackthefactory-fastems-keski-valkama}, last viewed July, 2017},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 46 of file FAS-Simulator_YSC2017_Tero_Keski-Valkama_easychair_procedia.bib
- :   
- :   year = 2015
-(Error may have been on previous line)
-I'm skipping whatever remains of this entry
-Repeated entry---line 272 of file FAS-Simulator_YSC2017_Tero_Keski-Valkama_easychair_procedia.bib
+Repeated entry---line 286 of file FAS-Simulator_YSC2017_Tero_Keski-Valkama_easychair_procedia.bib
  : @misc{transmission
  :                   ,
-I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 284 of file FAS-Simulator_YSC2017_Tero_Keski-Valkama_easychair_procedia.bib
- :   
- :   year = 2016
-(Error may have been on previous line)
 I'm skipping whatever remains of this entry
 Too many commas in name 1 of "Jian-Guang Lou, Qiang Fu, Shengqi Yang, Jiang Li, Bin Wu" for entry mining-program-workflow-from-interleaved-traces
 while executing---line 1049 of file plain.bst
@@ -43,16 +33,16 @@ Too many commas in name 1 of "Jian-Guang Lou, Qiang Fu, Shengqi Yang, Jiang Li, 
 while executing---line 1090 of file plain.bst
 You've used 31 entries,
             2118 wiz_defined-function locations,
-            670 strings with 9564 characters,
-and the built_in function-call counts, 10598 in all, are:
-= -- 1054
+            675 strings with 10033 characters,
+and the built_in function-call counts, 10652 in all, are:
+= -- 1066
 > -- 466
 < -- 11
 + -- 189
 - -- 154
 * -- 690
-:= -- 1695
-add.period$ -- 95
+:= -- 1707
+add.period$ -- 101
 call.type$ -- 31
 change.case$ -- 166
 chr.to.int$ -- 0
@@ -60,17 +50,17 @@ cite$ -- 32
 duplicate$ -- 419
 empty$ -- 867
 format.name$ -- 154
-if$ -- 2276
+if$ -- 2288
 int.to.chr$ -- 0
 int.to.str$ -- 31
 missing$ -- 30
-newline$ -- 152
+newline$ -- 158
 num.names$ -- 60
-pop$ -- 209
+pop$ -- 212
 preamble$ -- 1
 purify$ -- 139
 quote$ -- 0
-skip$ -- 322
+skip$ -- 313
 stack$ -- 0
 substring$ -- 654
 swap$ -- 113
@@ -81,5 +71,5 @@ type$ -- 116
 warning$ -- 1
 while$ -- 102
 width$ -- 33
-write$ -- 325
-(There were 10 error messages)
+write$ -- 337
+(There were 8 error messages)

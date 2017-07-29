@@ -4,6 +4,7 @@
 \usepackage{cite}
 \usepackage{algorithmic}
 \usepackage{array}
+\usepackage{hyperref}
 \usepackage{url}
 \usepackage{mathtools}
 \hyphenation{op-tical net-works semi-conduc-tor method methods}
@@ -28,7 +29,7 @@
 
 \maketitle
 
-\keywords{Simulation, Flexible Assembly System, Anomaly Detection}
+\keywords{Discrete Event Simulation, Flexible Assembly System, Anomaly Detection}
 
 \begin{abstract}
 We present an open source discrete event simulator, FAS Simulator, for generating interleaved process traces of Flexible Assembly Systems. The simulation includes plausible faults creating anomalies in the output.
@@ -87,7 +88,7 @@ and characteristics already useful for anomaly detection.
 
 Evaluating novel automatic methods for fault prediction requires standard benchmarks to compare these methods against. Currently there are no standard benchmarks to test
 different symbolic log anomaly detection methods and compare their performance against each other. Realistic and plausible simulations are often used\cite{jager2014assessing}\cite{FASTTRIPS} for domains where
-real data is hard to collect or where real data would be subject to business confidentiality. Training neural network and other learning systems often utilizes realistic
+real data is hard to collect or where real data would be subject to business confidentiality. Training neural networks and other learning systems often utilizes realistic
 simulations instead of real data\cite{weston2014memory}. Real measured data is often limited in both state space and in volume,
 and simulations can give better results \cite{duch2005artificial}.
 
@@ -121,8 +122,7 @@ forms a single interleaved log.
 On the other hand, delays in processing steps are mostly independent of the whole system state, and could be hypothetically used to infer structure in the interleaved log.
 There are also events unrelated to the processes, for example timer ticks. The main process events often follow stoichiometric laws in a normal operation corresponding to materials
 not being created or destroyed within the process. Stoichiometric invariance is often clearly visible when drawing a histogram of event type counts in the logs showing that specific events corresponding to certain
-assembly steps are done specific numbers of times per product, leading to counts of events for a specific event type strongly correlating with counts of other event types. If there are alternative routes of products
-through the assembly process, the correlation is more specifically between sums of counts of alternative event type which might not be as easily visible.
+assembly steps are done specific numbers of times per product, leading to counts of events for a specific event type strongly correlating with counts of other event types.
 
 \section{Modes of Failures in Flexible Assembly Systems}
 
@@ -151,24 +151,14 @@ The flexible assembly system might also get in incompatible materials, parts or 
 There has lately been an increase of computer crime against industrial networks as the devices and systems become more connected.
 Nation states execute industrial espionage and even sabotage against each other\cite{stuxnet}. An electronic sabotage attack might present itself
 much like a human misconfiguration error, and would be potentially detected in a similar fashion even if the attack itself would not be
-directly visible in the logs as anomalous activity.
+directly visible in the logs to intrusion detection systems.
 
 For the purposes of describing the fault types we divide system components into slowly and
 quickly degrading tools and auxilliary components. Tools are the components such as drill bits which are directly used to assemble or
 machine the product. The auxilliary components are components with less expected wear and tear which are used to transport the products,
 inspect the intermediate assemblies or dispense assembly components.
 
-The fault types and distribution depend on the assembly system
-and on the products being assembled. For one
-specific assembly line \cite{cong1997fault} the common fault types were feeder errors, robot insertion errors,
-robot grip errors, unqualified parts, fixture position errors, emergency stops, robot gripper collision,
-grip sensor line break, and inspection equipment failures. The root causes for these are wear and tear, and incompatible parts.
-
-For useful anomaly detection systems we need to concentrate on faults that are unexpected without pre-existing diagnostic error codes, and that potentially have early indications
-in collected event-based logs. Early indication in this context means that the error can be detected in the system logs before the failure becomes otherwise evident.
-The Table \ref{faults} summarizes the classes of faults.
-
-\begin{table}[!t]
+\begin{table}[bt]
 \tiny
 \renewcommand{\arraystretch}{1.3}
 \caption{Table of recognized fault types in flexible assembly systems}
@@ -198,13 +188,26 @@ Tool wear and tear for slowly degrading tools (e.g. screwdriver) & X & X & X \\
 \end{tabular}
 \end{table}
 
+The fault types and distribution depend on the assembly system
+and on the products being assembled. For one
+specific assembly line \cite{cong1997fault} the common fault types were feeder errors, robot insertion errors,
+robot grip errors, unqualified parts, fixture position errors, emergency stops, robot gripper collision,
+grip sensor line break, and inspection equipment failures. The root causes for these are wear and tear, and incompatible parts.
+
+For useful anomaly detection systems we need to concentrate on faults that are unexpected without pre-existing diagnostic error codes, and that potentially have early indications
+in collected event-based logs. Early indication in this context means that the error can be detected in the system logs before the failure becomes otherwise evident.
+The Table \ref{faults} summarizes the classes of faults and their respective potential for anomaly detection.
+
 \section{Flexible Assembly System Model}
 
-The simulation consists of a realistic discrete event model of a flexible assembly system with a class of faults optionally injected into the process.
+The simulation consists of a realistic discrete event model of a flexible assembly system with faults optionally injected into the process.
 The initial simulation is very simple and linear, and does not incorporate complex scheduling and routing decisions or optimization like many flexible assembly/manufacturing system simulations\cite{donath1988flexible}.
-However, it is a reasonable configuration of such a production system.
+However, it is a reasonable configuration of such a production system. Introducing synthetic faults into process data is a common method for testing whether the fault detection model works \cite{able2016model}.
 
-Introducing synthetic faults into process data is a common method for testing whether the fault detection model works \cite{able2016model}.
+FAS processes are often modelled as colored Petri nets \cite{saitou2002robust}, where a colored token corresponds to each process instance, moving between process states at observed events.
+In the scope of this research the process instances are not known, and all events are interleaved together for each process instance running concurrently. In the absence of distinction between process instances
+and by extension the Petri net tokens, the most appropriate formal model is a Petri Net.
+
 Discrete Event Systems can be conveniently
 described using Mixed Process Algebra Petri Nets (MPPN)\cite{falkman2001modeling}. In the following description we augment the MPPN with intervals between state transitions,
 because event intervals are important information for deinterleaving the process traces.
@@ -240,15 +243,6 @@ A formal language that accepts such sequences is called a shuffled language \cit
 relating to regular and context-free languages are inadequate. For example Langer et al. \cite{langer2011self} showed that Angluin learner was able to learn small
 toy examples very well, but didn't work very well for a real world example of a stream of events recorded from a CAN bus of the powertrain network of an electric vehicle.
 
-FAS processes are often modelled as colored Petri nets \cite{saitou2002robust}, where a colored token corresponds to each process instance, moving between process states at observed events.
-In the scope of this research the process instances are not known, and all events are interleaved together for each process instance running concurrently. In the absence of distinction between process instances
-and by extension the Petri net tokens, the most appropriate formal model is a Petri Net.
-
-Symbolic process logs are generated by running the simulation.
-The simulation is not fully deterministic and contains soft faults which do not immediately affect operation.
-Flexible assembly system scheduling and production optimization is an active research field. Different scheduling models can be implemented into the simulation,
-but the provided initial example is a simple sequence of mostly independent steps.
-
 The simulator is implemented in Python using Simpy discrete event simulation framework and it generates a JSON file which models the logs from the system.
 The log messages consist of a timestamp and an event type.
 
@@ -256,11 +250,11 @@ The discrete event simulation framework consists of a scheduler that takes the n
 execute when events are applied to them, and generate new events and immediate log entries with timestamps.
 The simulated modules have optional failure modes that affect the simulated operation of the component. Failure modes are configured to the simulated modules
 by scheduling failure activation as separate unlogged events.
-The main executable sets up the configuration of the processes, and bootstraps the events and optional failures.
+The main executable sets up the configuration of the processes, and bootstraps the events and optional faults.
 
 The simulated hypothetical system assembles and tools a car transmission block loosely inspired by a Youtube video of Chrysler transmission assembly\cite{transmission}.
 The linear workflow consists of several manual assembly steps in separate stations and transporting the subassemblies between the stations by the means of
-cranes and conveyors. Multiple transmission blocks in different stages of assembly are being assembled simultaneously in separate, independent stations.
+cranes and conveyors. Multiple transmission blocks in different stages of assembly are being assembled simultaneously in different stations.
 
 The main sequence starts from the frame of the transmission block
 and continues through several manual steps done in separate stations. The steps of the main sequence are given in the software documentation\cite{FASSimulator}.
@@ -301,10 +295,9 @@ slowly and roughly following an exponential curve. This characteristic delay pro
  \label{figure:delayprofiles}
 \end{figure}
 
-The simulated failures and their effects are listed in the Table \ref{failures}.
-To have a meaningful simulation of a system under faults we only need to simulate some representative fault conditions.
+The simulated failures and their effects are listed in the Table \ref{failures}. To have a meaningful simulation of a system under faults we only need to simulate some representative fault conditions.
 
-\begin{table}[!t]
+\begin{table}[tb]
 \tiny
 \renewcommand{\arraystretch}{1.3}
 \caption{Table of the simulated failures}
@@ -338,7 +331,7 @@ is done simply by triggering the global process inputs as required, causing sequ
 parallel processes that share the resources in the simulated assembly plant.
 
 Several specific simulation runs are pre-defined for the purposes of benchmarking
-different modelling approaches. These pre-defined simulations vary in complexity and length from trivial one item at a time sequences to complex multiple items at once simulations.
+different modelling approaches.
 Each type of simulation can also be configured to fail in specific ways to test different failure detection approaches.
 
 In addition to the events related to specific process traces, there is an event for an alarm if the queue waiting for a manual process is larger than five items. Also, there is

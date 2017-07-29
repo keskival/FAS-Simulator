@@ -5,16 +5,14 @@
   year    = {2015},
   volume  = {16},
   pages   = {547-551},
-  url     = {http://jmlr.org/papers/v16/weninger15a.html},
-  note    = {\url{http://jmlr.org/papers/v16/weninger15a.html}, last viewed July, 2017}
+  url     = {http://jmlr.org/papers/v16/weninger15a.html}
 }
 
 @misc{CURRENNTFORK,
   added-at = {2016-07-23},
   author = {Tero Keski-Valkama},
   title = {A fork of {CURRENNT} to make it run against the latest {CUDA} toolkit},
-  url = {https://github.com/keskival/currennt},
-  note    = {\url{https://github.com/keskival/currennt}, last viewed July, 2017},
+  url = {https://github.com/keskival/currennt}
   year = 2016
 }
 @misc{FASTTRIPS,
@@ -22,7 +20,6 @@
   author = {The Bay Area's Metropolitan Planning Organization},
   title = {FAST-TrIPs simulation tool for metropolitan transportation},
   url = {https://github.com/MetropolitanTransportationCommission/fast-trips}
-  note    = {\url{https://github.com/MetropolitanTransportationCommission/fast-trips}, last viewed July, 2017},
   year = 2016
 }
 
@@ -31,7 +28,6 @@
   title = {Flexible assembly simulation: {FAS Simulator}},
   author = {Tero Keski-Valkama},
   url = {https://github.com/keskival/FAS-Simulator}
-  note    = {\url{https://github.com/keskival/FAS-Simulator}, last viewed July, 2017},
   year = 2016
 }
 @article{LSTM,
@@ -47,7 +43,6 @@
   author = {Tero Keski-Valkama},
   title = "Cybercom Team Won the \#{IndustryHack} \#{HackTheFactory} \@{Fastems} - {Summary}",
   url = {https://www.linkedin.com/pulse/cybercom-team-won-industryhack-hackthefactory-fastems-keski-valkama}
-  note    = {\url{https://www.linkedin.com/pulse/cybercom-team-won-industryhack-hackthefactory-fastems-keski-valkama}, last viewed July, 2017},
   year = 2015
 }
 @article{langer2011self,
@@ -88,7 +83,6 @@
   URL = { 
         http://dx.doi.org/10.1108/01445151311306690
   },
-  note    = {\url{http://dx.doi.org/10.1108/01445151311306690}, last viewed July, 2017},
   eprint = { 
         http://dx.doi.org/10.1108/01445151311306690
   },
@@ -124,7 +118,6 @@
   timestamp = {2012-04-25T14:48:25.000+0200},
   title = {{MNIST} handwritten digit database},
   url = {http://yann.lecun.com/exdb/mnist/},
-  note    = {\url{http://yann.lecun.com/exdb/mnist/}, last viewed July, 2017},
   username = {mhwombat},
   year = 2010
 }
@@ -133,7 +126,6 @@
   author = {Cars},
   title = {Chrysler Transmission Assembly Line},
   url = {https://www.youtube.com/watch?v=447sSED91v0},
-  note    = {\url{https://www.youtube.com/watch?v=447sSED91v0}, last viewed July, 2017},
   year = 2014
 }
 @article{fatigue,
@@ -148,7 +140,6 @@
   URL = { 
         http://dx.doi.org/10.1080/10447319409526082
   },
-  note    = {\url{http://dx.doi.org/10.1080/10447319409526082}, last viewed July, 2017},
   eprint = { 
         http://dx.doi.org/10.1080/10447319409526082
   }
@@ -177,19 +168,16 @@
   journal={IEEE Spectrum},
   year=2013,
   publisher={IEEE Spectrum},
-  url={http://spectrum.ieee.org/telecom/security/the-real-story-of-stuxnet},
-  note    = {\url{http://spectrum.ieee.org/telecom/security/the-real-story-of-stuxnet}, last viewed July, 2017}
+  url={http://spectrum.ieee.org/telecom/security/the-real-story-of-stuxnet}
 }
 @misc{nasaames,
   title={NASA Ames Prognostics Center of Excellence - Data Repository},
-  url={http://ti.arc.nasa.gov/tech/dash/pcoe/prognostic-data-repository/},
-  note    = {\url{http://ti.arc.nasa.gov/tech/dash/pcoe/prognostic-data-repository/}, last viewed July, 2017}
+  url={http://ti.arc.nasa.gov/tech/dash/pcoe/prognostic-data-repository/}
 }
 @misc{milldataset,
   title={Documentation for Mill Data Set},
   author={Goebel, Kai and Agogino, Alice},
-  url={http://ti.arc.nasa.gov/tech/dash/pcoe/prognostic-data-repository/},
-  note    = {\url{http://ti.arc.nasa.gov/tech/dash/pcoe/prognostic-data-repository/}, last viewed July, 2017}
+  url={http://ti.arc.nasa.gov/tech/dash/pcoe/prognostic-data-repository/}
 }
 @article{eker2012major,
   title={Major challenges in prognostics: Study on benchmarking prognostics datasets},
@@ -209,7 +197,6 @@
   timestamp = {2012-04-25T14:48:25.000+0200},
   title = {{MNIST} handwritten digit database},
   url = {http://yann.lecun.com/exdb/mnist/},
-  note    = {\url{http://yann.lecun.com/exdb/mnist/}, last viewed July, 2017},
   username = {mhwombat},
   year = 2010
 }
@@ -221,23 +208,22 @@
   pages={378}
 }
 @article{Angluin,
-  author = {Angluin, Dana},
-  title = {Learning Regular Sets from Queries and Counterexamples},
-  journal = {Inf. Comput.},
-  issue_date = {November 1, 1987},
-  volume = {75},
-  number = {2},
-  month = nov,
-  year = {1987},
-  issn = {0890-5401},
-  pages = {87--106},
-  numpages = {20},
-  url = {http://dx.doi.org/10.1016/0890-5401(87)90052-6},
-  note    = {\url{http://dx.doi.org/10.1016/0890-5401(87)90052-6}, last viewed July, 2017},
-  doi = {10.1016/0890-5401(87)90052-6},
-  acmid = {36889},
-  publisher = {Academic Press, Inc.},
-  address = {Duluth, MN, USA},
+ author = {Angluin, Dana},
+ title = {Learning Regular Sets from Queries and Counterexamples},
+ journal = {Inf. Comput.},
+ issue_date = {November 1, 1987},
+ volume = {75},
+ number = {2},
+ month = nov,
+ year = {1987},
+ issn = {0890-5401},
+ pages = {87--106},
+ numpages = {20},
+ url = {http://dx.doi.org/10.1016/0890-5401(87)90052-6},
+ doi = {10.1016/0890-5401(87)90052-6},
+ acmid = {36889},
+ publisher = {Academic Press, Inc.},
+ address = {Duluth, MN, USA},
 } 
 @incollection{berglund2011recognizing,
   title={Recognizing shuffled languages},
@@ -288,15 +274,13 @@
   author = {Cars},
   title = {Chrysler Transmission Assembly Line},
   url = {https://www.youtube.com/watch?v=447sSED91v0},
-  note    = {\url{https://www.youtube.com/watch?v=447sSED91v0}, last viewed July, 2017},
   year = 2014
 }
 @misc{PHONOZATION,
   added-at = {2016-01-24},
   author = {Tero Keski-Valkama},
   title = {A visualization animation of a simulated FAS event log with sound.},
-  url = {https://www.youtube.com/watch?v=9oVP05pi4QI},
-  note    = {\url{https://www.youtube.com/watch?v=9oVP05pi4QI}, last viewed July, 2017},
+  url = {https://www.youtube.com/watch?v=9oVP05pi4QI}
   year = 2016
 }
 @inproceedings{cong1997fault,
@@ -421,7 +405,6 @@ month = {July},
 abstract = {Successful software maintenance is becoming increasingly critical due to the increasing dependence of our society and economy on software systems. One key problem of software maintenance is the difficulty in understanding the evolving software systems. Program workflows can help system operators and administrators to understand system behaviors and verify system executions so as to greatly facilitate system maintenance. In this paper, we propose an algorithm to automatically discover program workflows from event traces that record system events during system execution. Different from existing workflow mining algorithms, our approach can construct concurrent workflows from traces of interleaved events. Our workflow mining approach is a three-step coarse-to-fine algorithm. At first, we mine temporal dependencies for each pair of events. Then, based on the mined pair-wise temporal dependencies, we construct a basic workflow model by a breadth-first path pruning algorithm. After that, we refine the workflow by verifying it with all training event traces. The refinement algorithm tries to find out a workflow that can interpret all event traces with minimal state transitions and threads. The results of both simulation data and real program data show that our algorithm is highly effective.},
 publisher = {Association for Computing Machinery, Inc.},
 url = {https://www.microsoft.com/en-us/research/publication/mining-program-workflow-from-interleaved-traces/},
-  note    = {\url{https://www.microsoft.com/en-us/research/publication/mining-program-workflow-from-interleaved-traces/}, last viewed July, 2017},
 address = {},
 pages = {},
 journal = {},

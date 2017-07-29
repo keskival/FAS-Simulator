@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2017.5.28)  29 JUL 2017 17:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2017.5.28)  29 JUL 2017 17:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -792,20 +792,20 @@ Package caption Info: listings package is loaded.
 (./FAS-Simulator_YSC2017_Tero_Keski-Valkama_easychair_procedia.aux)
 \openout1 = `FAS-Simulator_YSC2017_Tero_Keski-Valkama_easychair_procedia.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -876,9 +876,9 @@ e
 
 Package lastpage Info: Please have a look at the pageslts package at
 (lastpage)             https://www.ctan.org/pkg/pageslts
-(lastpage)             ! on input line 27.
+(lastpage)             ! on input line 28.
 \AtBeginShipoutBox=\box35
-Package hyperref Info: Link coloring OFF on input line 27.
+Package hyperref Info: Link coloring OFF on input line 28.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 
@@ -887,9 +887,9 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count149
 )
-LaTeX Info: Redefining \ref on input line 27.
-LaTeX Info: Redefining \pageref on input line 27.
-LaTeX Info: Redefining \nameref on input line 27.
+LaTeX Info: Redefining \ref on input line 28.
+LaTeX Info: Redefining \pageref on input line 28.
+LaTeX Info: Redefining \nameref on input line 28.
 
 (./FAS-Simulator_YSC2017_Tero_Keski-Valkama_easychair_procedia.out)
 (./FAS-Simulator_YSC2017_Tero_Keski-Valkama_easychair_procedia.out)
@@ -899,31 +899,31 @@ LaTeX Info: Redefining \nameref on input line 27.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 
-Underfull \hbox (badness 10000) in paragraph at lines 30--30
+Underfull \hbox (badness 10000) in paragraph at lines 31--31
 
  []
 
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
-Underfull \vbox (badness 1014) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [3]
-LaTeX Font Info:    Try loading font information for U+lasy on input line 177.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 167.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-Underfull \hbox (badness 10000) in paragraph at lines 179--180
+Underfull \hbox (badness 10000) in paragraph at lines 169--170
 []|\OT1/cmr/m/n/5 Useful tar-get for
  []
 
 
-Underfull \hbox (badness 3826) in paragraph at lines 186--186
+Underfull \hbox (badness 3826) in paragraph at lines 176--176
 []|\OT1/cmr/m/n/5 Critical sys-temic fail-ures (power, net-work,
  []
 
-[4]
+[4] [5]
 Package epstopdf Info: Source file: <./general_resource_model.eps>
 (epstopdf)                    date: 2017-07-29 16:06:24
 (epstopdf)                    size: 30590 bytes
@@ -933,17 +933,17 @@ pdf>
 (epstopdf)                    size: 8235 bytes
 (epstopdf)             Command: <repstopdf --outfile=./general_resource_model-e
 ps-converted-to.pdf ./general_resource_model.eps>
-(epstopdf)             \includegraphics on input line 233.
+(epstopdf)             \includegraphics on input line 236.
 Package epstopdf Info: Output file is already uptodate.
 
-<./general_resource_model-eps-converted-to.pdf, id=106, 945.5325pt x 714.67pt>
+<./general_resource_model-eps-converted-to.pdf, id=122, 945.5325pt x 714.67pt>
 File: ./general_resource_model-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./general_resource_model-eps-converted-to.pdf>
 Package pdftex.def Info: ./general_resource_model-eps-converted-to.pdf used on 
-input line 233.
+input line 236.
 (pdftex.def)             Requested size: 113.81102pt x 86.01842pt.
- [5] [6 <./general_resource_model-eps-converted-to.pdf>] (./failure_profile.tex
+ [6 <./general_resource_model-eps-converted-to.pdf>] (./failure_profile.tex
 Package epstopdf Info: Source file: <failure_profile-inc.eps>
 (epstopdf)                    date: 2017-07-29 16:05:29
 (epstopdf)                    size: 9123 bytes
@@ -955,7 +955,7 @@ nverted-to.pdf failure_profile-inc.eps>
 (epstopdf)             \includegraphics on input line 7.
 Package epstopdf Info: Output file is already uptodate.
 
-<failure_profile-inc-eps-converted-to.pdf, id=151, 578.16pt x 434.62375pt>
+<failure_profile-inc-eps-converted-to.pdf, id=153, 578.16pt x 434.62375pt>
 File: failure_profile-inc-eps-converted-to.pdf Graphic file (type pdf)
 
 <use failure_profile-inc-eps-converted-to.pdf>
@@ -974,7 +974,7 @@ erted-to.pdf retry_profile-inc.eps>
 (epstopdf)             \includegraphics on input line 7.
 Package epstopdf Info: Output file is already uptodate.
 
-<retry_profile-inc-eps-converted-to.pdf, id=152, 578.16pt x 434.62375pt>
+<retry_profile-inc-eps-converted-to.pdf, id=154, 578.16pt x 434.62375pt>
 File: retry_profile-inc-eps-converted-to.pdf Graphic file (type pdf)
 
 <use retry_profile-inc-eps-converted-to.pdf>
@@ -1054,25 +1054,48 @@ o.pdf used on input line 7.
 _fault-inc-eps-converted-to.pdf> <./output_easy_with_retry_delay_fault-inc-eps-
 converted-to.pdf>] (./FAS-Simulator_YSC2017_Tero_Keski-Valkama_easychair_proced
 ia.bbl
-[9]) 
+Underfull \hbox (badness 1810) in paragraph at lines 29--33
+[]\OT1/cmr/m/n/9 Cars.  Chrysler trans-mis-sion as-sem-bly line, 2014.  []$\OT1
+/cmtt/m/n/9 https : / / www . youtube . com / watch ? v =
+ []
+
+[9]
+Underfull \hbox (badness 1796) in paragraph at lines 115--122
+[]\OT1/cmr/m/n/9 Shengqi Yang Jiang Li Bin Wu Jian-Guang Lou, Qiang Fu.  Min-in
+g pro-gram work-
+ []
+
+
+Underfull \hbox (badness 2698) in paragraph at lines 115--122
+\OT1/cmr/m/n/9 flow from in-ter-leaved traces.  In \OT1/cmr/m/it/9 SigKDD'10 (f
+ull pa-per)\OT1/cmr/m/n/9 . As-so-ci-a-tion for Com-put-ing
+ []
+
+
+Underfull \hbox (badness 2326) in paragraph at lines 115--122
+\OT1/cmr/m/n/9 Ma-chin-ery, Inc., July 2010.  []$\OT1/cmtt/m/n/9 https : / / ww
+w . microsoft . com / en-[]us / research / publication /
+ []
+
+) 
 AED: lastpage setting LastPage
 [10]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 402.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 402.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 395.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 395.
  (./FAS-Simulator_YSC2017_Tero_Keski-Valkama_easychair_procedia.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 402.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 402.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 395.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 395.
 Package rerunfilecheck Info: File `FAS-Simulator_YSC2017_Tero_Keski-Valkama_eas
 ychair_procedia.out' has not changed.
 (rerunfilecheck)             Checksum: CFAF727D6BC3D7599896BC13EB18D283;413.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 402.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 395.
  ) 
 Here is how much of TeX's memory you used:
- 10702 strings out of 493013
- 161055 string characters out of 6135682
+ 10721 strings out of 493013
+ 161234 string characters out of 6135682
  277626 words of memory out of 5000000
- 14016 multiletter control sequences out of 15000+600000
- 7172 words of font info for 28 fonts, out of 8000000 for 9000
+ 14026 multiletter control sequences out of 15000+600000
+ 9527 words of font info for 38 fonts, out of 8000000 for 9000
  1146 hyphenation exceptions out of 8191
  46i,12n,45p,359b,489s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
@@ -1086,12 +1109,13 @@ ublic/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
 sfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.p
 fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb>
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
 Output written on FAS-Simulator_YSC2017_Tero_Keski-Valkama_easychair_procedia.p
-df (10 pages, 240532 bytes).
+df (10 pages, 254681 bytes).
 PDF statistics:
- 262 PDF objects out of 1000 (max. 8388607)
- 221 compressed objects within 3 object streams
+ 278 PDF objects out of 1000 (max. 8388607)
+ 236 compressed objects within 3 object streams
  57 named destinations out of 1000 (max. 500000)
  87 words of extra memory for PDF output out of 10000 (max. 10000000)
 

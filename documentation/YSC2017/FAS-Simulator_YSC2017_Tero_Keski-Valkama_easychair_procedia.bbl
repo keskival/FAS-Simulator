@@ -2,6 +2,9 @@
 
 \bibitem{nasaames}
 Nasa ames prognostics center of excellence - data repository.
+\newblock
+  \url{http://ti.arc.nasa.gov/tech/dash/pcoe/prognostic-data-repository/}, last
+  viewed July, 2017.
 
 \bibitem{able2016model}
 Charles~M Able, Alan~H Baydush, Callistus Nguyen, Jacob Gersh, Alois Ndlovu,
@@ -25,6 +28,8 @@ Luis~M Camarinha-Matos, Luis~Seabra Lopes, and Jos{\'e} Barata.
 \bibitem{transmission}
 Cars.
 \newblock Chrysler transmission assembly line, 2014.
+\newblock \url{https://www.youtube.com/watch?v=447sSED91v0}, last viewed July,
+  2017.
 
 \bibitem{chandola2012anomaly}
 Varun Chandola, Arindam Banerjee, and Vipin Kumar.
@@ -82,6 +87,9 @@ Petter Falkman, Bengt Lennartson, and Michael Tittus.
 \bibitem{milldataset}
 Kai Goebel and Alice Agogino.
 \newblock Documentation for mill data set.
+\newblock
+  \url{http://ti.arc.nasa.gov/tech/dash/pcoe/prognostic-data-repository/}, last
+  viewed July, 2017.
 
 \bibitem{hashemian2011state}
 Hashem~M Hashemian and Wendell~C Bean.
@@ -108,6 +116,9 @@ Shengqi Yang Jiang Li Bin~Wu Jian-Guang~Lou, Qiang~Fu.
 \newblock Mining program workflow from interleaved traces.
 \newblock In {\em SigKDD'10 (full paper)}. Association for Computing Machinery,
   Inc., July 2010.
+\newblock
+  \url{https://www.microsoft.com/en-us/research/publication/mining-program-workflow-from-interleaved-traces/},
+  last viewed July, 2017.
 
 \bibitem{FASSimulator}
 Tero Keski-Valkama.
@@ -123,6 +134,9 @@ Sandeep Kumar, Siau-Cheng Khoo, Abhik Roychoudhury, and David Lo.
 David Kushner.
 \newblock The real story of stuxnet.
 \newblock {\em IEEE Spectrum}, 2013.
+\newblock
+  \url{http://spectrum.ieee.org/telecom/security/the-real-story-of-stuxnet},
+  last viewed July, 2017.
 
 \bibitem{landwehr2008modeling}
 Niels Landwehr.
@@ -151,6 +165,8 @@ Giulio Rosati, Maurizio Faccio, Christian Finetto, and Andrea Carli.
 \newblock Modelling and optimization of fully flexible assembly systems
   (f-fas).
 \newblock {\em Assembly Automation}, 33(2):165--174, 2013.
+\newblock \url{http://dx.doi.org/10.1108/01445151311306690}, last viewed July,
+  2017.
 
 \bibitem{saitou2002robust}
 Kazuhiro Saitou, Samir Malpathak, and Helge Qvam.
