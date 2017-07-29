@@ -1,0 +1,85 @@
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: FAS-Simulator_YSC2017_Tero_Keski-Valkama_easychair_procedia.aux
+The style file: plain.bst
+Database file #1: FAS-Simulator_YSC2017_Tero_Keski-Valkama_easychair_procedia.bib
+I was expecting a `,' or a `}'---line 16 of file FAS-Simulator_YSC2017_Tero_Keski-Valkama_easychair_procedia.bib
+ :   
+ :   year = 2016
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 23 of file FAS-Simulator_YSC2017_Tero_Keski-Valkama_easychair_procedia.bib
+ :   
+ :   year = 2016
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 31 of file FAS-Simulator_YSC2017_Tero_Keski-Valkama_easychair_procedia.bib
+ :   
+ :   year = 2016
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 46 of file FAS-Simulator_YSC2017_Tero_Keski-Valkama_easychair_procedia.bib
+ :   
+ :   year = 2015
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Repeated entry---line 272 of file FAS-Simulator_YSC2017_Tero_Keski-Valkama_easychair_procedia.bib
+ : @misc{transmission
+ :                   ,
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 284 of file FAS-Simulator_YSC2017_Tero_Keski-Valkama_easychair_procedia.bib
+ :   
+ :   year = 2016
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Too many commas in name 1 of "Jian-Guang Lou, Qiang Fu, Shengqi Yang, Jiang Li, Bin Wu" for entry mining-program-workflow-from-interleaved-traces
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Jian-Guang Lou, Qiang Fu, Shengqi Yang, Jiang Li, Bin Wu" for entry mining-program-workflow-from-interleaved-traces
+while executing---line 1049 of file plain.bst
+Warning--to sort, need author or key in nasaames
+Too many commas in name 1 of "Jian-Guang Lou, Qiang Fu, Shengqi Yang, Jiang Li, Bin Wu" for entry mining-program-workflow-from-interleaved-traces
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "Jian-Guang Lou, Qiang Fu, Shengqi Yang, Jiang Li, Bin Wu" for entry mining-program-workflow-from-interleaved-traces
+while executing---line 1090 of file plain.bst
+You've used 31 entries,
+            2118 wiz_defined-function locations,
+            670 strings with 9564 characters,
+and the built_in function-call counts, 10598 in all, are:
+= -- 1054
+> -- 466
+< -- 11
++ -- 189
+- -- 154
+* -- 690
+:= -- 1695
+add.period$ -- 95
+call.type$ -- 31
+change.case$ -- 166
+chr.to.int$ -- 0
+cite$ -- 32
+duplicate$ -- 419
+empty$ -- 867
+format.name$ -- 154
+if$ -- 2276
+int.to.chr$ -- 0
+int.to.str$ -- 31
+missing$ -- 30
+newline$ -- 152
+num.names$ -- 60
+pop$ -- 209
+preamble$ -- 1
+purify$ -- 139
+quote$ -- 0
+skip$ -- 322
+stack$ -- 0
+substring$ -- 654
+swap$ -- 113
+text.length$ -- 11
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 116
+warning$ -- 1
+while$ -- 102
+width$ -- 33
+write$ -- 325
+(There were 10 error messages)
