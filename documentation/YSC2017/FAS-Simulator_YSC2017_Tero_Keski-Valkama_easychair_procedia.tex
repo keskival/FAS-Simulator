@@ -11,17 +11,12 @@
 \usepackage[font=scriptsize]{subcaption}
 \usepackage[font=scriptsize]{caption}
 
-% declare the path(s) where your graphic files are
-% \graphicspath{{../pdf/}{../jpeg/}}
-% and their extensions so you won't have to specify these with
-% every instance of \includegraphics
 \DeclareGraphicsExtensions{.pdf,.jpeg,.jpg,.png}
 
 \floatstyle{ruled}
 \newfloat{json}{thp}{lop}
 \floatname{program}{Program}
 
-%opening
 \title{A Simulator for Event-oriented Data in Flexible Assembly System Fault Prediction - DRAFT}
 \author{Tero Keski-Valkama}
 
@@ -409,32 +404,16 @@ The simulation is considered useful if it can be reasonably expected to mirror t
 learn or infer by existing methods. If the simulator creates event sequences that are challenging to learn by existing methods, then it is useful as a benchmark
 in relation to improving those methods and in creating new ones.
 
-For the purposes of this article, we will only consider methods which are not trained based on known error conditions beforehand. Thus, the failure prediction challenge
-becomes a challenge of learning the correct operation of the system and flagging any inconsistencies and anomalies.
+Three different simulation runs of around 1400 events and 36 event types are shown in Figure \ref{figure:output_images}. Figure \ref{figure:output_easy} shows a normal, fault-free production run.
+The run consists of 30 items assembled simultaneously, going through the system.
+The pixel colors correspond to event types and are chosen from a ``copper'' color map. The end is padded with gray.
 
-For evaluation purposes, we will use a generated fault-free event sequence with first one complete sequence for one item only, then for 30 items simultaneously going through
-the system simultaneously in the same log file. This results in a log file with a sequence of 1364 events of 36 different
-event types.
-
-For evaluating whether there is enough information in the sequence to determine some structure in the model, the sequence was visualized as grayscale pixels in Figure \ref{figure:output_easy}.
-The pixel colors are chosen
-from an ordered grayscale map, and the states are indexed in the order they are met in the log. It is possible to discern the three different length production batches from the image.
-For each batch there are
-a number of products assembled which corresponds to the same number of certain production related events.
 For comparison, Figure \ref{figure:output_easy_wear_and_tear} was
 created for situation where a simulated wear and tear fault happens in one of the conveyors, slowing its operation down slightly. Comparing the two simulations visually it is evident that the second process
 is slower in the end of the batch, featuring tick events in longer sequences.
 Similarly a retry delay fault with the bowl feeder can be seen in the Figure \ref{figure:output_easy_retry_delay}. As the retry delay affects a process step that is relatively fast, and does not 
-represent a bottleneck in the process, it does not have a significant impact to the process.
-
-It should be noted that while this kind of wear and tear fault would also be evident from measuring the process throughput, process throughput is a function of many other variables as well,
-so in itself it is not an adequate measure of faults. A general anomaly detection system only observing event logs does not necessarily have a complete process model, but
-can still observe these kinds of deviations from expected kind of activity.
-
-We know that material balance requires that each log event strictly associated to a later part of process requires the number of requisite steps before it can be executed, and
-therefore the associated log events must be present. Analogously this relates to the principles of stoichiometry and material balance used in chemistry and industrial processes.
-For such a simple process what we have used as an example, most events occurs once and only once for each process instance, so drawing a histogram over a time window of a logged
-composed of such process traces forms an equal distribution, discounting window effects.
+represent a bottleneck in the process, it does not have a significant impact to the total process time. However, a learning algorithm could in principle notice variations of delays between specific events
+and flag an anomaly.
 
 \begin{figure}[tb]
 \begin{subfigure}[h]{0.32\linewidth}
@@ -444,15 +423,15 @@ composed of such process traces forms an equal distribution, discounting window 
 \end{subfigure}
 \begin{subfigure}[h]{0.32\linewidth}
  \resizebox{\linewidth}{!}{\input{./output_easy_with_wear_and_tear_fault.tex}}
- \caption{The same as previous, but with a simulated wear and tear fault in step 15 conveyor.}
+ \caption{The same as previous, but with a simulated wear and tear fault in the step 15 conveyor.}
  \label{figure:output_easy_wear_and_tear}
 \end{subfigure}
 \begin{subfigure}[h]{0.32\linewidth}
  \resizebox{\linewidth}{!}{\input{./output_easy_with_retry_delay_fault.tex}}
- \caption{The same as Figure \ref{figure:output_easy}, but with a simulated retry delay fault in step 7 bowl feeder.}
+ \caption{The same as Figure \ref{figure:output_easy}, but with a simulated retry delay fault in the step 7 bowl feeder.}
  \label{figure:output_easy_retry_delay}
 \end{subfigure}
- \caption{The event sequence as grayscale pixels from left to right, top to bottom, padded in the end with gray.}
+ \caption{The event sequence as colored pixels from left to right, top to bottom, padded in the end with gray.}
  \label{figure:output_images}
 \end{figure}
 
