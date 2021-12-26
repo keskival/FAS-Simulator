@@ -12,3 +12,5 @@ output
 ..bfg-report/
 .project
 .pydevproject
+numpy_data/*
+

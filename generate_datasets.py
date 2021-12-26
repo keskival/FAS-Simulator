@@ -69,12 +69,3 @@ for run in range(NUMBER_OF_RUNS):
     fault_types = [add_wear_and_tear_fault, add_retry_delay_fault]
     fault = random.sample(fault_types, 1)[0]
     generate_run(f"data/runs_with_errors/{run}.json", fault)
-
-# Converting JSONs to Numpy.
-
-# Getting all event types to make an index out of them.
-production_line = ProductionLine(None, None, False)
-clock = Clock(None, None, False)
-all_event_types = clock.get_events() + production_line.get_events()
-
-print(all_event_types)

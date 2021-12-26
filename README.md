@@ -77,3 +77,7 @@ We first produce 10,000 runs with errors and 10,000 similar runs without errors 
 Do this by running: `./generate_datasets`.
 
 The data will be generated in JSON form, one file per run in `data/correct_runs/*.json` and `data/runs_with_errors/*.json`.
+
+This data can then be converted to numpy format by running: `./convert_datasets_to_numpy.py`.
+
+The data will be generated in numpy form, one file per run in `numpy_data/correct_runs/*.npy` and `numpy_data/runs_with_errors/*.npy`.
