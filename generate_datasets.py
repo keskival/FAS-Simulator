@@ -2,6 +2,8 @@
 
 import simpy
 import os
+import random
+
 from modules.process.production_line import ProductionLine
 from modules.process.fas_instance import FASInstance
 from modules.faults.wear_and_tear import WearAndTear
@@ -18,12 +20,12 @@ def generate_run(filename, fault=None):
 
     production_line = ProductionLine(env, logger, False)
 
-    clock = Clock(logger, env, False)
+    clock = Clock(env, logger, False)
     clock.spawn()
 
     if fault is not None:
         # Adding a fault immediately.
-        env.process(fault())
+        env.process(fault(env, production_line))
 
     # Putting in 30 items, waiting for them to be done.
 
@@ -39,19 +41,19 @@ def generate_run(filename, fault=None):
     f.write(logger.getLoglines())
     f.close()
 
-def add_wear_and_tear_fault():
+def add_wear_and_tear_fault(env, production_line):
     yield env.timeout(0)
     # Simulated WearAndTear faults only apply to Conveyors.
-    conveyor_to_fail = random.sample(production_line.conveyors)
+    conveyor_to_fail = random.sample(production_line.conveyors, 1)[0]
     conveyor_to_fail.add_fault(
-        WearAndTear(env, conveyor_to_fail));
+        WearAndTear(env, conveyor_to_fail, False));
 
-def add_retry_delay_fault():
+def add_retry_delay_fault(env, production_line):
     yield env.timeout(0)
     # Simulated RetryDelay faults only apply to BowlFeeders.
-    bowl_feeder_to_fail = random.sample(production_line.bowl_feeders)
+    bowl_feeder_to_fail = random.sample(production_line.bowl_feeders, 1)[0]
     bowl_feeder_to_fail.add_fault(
-        RetryDelay(env, bowl_feeder_to_fail));
+        RetryDelay(env, bowl_feeder_to_fail, False));
 
 NUMBER_OF_RUNS = 100000
 
@@ -65,5 +67,14 @@ for run in range(NUMBER_OF_RUNS):
 for run in range(NUMBER_OF_RUNS):
     print(f"Generating faulty run {run}/{NUMBER_OF_RUNS}")
     fault_types = [add_wear_and_tear_fault, add_retry_delay_fault]
-    fault = random.sample(fault_types)
+    fault = random.sample(fault_types, 1)[0]
     generate_run(f"data/runs_with_errors/{run}.json", fault)
+
+# Converting JSONs to Numpy.
+
+# Getting all event types to make an index out of them.
+production_line = ProductionLine(None, None, False)
+clock = Clock(None, None, False)
+all_event_types = clock.get_events() + production_line.get_events()
+
+print(all_event_types)

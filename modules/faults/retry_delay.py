@@ -9,10 +9,10 @@ class RetryDelay(simpy.Resource):
     """
     def __init__(self, env, module, debug=True):
         super(RetryDelay, self).__init__(env)
+        self.debug = debug
         self.t = 0
         self.env = env
         self.module = module
-        self.debug = debug
 
     def process(self):
         with self.request() as req:

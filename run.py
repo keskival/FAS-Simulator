@@ -18,7 +18,7 @@ production_line = ProductionLine(env, logger)
 # event indices follow this order.
 
 fas_instance = FASInstance(env, production_line, logger)
-clock = Clock(logger, env)
+clock = Clock(env, logger)
 done = fas_instance.spawn()
 clock.spawn()
 env.run(done)

@@ -1,4 +1,6 @@
 import simpy
+import functools
+
 from modules.process.random_delay import delay
 
 from modules.components.bowl_feeder import BowlFeeder
@@ -52,5 +54,23 @@ class ProductionLine:
         self.conveyors = [self.conveyor1, self.conveyor2, self.conveyor3,
             self.conveyor4, self.conveyor5, self.conveyor6, self.conveyor7,
             self.conveyor8, self.conveyor9, self.conveyor10, self.conveyor11,
-            self.conveyor12]
+            self.conveyor12, self.conveyor_input_subassembly_b,
+            self.conveyor_input_subassembly_c]
         self.bowl_feeders = [self.bowl1, self.bowl2, self.bowl3, self.bowl4]
+        self.cranes = [self.crane1, self.crane_input_subassembly_a]
+        self.manual_steps = [self.manual_inspection,
+            self.manual_add_components1, self.manual_add_components2,
+            self.manual_combine_subassembly_a,
+            self.manual_combine_subassembly_b,
+            self.manual_add_cover_and_bolts,
+            self.manual_tighten_bolts1,
+            self.manual_combine_subassembly_c,
+            self.manual_tighten_bolts2,
+            self.manual_add_components3,
+            self.manual_tighten_bolts3
+            ]
+        self.all_modules = self.conveyors + self.bowl_feeders + self.cranes + \
+                           self.manual_steps
+
+    def get_events(self):
+        return functools.reduce(lambda a, b: a + b, [module.get_events() for module in self.all_modules], [])

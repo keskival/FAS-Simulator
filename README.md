@@ -72,7 +72,7 @@ For the challenge task we create a set of clean runs, and a set of runs with err
 
 A suggested learning system can be trained or conditioned on a subset of clean runs, and tested whether it is able to discriminate between runs with errors and clean runs. Note that a system shouldn't be trained on the faulty runs, because the fault types and behaviors cannot be known in advance in practice.
 
-We first produce 100,000 runs with errors and 100,000 similar runs without errors in JSON.
+We first produce 10,000 runs with errors and 10,000 similar runs without errors in JSON.
 
 Do this by running: `./generate_datasets`.
 

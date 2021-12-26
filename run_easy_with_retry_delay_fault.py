@@ -15,7 +15,7 @@ logger = Logger(env)
 
 production_line = ProductionLine(env, logger)
 
-clock = Clock(logger, env)
+clock = Clock(env, logger)
 clock.spawn()
 
 # Adding a fault immediately to the CONVEYOR5

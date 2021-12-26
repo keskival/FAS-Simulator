@@ -37,3 +37,6 @@ class BowlFeeder(simpy.Resource):
 
     def spawn(self):
         return self.env.process(self.process())
+
+    def get_events(self):
+        return [self.name + " GIVEN"]

@@ -14,7 +14,7 @@ logger = Logger(env)
 
 production_line = ProductionLine(env, logger)
 
-clock = Clock(logger, env)
+clock = Clock(env, logger)
 clock.spawn()
 
 # Putting in 30 items, waiting for them to be done.
