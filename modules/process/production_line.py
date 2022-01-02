@@ -48,13 +48,12 @@ class ProductionLine:
         self.manual_add_components3 = ManualStep("MANUAL_ADD_COMPONENTS3", 11000, logger, env, debug)
         self.conveyor11 = Conveyor("CONVEYOR11", 21000, logger, env, debug)
         self.manual_tighten_bolts3 = ManualStep("MANUAL_TIGHTEN_BOLTS3", 32000, logger, env, debug)
-        self.conveyor12 = Conveyor("CONVEYOR12", 21000, logger, env, debug)
         self.output = simpy.resources.store.Store(env)
 
         self.conveyors = [self.conveyor1, self.conveyor2, self.conveyor3,
             self.conveyor4, self.conveyor5, self.conveyor6, self.conveyor7,
             self.conveyor8, self.conveyor9, self.conveyor10, self.conveyor11,
-            self.conveyor12, self.conveyor_input_subassembly_b,
+            self.conveyor_input_subassembly_b,
             self.conveyor_input_subassembly_c]
         self.bowl_feeders = [self.bowl1, self.bowl2, self.bowl3, self.bowl4]
         self.cranes = [self.crane1, self.crane_input_subassembly_a]

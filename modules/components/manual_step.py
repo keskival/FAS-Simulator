@@ -18,7 +18,7 @@ class ManualStep(simpy.Resource):
             print(self.name + ": input")
         self.queue = self.queue + 1
         if (self.queue >= 5):
-            self.logger.addMessage("QUEUE ALARM");
+            self.logger.addMessage(self.name + " QUEUE_ALARM");
         with self.request() as req:
             yield req
             if self.debug:
@@ -38,4 +38,4 @@ class ManualStep(simpy.Resource):
         return self.env.process(self.process())
 
     def get_events(self):
-        return ["QUEUE ALARM", self.name + " OK"]
+        return [self.name + " QUEUE_ALARM", self.name + " OK"]

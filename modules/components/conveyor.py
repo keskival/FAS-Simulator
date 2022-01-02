@@ -24,7 +24,7 @@ class Conveyor(simpy.Resource):
             yield req
             if self.debug:
                 print(self.name + ": input")
-            self.logger.addMessage(self.name + " CONVEYOR GATE");
+            self.logger.addMessage(self.name + " CONVEYOR_GATE");
             yield self.env.timeout(delay(self.duration, 1))
             for fault in self.faults:
                 yield fault.spawn()
@@ -36,4 +36,4 @@ class Conveyor(simpy.Resource):
         return self.env.process(self.process())
 
     def get_events(self):
-        return [self.name + " CONVEYOR GATE"]
+        return [self.name + " CONVEYOR_GATE"]

@@ -17,7 +17,7 @@ print("""\\begin{table}[!t]
 \\caption{Table of the Event Identifiers}
 \\label{eventids}
 \\centering
-\\begin{tabular}{|p{15mm}|p{15mm}|}
+\\begin{tabular}{|p{5mm}|p{55mm}|}
 \\hline
 Event id & Event name \\\\
 \\hline
