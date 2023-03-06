@@ -140,3 +140,15 @@ The data will be generated in JSON form, one file per run in `data/correct_runs/
 This data can then be converted to numpy format by running: `./convert_datasets_to_numpy.py`.
 
 The data will be generated in numpy form, one file per run in `numpy_data/correct_runs/*.npy` and `numpy_data/runs_with_errors/*.npy`.
+
+## Reference
+
+Embodied Emulated Personas
+
+```
+@article{keskival2015fassimulator,
+  title={FAS Simulator},
+  author={Keski-Valkama, Tero},
+  year={2015}
+}
+```
