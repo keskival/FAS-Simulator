@@ -143,12 +143,16 @@ The data will be generated in numpy form, one file per run in `numpy_data/correc
 
 ## Reference
 
-Embodied Emulated Personas
+FAS Simulator
 
 ```
-@article{keskival2015fassimulator,
-  title={FAS Simulator},
+@article{keski2017simulator,
+  title={A simulator for event-oriented data in flexible assembly system fault prediction},
   author={Keski-Valkama, Tero},
-  year={2015}
+  journal={Procedia computer science},
+  volume={119},
+  pages={121--130},
+  year={2017},
+  publisher={Elsevier}
 }
 ```
