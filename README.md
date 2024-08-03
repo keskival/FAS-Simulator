@@ -141,7 +141,7 @@ This data can then be converted to numpy format by running: `./convert_datasets_
 
 The data will be generated in numpy form, one file per run in `numpy_data/correct_runs/*.npy` and `numpy_data/runs_with_errors/*.npy`.
 
-## Reference
+## Citing
 
 FAS Simulator
 
